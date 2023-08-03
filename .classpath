@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="Img"/>
+	<classpathentry kind="lib" path="C:/Users/Rui Pereira/eclipse-workspace/AlimentacaoJava_Demo/libs/JPlanner.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Rui Pereira/eclipse-workspace/AlimentacaoJava_Demo/libs/jcalendar/jcalendar-1.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Rui Pereira/eclipse-workspace/AlimentacaoJava_Demo/libs/jcalendar/jgoodies-common-1.2.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Rui Pereira/eclipse-workspace/AlimentacaoJava_Demo/libs/jcalendar/jgoodies-looks-2.4.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Rui Pereira/eclipse-workspace/AlimentacaoJava_Demo/libs/jcalendar/junit-4.6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Rui Pereira/eclipse-workspace/AlimentacaoJava_Demo/libs/ojdbc6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Rui Pereira/eclipse-workspace/AlimentacaoJava_Demo/libs/rs2xml.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Rui Pereira/eclipse-workspace/AlimentacaoJava_Demo/libs/itextpdf-5.4.1-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Rui Pereira/eclipse-workspace/AlimentacaoJava_Demo/libs/itextpdf-5.5.13.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
