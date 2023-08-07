@@ -139,6 +139,7 @@ public class Marcacoes extends JFrame {
 		FillReFeicao();
 		FillPrato();
 		GetName Gn = new GetName();
+		@SuppressWarnings("static-access")
 		String nome = Gn.GETNAME(Integer.parseInt(Login.txtUser.getText()));
 		Marcacoes.lblNome.setText(nome);
 		lblNum.setVisible(false);

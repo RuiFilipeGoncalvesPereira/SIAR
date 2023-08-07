@@ -20,6 +20,9 @@ public class MyQuery {
 	Statement pst_parametro = null;
 	Connection conn_parametro = null;
 	ResultSet resparametro= null;
+	Statement pst_dominio = null;
+	Connection conn_dominio = null;
+	ResultSet resdominio = null;
 
 			public ArrayList<Product> BindTable()
 			{
@@ -53,10 +56,12 @@ public class MyQuery {
 			{
 				conn_upd = JavaConection.ConnecrDb();
 				ArrayList<Product> list = new ArrayList<Product>();
+				//.replace("", "%")
 				try
 				{
 					pst_upd = conn_upd.createStatement();
-					resupd = pst_upd.executeQuery("select siar.siar_utilizadores.Num_Mecanog Nmec,siar.siar_utilizadores.nome_utilizador nuti,siar.siar_utilizadores.senha pass, Dta_Desativo dta_des,siar.siar_utilizadores.email em,siar.siar_utilizadores.imagem img from siar.siar_utilizadores where UPPER(siar.siar_utilizadores.nome_utilizador) LIKE '%"+nome.toUpperCase().replace("", "%")+"%' and siar.siar_utilizadores.num_mecanog is not null and siar.siar_utilizadores.dta_desativo is null");
+					resupd = pst_upd.executeQuery("select siar.siar_utilizadores.Num_Mecanog Nmec,siar.siar_utilizadores.nome_utilizador nuti,siar.siar_utilizadores.senha pass, Dta_Desativo dta_des,siar.siar_utilizadores.email em,siar.siar_utilizadores.imagem img from siar.siar_utilizadores where UPPER(siar.siar_utilizadores.nome_utilizador) LIKE '%"+nome.toUpperCase()+"%' and siar.siar_utilizadores.num_mecanog is not null"
+							+ "");
 					Product p;
 					while(resupd.next())
 					{
@@ -124,6 +129,31 @@ public class MyQuery {
 				catch(Exception e)
 				{
 					JOptionPane.showMessageDialog(null, "Erro na querie de Parametros!"+e);
+				}
+				return list;
+			}
+			public ArrayList<Dominio> Mostra_Dominio()
+			{
+				conn_dominio = JavaConection.ConnecrDb();
+				ArrayList<Dominio> list = new ArrayList<Dominio>();
+				try
+				{
+					pst_dominio = conn_dominio.createStatement();
+					resdominio = pst_dominio.executeQuery("select siar.siar_dominios.valor val,siar.siar_dominios.dominio dom,siar.siar_dominios.desc_dominio desc_ FROM siar.siar_dominios order by Valor");
+					Dominio d;
+					while(resdominio.next())
+					{
+						d = new Dominio(
+								   resdominio.getInt("val"),
+								   resdominio.getString("dom"),
+								   resdominio.getString("desc_")
+									);
+								list.add(d);
+					}
+				}
+				catch(Exception e)
+				{
+					JOptionPane.showMessageDialog(null, "Erro na querie de Dominio!"+e);
 				}
 				return list;
 			}

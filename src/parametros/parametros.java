@@ -41,6 +41,7 @@ public class parametros {
 	public static void Insere_parametros() throws SQLException
 	{
 		Connection conn_param = null;
+		@SuppressWarnings("unused")
 		ResultSet rs_param = null;
 		PreparedStatement pst_rs_param = null;
 		conn_param = siar.JavaConection.ConnecrDb(); 
@@ -125,6 +126,7 @@ public class parametros {
 	public static void remove_parametro()
 	{
 		Connection conn_param = null;
+		@SuppressWarnings("unused")
 		ResultSet rs_param = null;
 		PreparedStatement pst_rs_param = null;
 		conn_param = siar.JavaConection.ConnecrDb(); 
@@ -154,6 +156,7 @@ public class parametros {
 	public static void update_param()
     {
 		Connection conn_param = null;
+		@SuppressWarnings("unused")
 		ResultSet rs_param = null;
 		PreparedStatement pst_rs_param = null;
 		conn_param = siar.JavaConection.ConnecrDb(); 

@@ -326,13 +326,17 @@ public class Gestor_Refeicoes extends JFrame {
 					list.add("Five Item");
 					list.add("Sixth Item");
 					document.add(list);*/
+					//Colocar uma imagem num relatório
 					com.itextpdf.text.Image image1 = com.itextpdf.text.Image.getInstance("C:\\Users\\Rui Pereira\\eclipse-workspace\\AlimentacaoJava_Demo\\Img\\chart.png");
+					image1.setRotationDegrees(45.0f);
 					image1.scaleAbsolute(480, 300);
 					document.add(image1);
+					
 					document.close();
 					//https://www.tabnine.com/code/java/methods/com.itextpdf.text.Document/newPage
-					//https://www.youtube.com/watch?v=kWaqUnjDoUU&list=PLS1QulWo1RIayTWHnCGE_ttQG1_ajCBI4&index=13
+					//https://www.youtube.com/watch?v=74pE3kLerAU&list=PLS1QulWo1RIayTWHnCGE_ttQG1_ajCBI4&index=15
                     //https://pt.stackoverflow.com/questions/340500/banco-de-dados-trocando-acento-por
+					//https://www.youtube.com/@easy2excel927/playlists
 				 }
 				catch(Exception e2){
 					return;

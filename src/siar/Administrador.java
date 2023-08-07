@@ -57,14 +57,14 @@ public class Administrador extends JFrame {
 	private JTable table_3;
 	public static JTextField Desc_Prato;
 	public static JTable table_4;
-	private JTextField Dom;
-	private JTextField Val;
-	private JTextField Desc_dom;
+	public static JTextField Dom;
+	public static JTextField Val;
+	public static JTextField Desc_dom;
 	private JTable table_5;
-	private JTable table_6;
 	public static JTextField Val_Par;
 	public static JTextField Desc_Par;
 	public static JTable table_7;
+	public static JTable table_6;
 	public static JDateChooser DC_prato;
 	public static JDateChooser DC_ref;
 	public static JDateChooser dta_feriado;
@@ -145,6 +145,9 @@ public class Administrador extends JFrame {
 	public static JTextField val_aux;
 	public static JTextField desc_aux;
 	public static JTextField txt_cod_aux;
+	public static JTextField dom_aux;
+	public static JTextField valor_dom_aux;
+	public static JTextField desc_aux_dom;
 	
 	//SimpleDateFormat ddath = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
 
@@ -196,7 +199,9 @@ public class Administrador extends JFrame {
 		prencherRefeicao();
 		parametros.parametros.prenche_parametros();
 		parametros.prato.prencher_pratos();
+		parametros.dominios.prenche_dominios();
 		GetName Gn = new GetName();
+		@SuppressWarnings("static-access")
 		String nome = Gn.GETNAME(Integer.parseInt(Login.txtUser.getText()));
 		Administrador.lblNome.setText(nome);
 		lblnum.setVisible(false);
@@ -814,6 +819,16 @@ public class Administrador extends JFrame {
 		Desc_dom.setColumns(10);
 		
 		JButton button_12 = new JButton("");
+		button_12.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					parametros.dominios.Insere_dominios();
+					parametros.dominios.prenche_dominios();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
 		button_12.setIcon(new ImageIcon("C:\\Users\\Rui Pereira\\Documents\\Icons_Geral\\Icons\\action_add.gif"));
 		button_12.setToolTipText("Inserir Utilizador");
 		button_12.setBounds(500, 18, 27, 28);
@@ -828,9 +843,21 @@ public class Administrador extends JFrame {
 		Ges_Dom.add(scrollPane_3);
 		
 		table_6 = new JTable();
+		table_6.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				parametros.dominios.seleciona_linha_dom();
+			}
+		});
 		scrollPane_3.setViewportView(table_6);
 		
 		JButton button_13 = new JButton("");
+		button_13.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				parametros.dominios.remove_dominio();
+				parametros.dominios.prenche_dominios();
+			}
+		});
 		button_13.setIcon(new ImageIcon("C:\\Users\\Rui Pereira\\Documents\\Icons_Geral\\Icons\\001_05.gif"));
 		button_13.setToolTipText("Desativar Refei\u00E7\u00E3o");
 		button_13.setBounds(500, 69, 27, 28);
@@ -854,6 +881,37 @@ public class Administrador extends JFrame {
 		lblNewLabel_9.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_9.setBounds(274, 11, 147, 14);
 		Ges_Dom.add(lblNewLabel_9);
+		
+		JLabel lblNewLabel_16 = new JLabel("Dominio:");
+		lblNewLabel_16.setBounds(43, 366, 60, 14);
+		Ges_Dom.add(lblNewLabel_16);
+		
+		JButton button_19_2 = new JButton("");
+		button_19_2.setIcon(new ImageIcon("C:\\Users\\Rui Pereira\\Documents\\Icons_Geral\\Icons\\afsave_postfix.gif"));
+		button_19_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				parametros.dominios.update_dom();
+				parametros.dominios.prenche_dominios();
+			}
+		});
+		button_19_2.setToolTipText("Ativar Utilizador");
+		button_19_2.setBounds(500, 98, 27, 28);
+		Ges_Dom.add(button_19_2);
+		
+		dom_aux = new JTextField();
+		dom_aux.setBounds(104, 366, 52, 20);
+		Ges_Dom.add(dom_aux);
+		dom_aux.setColumns(10);
+		
+		valor_dom_aux = new JTextField();
+		valor_dom_aux.setBounds(166, 366, 86, 20);
+		Ges_Dom.add(valor_dom_aux);
+		valor_dom_aux.setColumns(10);
+		
+		desc_aux_dom = new JTextField();
+		desc_aux_dom.setBounds(262, 366, 228, 20);
+		Ges_Dom.add(desc_aux_dom);
+		desc_aux_dom.setColumns(10);
 		JPanel Ges_Fer = new JPanel();
 		tabbedPane.addTab("Gest\u00E3o de Feriados", null, Ges_Fer, null);
 		Ges_Fer.setLayout(null);
