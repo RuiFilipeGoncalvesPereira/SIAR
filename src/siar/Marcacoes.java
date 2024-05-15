@@ -6,24 +6,17 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.TimeZone;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableColumn;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.DefaultCellEditor;
 import javax.swing.ImageIcon;
 import java.awt.event.ActionListener;
@@ -40,6 +33,11 @@ import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.SystemColor;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeEvent;
+import javax.swing.SwingConstants;
+import java.awt.Font;
 
 @SuppressWarnings("serial")
 public class Marcacoes extends JFrame {
@@ -55,7 +53,6 @@ public class Marcacoes extends JFrame {
 	Connection conn_anuladas= null;
 	ResultSet rs_admin = null;
 	ResultSet rs_gecan = null;
-	@SuppressWarnings("rawtypes")
 	public JComboBox<String> jcomboprato,jcomborefeicao;
 	public static JDateChooser dt_ref;
 	ResultSet rs = null;
@@ -95,8 +92,9 @@ public class Marcacoes extends JFrame {
 	public static JButton btn_anula;
 	public static JButton btn_back_menu;
 	public JTable table;
-	public JTextField jcodref;
-	public JTextField jcodprato;
+	public static JTextField jcodref;
+	public static JTextField jcodprato;
+	public static JTextPane ementa;
 	private JTextField nmec_aux;
 	private JTextField cod_ref_aux;
 	private JTextField cod_pra_aux;
@@ -104,6 +102,9 @@ public class Marcacoes extends JFrame {
 	private JTextField dta_registo_aux;
 	private JScrollPane scrollPane;
 	Check_Holiday CH = new Check_Holiday();
+	private JLabel lblNewLabel_2;
+	private JLabel lblNewLabel_2_1;
+	private JLabel lblNewLabel_2_2;
 	/**
 	 * Launch the application.
 	 */
@@ -123,6 +124,7 @@ public class Marcacoes extends JFrame {
 	 * Create the frame.
 	 */
 	public Marcacoes() {
+		setBackground(SystemColor.control);
 		conn_utilizador = JavaConection.ConnecrDb(); 
 		conn_ref = JavaConection.ConnecrDb(); 
 		conn_ref_cod = JavaConection.ConnecrDb(); 
@@ -145,7 +147,6 @@ public class Marcacoes extends JFrame {
 		lblNum.setVisible(false);
 		prencher_marcacoes();
 	}
-	@SuppressWarnings("unchecked")
 	public void FillPrato()
 	{
 		try
@@ -165,9 +166,8 @@ public class Marcacoes extends JFrame {
 	            JOptionPane.showMessageDialog(null, "Erro ao Listar na Tabela1!"+e);
 	     }
     }
-	@SuppressWarnings("rawtypes")
 	private void initialize() {
-		this.setTitle("Menu de Marcação de Refeições");
+		this.setTitle("Menu de Marcaï¿½ï¿½o de Refeiï¿½ï¿½es");
 		setAutoRequestFocus(false);
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 698, 471);
@@ -192,6 +192,7 @@ public class Marcacoes extends JFrame {
 		btnNewButton.setToolTipText("Inico");
 		btnNewButton.addActionListener(new ActionListener() 
 		{
+			@SuppressWarnings("static-access")
 			public void actionPerformed(ActionEvent arg0)
 			{
                 dispose();
@@ -212,7 +213,7 @@ public class Marcacoes extends JFrame {
 			}
 		});
 		button.setIcon(new ImageIcon("C:\\Users\\Rui Pereira\\Documents\\Icons_Geral\\Icons\\001_41.gif"));
-		button.setToolTipText("Alteração de Password");
+		button.setToolTipText("Alteraï¿½ï¿½o de Password");
 		button.setBounds(52, 11, 43, 36);
 		contentPane.add(button);
 		
@@ -254,9 +255,11 @@ public class Marcacoes extends JFrame {
 		lblNewLabel_1.setBounds(279, 53, 46, 14);
 		contentPane.add(lblNewLabel_1);
 		
-		JTextPane textPane = new JTextPane();
-		textPane.setBounds(362, 74, 273, 66);
-		contentPane.add(textPane);
+		ementa = new JTextPane();
+		ementa.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		ementa.setBackground(SystemColor.menu);
+		ementa.setBounds(448, 74, 187, 66);
+		contentPane.add(ementa);
 		
 		JButton btn_add_Refeicao = new JButton("");
 		btn_add_Refeicao.addActionListener(new ActionListener()
@@ -271,6 +274,11 @@ public class Marcacoes extends JFrame {
 		contentPane.add(btn_add_Refeicao);
 		
 		dt_ref = new JDateChooser();
+		dt_ref.addPropertyChangeListener(new PropertyChangeListener() {
+			public void propertyChange(PropertyChangeEvent evt) {
+				dados_auxiliares.get_ementa.get_ref(Marcacoes.dt_ref.getDate(),Marcacoes.jcodref.getText(),Marcacoes.jcodprato.getText());
+			}
+		});
 		dt_ref.setDateFormatString("dd-MM-yyyy");
 		Calcular_Dia_Correto();
 		dt_ref.setBounds(79, 78, 107, 20);
@@ -357,7 +365,7 @@ public class Marcacoes extends JFrame {
 				marcacoes_desativadas();
 			}
 		});
-		button_2.setToolTipText("Anulações");
+		button_2.setToolTipText("Anulaï¿½ï¿½es");
 		button_2.setIcon(new ImageIcon("C:\\Users\\Rui Pereira\\Documents\\Icons_Geral\\Icons\\db_del.gif"));
 		button_2.setBounds(10, 205, 27, 28);
 		contentPane.add(button_2);
@@ -373,6 +381,26 @@ public class Marcacoes extends JFrame {
 		btn_back_menu.setIcon(new ImageIcon("C:\\Users\\Rui Pereira\\Documents\\Icons_Geral\\Icons\\001_27.gif"));
 		btn_back_menu.setBounds(94, 11, 43, 36);
 		contentPane.add(btn_back_menu);
+		
+		JLabel lblNewLabel_1_1 = new JLabel("Ementa");
+		lblNewLabel_1_1.setBounds(448, 53, 46, 14);
+		contentPane.add(lblNewLabel_1_1);
+		
+		lblNewLabel_2 = new JLabel("          Sopa:");
+		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_2.setBounds(373, 74, 68, 14);
+		contentPane.add(lblNewLabel_2);
+		
+		lblNewLabel_2_1 = new JLabel("   Refei\u00E7\u00E3o:");
+		lblNewLabel_2_1.setVerticalAlignment(SwingConstants.BOTTOM);
+		lblNewLabel_2_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_2_1.setBounds(373, 89, 73, 14);
+		contentPane.add(lblNewLabel_2_1);
+		
+		lblNewLabel_2_2 = new JLabel("Sobremesa:");
+		lblNewLabel_2_2.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_2_2.setBounds(373, 103, 73, 14);
+		contentPane.add(lblNewLabel_2_2);
 		
 		cal.add(Calendar.DATE,Integer.parseInt(CH.check_holiday(31)));
 		calum.add(Calendar.DATE,Integer.parseInt(CH.check_holiday(61)));
@@ -433,13 +461,13 @@ public class Marcacoes extends JFrame {
 	            {
 	              jcodprato.setText(rs_conn_prato_cod.getString("Cod_Prato"));
 	            }   
+	            dados_auxiliares.get_ementa.get_ref(Marcacoes.dt_ref.getDate(),Marcacoes.jcodref.getText(),Marcacoes.jcodprato.getText());   
 	       }
 	       catch(Exception e3)
 	       {
 	       JOptionPane.showMessageDialog(null, "Erro ao Listar na Tabela4!"+e3);
 	       }
 	}
-	@SuppressWarnings("unchecked")
 	public void FillReFeicao()
 	{
 		try
@@ -471,7 +499,9 @@ public class Marcacoes extends JFrame {
 	            {
 	            	jcodref.setText(rs_ref_cod.getString("Cod_Refeicao"));
 	            }   
+	            dados_auxiliares.get_ementa.get_ref(Marcacoes.dt_ref.getDate(),Marcacoes.jcodref.getText(),Marcacoes.jcodprato.getText());  
 	       }
+		   
 	       catch(Exception e3)
 	       {
 	       JOptionPane.showMessageDialog(null, "Erro ao Listar na Tabela5!"+e3);
@@ -512,129 +542,129 @@ public class Marcacoes extends JFrame {
 			
 	         if(((JTextField)dt_ref.getDateEditor().getUiComponent()).getText().isEmpty())
 	         {
-	             JOptionPane.showMessageDialog(null, "Deve Inserir a Data da Refeição!");
+	             JOptionPane.showMessageDialog(null, "Deve Inserir a Data da Refeiï¿½ï¿½o!");
 	             ((JTextField)dt_ref.getDateEditor().getUiComponent()).requestFocus();
 	             return;
 	         }
 	         
 			if ((strDate.compareTo(Imaculada)==0) && (dataobtida.compareTo(Imaculada)==0))
 			{
-				 JOptionPane.showMessageDialog(null, "É Dia da Imaculada Conçeição não Pode Marcar Refeições para Amanhã");
+				 JOptionPane.showMessageDialog(null, "ï¿½ Dia da Imaculada Conï¿½eiï¿½ï¿½o nï¿½o Pode Marcar Refeiï¿½ï¿½es para Amanhï¿½");
 				 dt_ref.requestFocus();
 				 return;
 			}
 			if ((strDate.compareTo(Natal)==0) && (dataobtida.compareTo(Natal)==0))
 			{
-				 JOptionPane.showMessageDialog(null, "É Dia de Natal não Pode Marcar Refeições para Amanhã");
+				 JOptionPane.showMessageDialog(null, "ï¿½ Dia de Natal nï¿½o Pode Marcar Refeiï¿½ï¿½es para Amanhï¿½");
 				 dt_ref.requestFocus();
 				 return;
 			}
 			if ((strDate.compareTo(AssunSenhora)==0) && (dataobtida.compareTo(AssunSenhora)==0))
 			{
-				 JOptionPane.showMessageDialog(null, "É de nossa Senhora da Assunção não Pode Marcar Refeições para Amanhã");
+				 JOptionPane.showMessageDialog(null, "ï¿½ de nossa Senhora da Assunï¿½ï¿½o nï¿½o Pode Marcar Refeiï¿½ï¿½es para Amanhï¿½");
 				 dt_ref.requestFocus();
 				 return;
 			}
 			if ((strDate.compareTo(DPortugal)==0) && (dataobtida.compareTo(DPortugal)==0))
 			{
-				 JOptionPane.showMessageDialog(null, "É Dia de Portugal não Pode Marcar Refeições para Amanhã");
+				 JOptionPane.showMessageDialog(null, "ï¿½ Dia de Portugal nï¿½o Pode Marcar Refeiï¿½ï¿½es para Amanhï¿½");
 				 dt_ref.requestFocus();
 				 return;
 			}
 			if ((strDate.compareTo(DTrabalhador)==0) && (dataobtida.compareTo(DTrabalhador)==0))
 			{
-				 JOptionPane.showMessageDialog(null, "É Dia do trabalhador não Pode Marcar Refeições para Amanhã");
+				 JOptionPane.showMessageDialog(null, "ï¿½ Dia do trabalhador nï¿½o Pode Marcar Refeiï¿½ï¿½es para Amanhï¿½");
 				 dt_ref.requestFocus();
 				 return;
 			}
 			if ((strDate.compareTo(Fmunicipal)==0) && (dataobtida.compareTo(Fmunicipal)==0))
 			{
-				 JOptionPane.showMessageDialog(null, "É Feriado Municipal não Pode Marcar Refeições para Amanhã");
+				 JOptionPane.showMessageDialog(null, "ï¿½ Feriado Municipal nï¿½o Pode Marcar Refeiï¿½ï¿½es para Amanhï¿½");
 				 dt_ref.requestFocus();
 				 return;
 			}
 			if ((strDate.compareTo(Dliberdade)==0) && (dataobtida.compareTo(Dliberdade)==0))
 			{
-				 JOptionPane.showMessageDialog(null, "É Dia da liberdade não Pode Marcar Refeições para Amanhã");
+				 JOptionPane.showMessageDialog(null, "ï¿½ Dia da liberdade nï¿½o Pode Marcar Refeiï¿½ï¿½es para Amanhï¿½");
 				 dt_ref.requestFocus();
 				 return;
 			}
 			if ((strDate.compareTo(Pascoa)==0) && (dataobtida.compareTo(Pascoa)==0))
 			{
-				 JOptionPane.showMessageDialog(null, "É Páscoa não Pode Marcar Refeições para Amanhã");
+				 JOptionPane.showMessageDialog(null, "ï¿½ Pï¿½scoa nï¿½o Pode Marcar Refeiï¿½ï¿½es para Amanhï¿½");
 				 dt_ref.requestFocus();
 				 return;
 			}
 			if ((strDate.compareTo(SextaSanta)==0) && (dataobtida.compareTo(SextaSanta)==0))
 			{
-				 JOptionPane.showMessageDialog(null, "É Sexta Feira Santa não Pode Marcar Refeições para Amanhã");
+				 JOptionPane.showMessageDialog(null, "ï¿½ Sexta Feira Santa nï¿½o Pode Marcar Refeiï¿½ï¿½es para Amanhï¿½");
 				 dt_ref.requestFocus();
 				 return;
 			}
 			if ((strDate.compareTo(AnoNovo)==0) && (dataobtida.compareTo(AnoNovo)==0))
 			{
-				 JOptionPane.showMessageDialog(null, "É Ano Novo não Pode Marcar Refeições para Amanhã");
+				 JOptionPane.showMessageDialog(null, "ï¿½ Ano Novo nï¿½o Pode Marcar Refeiï¿½ï¿½es para Amanhï¿½");
 				 dt_ref.requestFocus();
 				 return;
 			}
 			if ((val == 6) && (dataobtida.compareTo(strcalendar)==0) && (mostra_data.horamin.compareTo(horalimite)>=0))
 			{
-				 JOptionPane.showMessageDialog(null, "Sexta,Já passa das "+horalimite+" !,Não pode marcar refeições para Sàbado!");
+				 JOptionPane.showMessageDialog(null, "Sexta,Jï¿½ passa das "+horalimite+" !,Nï¿½o pode marcar refeiï¿½ï¿½es para Sï¿½bado!");
 				 dt_ref.requestFocus();
 				 return;
 			}
 			if ((val == 6) && (dataobtida.compareTo(strcalum)==0) && (mostra_data.horamin.compareTo(horalimite)>=0))
 			{
-				 JOptionPane.showMessageDialog(null, "Sexta,Já passa das "+horalimite+" !,Não pode marcar refeições para Domingo!");
+				 JOptionPane.showMessageDialog(null, "Sexta,Jï¿½ passa das "+horalimite+" !,Nï¿½o pode marcar refeiï¿½ï¿½es para Domingo!");
 				 dt_ref.requestFocus();
 				 return;
 			}
 			if ((val == 6) && (dataobtida.compareTo(strcaldois)==0)&& (mostra_data.horamin.compareTo(horalimite)>=0))
 			{
-				 JOptionPane.showMessageDialog(null, "Sexta,Já passa das "+horalimite+" !,Não pode marcar refeições para Segunda!");
+				 JOptionPane.showMessageDialog(null, "Sexta,Jï¿½ passa das "+horalimite+" !,Nï¿½o pode marcar refeiï¿½ï¿½es para Segunda!");
 				 dt_ref.requestFocus();
 				 return;
 			}
 			if ((val == 7) && (dataobtida.compareTo(strcalendar)==0))
 			{
-				 JOptionPane.showMessageDialog(null, "Sàbado!,Não pode marcar refeições para domingo!");
+				 JOptionPane.showMessageDialog(null, "Sï¿½bado!,Nï¿½o pode marcar refeiï¿½ï¿½es para domingo!");
 				 dt_ref.requestFocus();
 				 return;
 			}
 			if ((val == 7) && (dataobtida.compareTo(strcalum)==0))
 			{
-				 JOptionPane.showMessageDialog(null, "Sàbado!,Não pode marcar refeições para Segunda!");
+				 JOptionPane.showMessageDialog(null, "Sï¿½bado!,Nï¿½o pode marcar refeiï¿½ï¿½es para Segunda!");
 				 dt_ref.requestFocus();
 				 return;
 			}
 			if ((val == 1) && (dataobtida.compareTo(strcalendar)==0))
 			{
-				 JOptionPane.showMessageDialog(null, "Domingo!,Não pode marcar refeições para segunda!");
+				 JOptionPane.showMessageDialog(null, "Domingo!,Nï¿½o pode marcar refeiï¿½ï¿½es para segunda!");
 				 dt_ref.requestFocus();
 				 return;
 			}
 			
 			if(dataobtida.compareTo(strcalendar)==0 && (mostra_data.horamin.compareTo(horalimite)>=0))
 	        {
-			 JOptionPane.showMessageDialog(null, "Já passa das "+horalimite+" não pode marcar refeições para Amanhã!");
+			 JOptionPane.showMessageDialog(null, "Jï¿½ passa das "+horalimite+" nï¿½o pode marcar refeiï¿½ï¿½es para Amanhï¿½!");
 			 dt_ref.requestFocus();
 			 return;
 	        }
 	        if(sqlStartDate.after(sqlDateTrinta))
 	        {
-			 JOptionPane.showMessageDialog(null, "Não pode marcar refeições para daqui a mais de 31 dias!");
+			 JOptionPane.showMessageDialog(null, "Nï¿½o pode marcar refeiï¿½ï¿½es para daqui a mais de 31 dias!");
 			 dt_ref.requestFocus();
 			 return;
 	        }
 			if(dataobtida.equals(strDate))
 	    	{
-			 JOptionPane.showMessageDialog(null, "Erro!,Não pode marcar refeições para hoje!");
+			 JOptionPane.showMessageDialog(null, "Erro!,Nï¿½o pode marcar refeiï¿½ï¿½es para hoje!");
 			 dt_ref.requestFocus();
 			 return;
 			}
 			else if(sqlStartDate.before(sqlDate)) 
 			{
-			 JOptionPane.showMessageDialog(null, "Erro!,Está a tentar marcar refeições para datas passadas!");
+			 JOptionPane.showMessageDialog(null, "Erro!,Estï¿½ a tentar marcar refeiï¿½ï¿½es para datas passadas!");
 			 dt_ref.requestFocus();
 			 return;
 			}
@@ -660,11 +690,11 @@ public class Marcacoes extends JFrame {
             rs_prato_rem.next();
             int conta_ref_rem = rs_prato_rem.getInt(1);
 
-            if(conta_ref > 0) // Entra aqui quando já existe o agendamento especifico
+            if(conta_ref > 0) // Entra aqui quando jï¿½ existe o agendamento especifico
               {
                 if (conta_ref_rem == 0) 
                 {	
-            	 JOptionPane.showMessageDialog(null,"Essa Refeição já foi Agendada Noutra Altura!"); 
+            	 JOptionPane.showMessageDialog(null,"Essa Refeiï¿½ï¿½o jï¿½ foi Agendada Noutra Altura!"); 
                  return;
                 } 
               }
@@ -687,10 +717,10 @@ public class Marcacoes extends JFrame {
 		        else if (conta_ref_rem > 0)
 		         {
 		        	 try{
-			            	String sql="update siar.siar_marcacoes set dta_desativo = null where Num_Mecanog='"+Login.txtUser.getText()+"'and to_char(dta_Refeicao,'dd-mm-yyyy')='"+dataref+"' and Cod_Refeicao='"+jcodref.getText()+"'and dta_desativo is not null"; 
+			            	String sql="update siar.siar_marcacoes set dta_desativo = null, cod_prato = '"+jcodprato.getText()+"' where Num_Mecanog='"+Login.txtUser.getText()+"'and to_char(dta_Refeicao,'dd-mm-yyyy')='"+dataref+"' and Cod_Refeicao='"+jcodref.getText()+"' and dta_desativo is not null"; 
 				            pstprato=conn_prato.prepareStatement(sql);
 				            pstprato.executeQuery();
-			                JOptionPane.showMessageDialog(null,"Refeição Remarcada!"); 
+			                JOptionPane.showMessageDialog(null,"Refeiï¿½ï¿½o Remarcada!"); 
 		            	  }
 		     	       catch(Exception e)
 				        {
@@ -761,12 +791,12 @@ public class Marcacoes extends JFrame {
     	}
      	else
     	{
-	        int p = JOptionPane.showConfirmDialog(null, "Deseja Realmente Desmarcar a Refeição!","Refeição Desmarcada!",JOptionPane.YES_NO_OPTION);
+	        int p = JOptionPane.showConfirmDialog(null, "Deseja Realmente Desmarcar a Refeiï¿½ï¿½o!","Refeiï¿½ï¿½o Desmarcada!",JOptionPane.YES_NO_OPTION);
 	        if(p==0)
 	        {
 	        	if ((mostra_data.horamin.compareTo(des_horalimite)>=0) && (dta_ref_aux.getText().equals(strDate)))
 	        	{
-	        		JOptionPane.showMessageDialog(null,"Já passa das "+des_horalimite+", não pode desmarcar a refeição!");
+	        		JOptionPane.showMessageDialog(null,"Jï¿½ passa das "+des_horalimite+", nï¿½o pode desmarcar a refeiï¿½ï¿½o!");
 	        	}
 	        	else
 	        	{	
@@ -799,7 +829,7 @@ public class Marcacoes extends JFrame {
 			        	String sql="update siar.siar_marcacoes set dta_desativo = sysdate where Num_Mecanog='"+nmec_aux.getText()+"' and to_char(Dta_Refeicao,'dd-mm-yyyy')='"+dta_ref_aux.getText()+"' and Cod_Refeicao='"+cod_ref_aux.getText()+"'";
 			        	pstconn_mar=conn_mar.prepareStatement(sql);
 			        	pstconn_mar.executeQuery();
-			        	JOptionPane.showMessageDialog(null,"Refeição Desmarcada com Sucesso!"); 
+			        	JOptionPane.showMessageDialog(null,"Refeiï¿½ï¿½o Desmarcada com Sucesso!"); 
 			          }
 				       catch(Exception e2)
 					  {
@@ -820,6 +850,7 @@ public class Marcacoes extends JFrame {
 		JTextField Jcolquatro = new JTextField();
 		JTextField Jcolcinco = new JTextField();
 		JTextField Jcolseis = new JTextField();
+		@SuppressWarnings("unused")
 		int linha = 0;
 		btn_anula.setEnabled(true);
      try
@@ -841,12 +872,12 @@ public class Marcacoes extends JFrame {
    	      sportColumnum.setCellEditor(new DefaultCellEditor(Jcolum));
    	      table.getColumnModel().getColumn(1).setResizable(false);
    	      table.getColumnModel().getColumn(1).setPreferredWidth(140);
-   	      table.getColumnModel().getColumn(1).setHeaderValue("Data da Refeição");
+   	      table.getColumnModel().getColumn(1).setHeaderValue("Data da Refeiï¿½ï¿½o");
   	      TableColumn sportColumdois = table.getColumnModel().getColumn(2);
    	      sportColumdois.setCellEditor(new DefaultCellEditor(Jcoldois));
    	      table.getColumnModel().getColumn(2).setResizable(false);
    	      table.getColumnModel().getColumn(2).setPreferredWidth(110);
-   	      table.getColumnModel().getColumn(2).setHeaderValue("Refeição");
+   	      table.getColumnModel().getColumn(2).setHeaderValue("Refeiï¿½ï¿½o");
  	      TableColumn sportColumtres = table.getColumnModel().getColumn(3);
    	      sportColumtres.setCellEditor(new DefaultCellEditor(Jcoltres));
    	      table.getColumnModel().getColumn(3).setResizable(false);
@@ -923,12 +954,12 @@ public class Marcacoes extends JFrame {
 	      sportColumnum.setCellEditor(new DefaultCellEditor(Jcolum));
 	      table.getColumnModel().getColumn(1).setResizable(false);
 	      table.getColumnModel().getColumn(1).setPreferredWidth(140);
-	      table.getColumnModel().getColumn(1).setHeaderValue("Data da Refeição");
+	      table.getColumnModel().getColumn(1).setHeaderValue("Data da Refeiï¿½ï¿½o");
 	      TableColumn sportColumdois = table.getColumnModel().getColumn(2);
 	      sportColumdois.setCellEditor(new DefaultCellEditor(Jcoldois));
 	      table.getColumnModel().getColumn(2).setResizable(false);
 	      table.getColumnModel().getColumn(2).setPreferredWidth(110);
-	      table.getColumnModel().getColumn(2).setHeaderValue("Refeição");
+	      table.getColumnModel().getColumn(2).setHeaderValue("Refeiï¿½ï¿½o");
 	      TableColumn sportColumtres = table.getColumnModel().getColumn(3);
 	      sportColumtres.setCellEditor(new DefaultCellEditor(Jcoltres));
 	      table.getColumnModel().getColumn(3).setResizable(false);
@@ -1001,12 +1032,12 @@ public class Marcacoes extends JFrame {
 		      sportColumnum.setCellEditor(new DefaultCellEditor(Jcolum));
 		      table.getColumnModel().getColumn(1).setResizable(false);
 		      table.getColumnModel().getColumn(1).setPreferredWidth(140);
-		      table.getColumnModel().getColumn(1).setHeaderValue("Data da Refeição");
+		      table.getColumnModel().getColumn(1).setHeaderValue("Data da Refeiï¿½ï¿½o");
 		      TableColumn sportColumdois = table.getColumnModel().getColumn(2);
 		      sportColumdois.setCellEditor(new DefaultCellEditor(Jcoldois));
 		      table.getColumnModel().getColumn(2).setResizable(false);
 		      table.getColumnModel().getColumn(2).setPreferredWidth(110);
-		      table.getColumnModel().getColumn(2).setHeaderValue("Refeição");
+		      table.getColumnModel().getColumn(2).setHeaderValue("Refeiï¿½ï¿½o");
 		      TableColumn sportColumtres = table.getColumnModel().getColumn(3);
 		      sportColumtres.setCellEditor(new DefaultCellEditor(Jcoltres));
 		      table.getColumnModel().getColumn(3).setResizable(false);

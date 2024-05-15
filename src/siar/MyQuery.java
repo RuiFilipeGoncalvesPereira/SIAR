@@ -1,7 +1,9 @@
 package siar;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
@@ -23,6 +25,12 @@ public class MyQuery {
 	Statement pst_dominio = null;
 	Connection conn_dominio = null;
 	ResultSet resdominio = null;
+	Statement pst_ementas = null;
+	Connection conn_ementas = null;
+	ResultSet resementas= null;
+    SimpleDateFormat df2 = new SimpleDateFormat("dd/MM/yyyy");
+    Date now = new Date(System.currentTimeMillis());
+    String strDate = df2.format(now);
 
 			public ArrayList<Product> BindTable()
 			{
@@ -60,8 +68,10 @@ public class MyQuery {
 				try
 				{
 					pst_upd = conn_upd.createStatement();
-					resupd = pst_upd.executeQuery("select siar.siar_utilizadores.Num_Mecanog Nmec,siar.siar_utilizadores.nome_utilizador nuti,siar.siar_utilizadores.senha pass, Dta_Desativo dta_des,siar.siar_utilizadores.email em,siar.siar_utilizadores.imagem img from siar.siar_utilizadores where UPPER(siar.siar_utilizadores.nome_utilizador) LIKE '%"+nome.toUpperCase()+"%' and siar.siar_utilizadores.num_mecanog is not null"
-							+ "");
+					//resupd = pst_upd.executeQuery("select siar.siar_utilizadores.Num_Mecanog Nmec,siar.siar_utilizadores.nome_utilizador nuti,siar.siar_utilizadores.senha pass, Dta_Desativo dta_des,siar.siar_utilizadores.email em,siar.siar_utilizadores.imagem img from siar.siar_utilizadores where UPPER(siar.siar_utilizadores.nome_utilizador) LIKE '%"+nome.toUpperCase()+"%' and siar.siar_utilizadores.num_mecanog is not null"
+							//+ "");
+					resupd = pst_upd.executeQuery("select siar.siar_utilizadores.Num_Mecanog Nmec,siar.siar_utilizadores.nome_utilizador nuti,siar.siar_utilizadores.senha pass, Dta_Desativo dta_des,siar.siar_utilizadores.email em,siar.siar_utilizadores.imagem img from siar.siar_utilizadores where UPPER(siar.siar_utilizadores.nome_utilizador) LIKE '"+nome.toUpperCase()+"' and siar.siar_utilizadores.num_mecanog is not null"
+					+ "");
 					Product p;
 					while(resupd.next())
 					{
@@ -154,6 +164,37 @@ public class MyQuery {
 				catch(Exception e)
 				{
 					JOptionPane.showMessageDialog(null, "Erro na querie de Dominio!"+e);
+				}
+				return list;
+			}
+			public ArrayList<Ementas> Mostra_Ementas()
+			{
+				conn_ementas = JavaConection.ConnecrDb();
+				ArrayList<Ementas> list = new ArrayList<Ementas>();
+				try
+				{
+					pst_ementas = conn_ementas.createStatement();
+					resementas = pst_ementas.executeQuery("select to_char(siar.siar_ementas.dta_refeicao,'dd/MM/yyyy')"
+							+ " dta_ref,siar.siar_ementas.cod_refeicao c_ref,siar.siar_ementas.cod_prato c_pr,siar.siar_refeicao.desc_refeicao cdr,siar.siar_prato.desc_prato cdp"
+							+ " FROM siar.siar_ementas,siar.siar_prato,siar.siar_refeicao"
+							+ " where siar.siar_ementas.cod_prato = siar.siar_prato.cod_prato and siar.siar_ementas.cod_refeicao = siar.siar_refeicao.cod_refeicao and siar.siar_ementas.dta_refeicao > sysdate "
+							+ " order by dta_ref,cdr asc");
+					Ementas d;
+					while(resementas.next())
+					{
+						d = new Ementas(
+							       resementas.getString("dta_ref"),
+							       resementas.getString("cdr"),
+							       resementas.getString("cdp"),
+							       resementas.getInt("c_ref"),
+							       resementas.getInt("c_pr")
+									);
+								list.add(d);
+					}
+				}
+				catch(Exception e)
+				{
+					JOptionPane.showMessageDialog(null, "Erro na querie de Ementas!"+e);
 				}
 				return list;
 			}

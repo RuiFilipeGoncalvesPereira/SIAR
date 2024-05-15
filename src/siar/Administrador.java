@@ -15,6 +15,8 @@ import javax.swing.JButton;
 import javax.swing.DefaultCellEditor;
 import javax.swing.ImageIcon;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.Date;
@@ -46,6 +48,10 @@ import java.io.IOException;
 import com.toedter.calendar.JDateChooser;
 
 public class Administrador extends JFrame {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public static JLabel lblnum, lblNome;
 	private JPanel contentPane;
 	private JLabel lblDesc;
@@ -68,6 +74,8 @@ public class Administrador extends JFrame {
 	public static JDateChooser DC_prato;
 	public static JDateChooser DC_ref;
 	public static JDateChooser dta_feriado;
+	public static JButton button_3;
+	public static JButton button_4;
 	Connection conn_utilizador = null;
 	ResultSet rs = null;
 	PreparedStatement pst = null;
@@ -207,10 +215,12 @@ public class Administrador extends JFrame {
 		lblnum.setVisible(false);
 		DC_ref.setDate(sqlDate);
 		DC_prato.setDate(sqlDate);
+		button_3.setVisible(true);
+		button_4.setVisible(false);
 	}
 	private void initialize() 
 	{
-		setTitle("Menu de Administra\u00E7\u00E3o");
+		setTitle("Menu de Administraï¿½ï¿½o");
 		setAutoRequestFocus(false);
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 1000, 491);
@@ -224,12 +234,13 @@ public class Administrador extends JFrame {
 		contentPane.add(lblnum);
 		
 		lblNome = new JLabel("");
-		lblNome.setBounds(334, 0, 348, 14);
+		lblNome.setBounds(636, 0, 348, 14);
 		contentPane.add(lblNome);
 		
 		JButton button = new JButton("");
 		button.addActionListener(new ActionListener()
 		{
+			@SuppressWarnings("static-access")
 			public void actionPerformed(ActionEvent e)
 			{
 	                dispose();
@@ -243,7 +254,7 @@ public class Administrador extends JFrame {
 		contentPane.add(button);
 		
 		lblDesc = new JLabel("Utilizador:");
-		lblDesc.setBounds(261, 0, 66, 14);
+		lblDesc.setBounds(563, 0, 66, 14);
 		contentPane.add(lblDesc);
 		
 		JButton button_1 = new JButton("");
@@ -291,7 +302,7 @@ public class Administrador extends JFrame {
 		Senha.setColumns(10);
 		Senha.setEnabled(false);
 		
-		JButton button_3 = new JButton("");
+		button_3 = new JButton("");
 		button_3.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent e) 
@@ -300,11 +311,12 @@ public class Administrador extends JFrame {
 			}
 		});
 		button_3.setToolTipText("Pesquisar Utilizador");
-		button_3.setIcon(new ImageIcon("C:\\Users\\Rui Pereira\\Documents\\Icons_Geral\\Icons\\001_38.gif"));
+		button_3.setIcon(new ImageIcon("C:\\Users\\Rui Pereira\\Documents\\Icons_Geral\\Icons\\image275.gif"));
 		button_3.setBounds(820, 58, 27, 28);
 		Ges_Uti.add(button_3);
+
 		
-		JButton button_4 = new JButton("");
+		button_4 = new JButton("");
 		button_4.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e)
@@ -313,9 +325,10 @@ public class Administrador extends JFrame {
 			}
 		});
 		button_4.setToolTipText("Ver Todos  os Utilizadores");
-		button_4.setIcon(new ImageIcon("C:\\Users\\Rui Pereira\\Documents\\Icons_Geral\\Icons\\001_57.gif"));
-		button_4.setBounds(857, 58, 27, 28);
+		button_4.setIcon(new ImageIcon("C:\\Users\\Rui Pereira\\Documents\\Icons_Geral\\Icons\\image274.gif"));
+		button_4.setBounds(820, 58, 27, 28);
 		Ges_Uti.add(button_4);
+	
 		
 		JButton button_5 = new JButton("");
 		button_5.addActionListener(new ActionListener() {
@@ -377,7 +390,7 @@ public class Administrador extends JFrame {
 		});
 		button_6.setIcon(new ImageIcon("C:\\Users\\Rui Pereira\\Documents\\Icons_Geral\\Icons\\001_06.gif"));
 		button_6.setToolTipText("Ativar Utilizador");
-		button_6.setBounds(804, 225, 27, 28);
+		button_6.setBounds(804, 197, 27, 28);
 		Ges_Uti.add(button_6);
 		
 		JButton button_7 = new JButton("");
@@ -406,7 +419,7 @@ public class Administrador extends JFrame {
 		});
 		button_7.setIcon(new ImageIcon("C:\\Users\\Rui Pereira\\Documents\\Icons_Geral\\Icons\\001_05.gif"));
 		button_7.setToolTipText("Desativar Utilizador");
-		button_7.setBounds(835, 225, 27, 28);
+		button_7.setBounds(804, 225, 27, 28);
 		Ges_Uti.add(button_7);
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -416,11 +429,6 @@ public class Administrador extends JFrame {
 		table_2 = new JTable();
 		table_2.addMouseListener(new MouseAdapter()
 		{
-			/*public void mouseClicked(MouseEvent arg0)
-			{
-				seleciona_linha();	
-			}*/
-			@Override
 			public void mousePressed(MouseEvent e) {
 				seleciona_linha();	
 			}
@@ -551,7 +559,7 @@ public class Administrador extends JFrame {
 			}
 		});
 		button_8.setIcon(new ImageIcon("C:\\Users\\Rui Pereira\\Documents\\Icons_Geral\\Icons\\action_add.gif"));
-		button_8.setToolTipText("Inserir Refeicão");
+		button_8.setToolTipText("Inserir Refeicï¿½o");
 		button_8.setBounds(412, 18, 27, 28);
 		Ges_Ref.add(button_8);
 		
@@ -637,7 +645,6 @@ public class Administrador extends JFrame {
 					parametros.prato.Insere_prato();
 					parametros.prato.prencher_pratos();
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
@@ -800,18 +807,46 @@ public class Administrador extends JFrame {
 		Ges_Par.add(button_19_1);
 		
 		JPanel Ges_Dom = new JPanel();
-		tabbedPane.addTab("Gest\u00E3o de Dominios", null, Ges_Dom, null);
+		tabbedPane.addTab("Gestï¿½o de Dominios", null, Ges_Dom, null);
 		Ges_Dom.setLayout(null);
 		
 		Dom = new JTextField();
 		Dom.setColumns(10);
 		Dom.setBounds(43, 26, 73, 20);
 		Ges_Dom.add(Dom);
+		Dom.addKeyListener(new KeyAdapter() {
+			public void keyTyped(KeyEvent e) {
+				char c = e.getKeyChar();
+                if (Character.isLetter(c)||Character.isISOControl(c)) // || !Character.isWhitespace(c)
+                {
+                	return;
+                }
+                else
+                {
+                	e.consume();
+                	Dom.setText(null);
+                	JOptionPane.showMessageDialog(null,"Only accept letters!");
+                }
+				
+			}
+		});
 		
 		Val = new JTextField();
 		Val.setBounds(126, 26, 62, 20);
 		Ges_Dom.add(Val);
 		Val.setColumns(10);
+		Val.addKeyListener(new KeyAdapter() {
+            public void keyTyped(KeyEvent e) 
+            {
+                char caracter = e.getKeyChar();
+                if (((caracter < '0') || (caracter > '9'))) 
+                {
+                    e.consume();
+                    Val.setText(null);
+                	JOptionPane.showMessageDialog(null,"Only accept numbers!");
+                }
+            }
+	    });
 		
 		Desc_dom = new JTextField();
 		Desc_dom.setBounds(198, 26, 292, 20);
@@ -887,7 +922,7 @@ public class Administrador extends JFrame {
 		Ges_Dom.add(lblNewLabel_16);
 		
 		JButton button_19_2 = new JButton("");
-		button_19_2.setIcon(new ImageIcon("C:\\Users\\Rui Pereira\\Documents\\Icons_Geral\\Icons\\afsave_postfix.gif"));
+		button_19_2.setIcon(new ImageIcon("C:\\Users\\Rui Pereira\\Documents\\Icons_Geral\\Icons\\affldsav.gif"));
 		button_19_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				parametros.dominios.update_dom();
@@ -913,7 +948,7 @@ public class Administrador extends JFrame {
 		Ges_Dom.add(desc_aux_dom);
 		desc_aux_dom.setColumns(10);
 		JPanel Ges_Fer = new JPanel();
-		tabbedPane.addTab("Gest\u00E3o de Feriados", null, Ges_Fer, null);
+		tabbedPane.addTab("Gestï¿½o de Feriados", null, Ges_Fer, null);
 		Ges_Fer.setLayout(null);
 		
 		JLabel lbl_date = new JLabel("Data do Feriado");
@@ -949,7 +984,7 @@ public class Administrador extends JFrame {
 		button_18.setBounds(528, 18, 27, 28);
 		Ges_Fer.add(button_18);
 		
-		JLabel lbldescFe = new JLabel("Descri\u00E7\u00E3o do Feriado");
+		JLabel lbldescFe = new JLabel("Descriï¿½ï¿½o do Feriado");
 		lbldescFe.setBounds(304, 11, 126, 14);
 		Ges_Fer.add(lbldescFe);
 		
@@ -1017,6 +1052,7 @@ public class Administrador extends JFrame {
 				try 
 				{
 					File image = new File(filename);
+					@SuppressWarnings("resource")
 					FileInputStream  fis = new FileInputStream(image);
 					ByteArrayOutputStream bos=new ByteArrayOutputStream();
 					byte[] buf = new byte[1024];
@@ -1042,6 +1078,7 @@ public class Administrador extends JFrame {
 				try 
 				{
 					File image = new File(filename);
+					@SuppressWarnings("resource")
 					FileInputStream fis=new FileInputStream(image);
 					ByteArrayOutputStream bos=new ByteArrayOutputStream();
 					byte[] buf = new byte[1024];
@@ -1114,15 +1151,18 @@ public class Administrador extends JFrame {
 	}
 	public void prencheUtilizadores()
 	{
+		button_4.setVisible(false);
+		button_3.setVisible(true);
 		MyQuery mq = new MyQuery();
 		ArrayList<Product> list = mq.BindTable();
-		String[] columnName = {"Núm.Mec.","Nome do Utilizador","Senha","Dta.Desativo","Email","Imagem"}; 
+		String[] columnName = {"Nï¿½m.Mec.","Nome do Utilizador","Senha","Dta.Desativo","Email","Imagem"}; 
 		Object [][] rows = new Object[list.size()][6];
 		for(int i = 0; i < list.size(); i++)
 			{
 				rows[i][0] = list.get(i).getNmec();
 				rows[i][1] = list.get(i).getN_uti();
-				rows[i][2] = list.get(i).getSenha();
+				rows[i][2] = "*********";
+				//rows[i][2] = list.get(i).getSenha();
 				if(list.get(i).getDta_desativo() != null)
 				{	
 				  rows[i][3] = list.get(i).getDta_desativo();
@@ -1180,7 +1220,7 @@ public class Administrador extends JFrame {
    	      sportColumnzero.setCellEditor(new DefaultCellEditor(Jcolzero));
    	      table_8.getColumnModel().getColumn(0).setResizable(false);
    	      table_8.getColumnModel().getColumn(0).setPreferredWidth(25);
-   	      table_8.getColumnModel().getColumn(0).setHeaderValue("Código Feriado");
+   	      table_8.getColumnModel().getColumn(0).setHeaderValue("Cï¿½digo Feriado");
   	      TableColumn sportColumnum = table_8.getColumnModel().getColumn(1);
    	      sportColumnum.setCellEditor(new DefaultCellEditor(Jcolum));
     	  table_8.getColumnModel().getColumn(1).setResizable(false);
@@ -1190,7 +1230,7 @@ public class Administrador extends JFrame {
    	      sportColumdois.setCellEditor(new DefaultCellEditor(Jcoldois));
    	      table_8.getColumnModel().getColumn(2).setResizable(false);
    	      table_8.getColumnModel().getColumn(2).setPreferredWidth(170);
-   	      table_8.getColumnModel().getColumn(2).setHeaderValue("Descrição do Feriado");
+   	      table_8.getColumnModel().getColumn(2).setHeaderValue("Descriï¿½ï¿½o do Feriado");
          } while(resferiado.next());
           DefaultTableModel modelo = (DefaultTableModel)table_8.getModel();
           modelo.setNumRows(30);
@@ -1213,7 +1253,7 @@ public class Administrador extends JFrame {
 		JTextField Jcoldois = new JTextField();
      try
       {
-    	 String sql="select siar.siar_refeicao.cod_refeicao codref,siar.siar_refeicao.desc_refeicao desre,siar.siar_refeicao.dta_registo dtare from siar.siar_refeicao order by cod_refeicao";
+    	 String sql="select siar.siar_refeicao.cod_refeicao codref,siar.siar_refeicao.desc_refeicao desre,to_char(siar.siar_refeicao.dta_registo,'dd-MM-YYYY hh24:mi:ss') dtare from siar.siar_refeicao order by cod_refeicao";
     	 pstatu_ref=conn_atu_ref.prepareStatement(sql); 
     	 rsref=pstatu_ref.executeQuery();
  		 do
@@ -1223,17 +1263,17 @@ public class Administrador extends JFrame {
    	      sportColumnzero.setCellEditor(new DefaultCellEditor(Jcolzero));
    	      table_3.getColumnModel().getColumn(0).setResizable(false);
    	      table_3.getColumnModel().getColumn(0).setPreferredWidth(25);
-   	      table_3.getColumnModel().getColumn(0).setHeaderValue("Código");
+   	      table_3.getColumnModel().getColumn(0).setHeaderValue("Cï¿½digo");
   	      TableColumn sportColumnum = table_3.getColumnModel().getColumn(1);
    	      sportColumnum.setCellEditor(new DefaultCellEditor(Jcolum));
     	  table_3.getColumnModel().getColumn(1).setResizable(false);
    	      table_3.getColumnModel().getColumn(1).setPreferredWidth(60);
-   	      table_3.getColumnModel().getColumn(1).setHeaderValue("Descrição");
+   	      table_3.getColumnModel().getColumn(1).setHeaderValue("Descriï¿½ï¿½o");
   	      TableColumn sportColumdois = table_3.getColumnModel().getColumn(2);
    	      sportColumdois.setCellEditor(new DefaultCellEditor(Jcoldois));
    	      table_3.getColumnModel().getColumn(2).setResizable(false);
    	      table_3.getColumnModel().getColumn(2).setPreferredWidth(170);
-   	      table_3.getColumnModel().getColumn(2).setHeaderValue("Data da Refeicão");
+   	      table_3.getColumnModel().getColumn(2).setHeaderValue("Data da Refeicï¿½o");
          } while(rsref.next());
           DefaultTableModel modelo = (DefaultTableModel)table_3.getModel();
           modelo.setNumRows(30);
@@ -1246,20 +1286,23 @@ public class Administrador extends JFrame {
       }
          catch(Exception e)
          {
-        	 JOptionPane.showMessageDialog(null, "Erro ao Listar as refeições!"+e);
+        	 JOptionPane.showMessageDialog(null, "Erro ao Listar as refeiï¿½ï¿½es!"+e);
          }
     }
 	public void pesq_utilizador()
 	{
+		button_3.setVisible(false);
+		button_4.setVisible(true);
 		MyQuery mq = new MyQuery();
 		ArrayList<Product> list = mq.pesq_utilizador(Nome_Uti.getText());
-		String[] columnName = {"Número Mec.","Nome do Utilizador","Senha","Dta.Desativo","Email","Imagem"}; 
+		String[] columnName = {"Nï¿½mero Mec.","Nome do Utilizador","Senha","Dta.Desativo","Email","Imagem"}; 
 		Object [][] rows = new Object[list.size()][6];
 			for(int i = 0; i < list.size(); i++)
 			{
 				rows[i][0] = list.get(i).getNmec();
 				rows[i][1] = list.get(i).getN_uti();
-				rows[i][2] = list.get(i).getSenha();
+				rows[i][2] = "*********";
+				//rows[i][2] = list.get(i).getSenha();
 				if(list.get(i).getDta_desativo() != null)
 				{	
 				  rows[i][3] = list.get(i).getDta_desativo();
@@ -1363,7 +1406,7 @@ public class Administrador extends JFrame {
 	      }
          catch(Exception e)
          {
-        	 JOptionPane.showMessageDialog(null, "Erro ao atualizar Sequência!"+e);
+        	 JOptionPane.showMessageDialog(null, "Erro ao atualizar Sequï¿½ncia!"+e);
          }
       }
 	public void atua_seq_feriado()
@@ -1380,7 +1423,7 @@ public class Administrador extends JFrame {
 	      }
          catch(Exception e)
          {
-        	 JOptionPane.showMessageDialog(null, "Erro ao atualizar Sequência feriado!"+e);
+        	 JOptionPane.showMessageDialog(null, "Erro ao atualizar Sequï¿½ncia feriado!"+e);
          }
       }
 	public void atua_seq_refeicao()
@@ -1397,7 +1440,7 @@ public class Administrador extends JFrame {
 	      }
          catch(Exception e)
          {
-        	 JOptionPane.showMessageDialog(null, "Erro ao atualizar Sequência refeicao!"+e);
+        	 JOptionPane.showMessageDialog(null, "Erro ao atualizar Sequï¿½ncia refeicao!"+e);
          }
       }
 	public void Insere_Utilizador() throws SQLException
@@ -1422,7 +1465,7 @@ public class Administrador extends JFrame {
 		}
 		else if((!regexMaster.matches())) 
 		{
-		    JOptionPane.showMessageDialog(null, "Formato email "+Email.getText()+", inválido!");
+		    JOptionPane.showMessageDialog(null, "Formato email "+Email.getText()+", invï¿½lido!");
 		}
     	else
     	{	
@@ -1461,7 +1504,7 @@ public class Administrador extends JFrame {
         }
     	if((desc_feriado.getText().length()==0))
     	{
-    	 JOptionPane.showMessageDialog(null,"Deve Introduzir a descrição!");
+    	 JOptionPane.showMessageDialog(null,"Deve Introduzir a descriï¿½ï¿½o!");
     	}
     	else
     	{	
@@ -1482,13 +1525,13 @@ public class Administrador extends JFrame {
 	{
         if(((JTextField)DC_ref.getDateEditor().getUiComponent()).getText().isEmpty())
         {
-            JOptionPane.showMessageDialog(null, "Deve Inserir a Data da Refeição!");
+            JOptionPane.showMessageDialog(null, "Deve Inserir a Data da Refeiï¿½ï¿½o!");
             ((JTextField)DC_ref.getDateEditor().getUiComponent()).requestFocus();
             return;
         }
     	if((Desc_Ref.getText().length()==0))
     	{
-    	 JOptionPane.showMessageDialog(null,"Deve Introduzir a Descrição da Refeição!");
+    	 JOptionPane.showMessageDialog(null,"Deve Introduzir a Descriï¿½ï¿½o da Refeiï¿½ï¿½o!");
     	}
     	else
     	{	
@@ -1499,7 +1542,7 @@ public class Administrador extends JFrame {
 	        pst_insref.setString(2,Desc_Ref.getText());
 	        pst_insref.setDate(3,convertUtilDateToSqlDate(DC_ref.getDate()));
 	        pst_insref.executeQuery();
-	        JOptionPane.showMessageDialog(null,"Refeição Inserida com Sucesso!");
+	        JOptionPane.showMessageDialog(null,"Refeiï¿½ï¿½o Inserida com Sucesso!");
 	        DC_ref.setDate(null);
 	        Desc_Ref.setText(null);
     	}
@@ -1624,7 +1667,7 @@ public class Administrador extends JFrame {
     	}
      	else
     	{
-	        int p = JOptionPane.showConfirmDialog(null, "Deseja Realmente Remover a Refeição!","Refeição Removida!",JOptionPane.YES_NO_OPTION);
+	        int p = JOptionPane.showConfirmDialog(null, "Deseja Realmente Remover a Refeiï¿½ï¿½o!","Refeiï¿½ï¿½o Removida!",JOptionPane.YES_NO_OPTION);
 	        if(p==0)
 	        {
 		          try{
@@ -1655,7 +1698,7 @@ public class Administrador extends JFrame {
     	}
 		else if((!regexMaster.matches())) 
 		{
-		    JOptionPane.showMessageDialog(null, "Formato email "+email_aux.getText()+", inválido!");
+		    JOptionPane.showMessageDialog(null, "Formato email "+email_aux.getText()+", invï¿½lido!");
 		} 
 		else
 		{		
@@ -1673,7 +1716,7 @@ public class Administrador extends JFrame {
 		     }
 	         catch(Exception e)
 	         {
-	        	 JOptionPane.showMessageDialog(null, "Erro ao atualizar informação do utilizador!"+e);
+	        	 JOptionPane.showMessageDialog(null, "Erro ao atualizar informaï¿½ï¿½o do utilizador!"+e);
 	         }
     	}
 	}

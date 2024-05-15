@@ -150,7 +150,7 @@ public class dominios {
     	{
 			try
 		      {
-				String sql="update siar.siar_dominios set dominio='"+Administrador.valor_dom_aux.getText()+"', desc_dominio='"+Administrador.desc_aux_dom.getText()+"' where valor='"+Administrador.dom_aux.getText()+"'";
+				String sql="update siar.siar_dominios set valor='"+Administrador.dom_aux.getText()+"',  dominio='"+Administrador.valor_dom_aux.getText()+"', desc_dominio='"+Administrador.desc_aux_dom.getText()+"' where valor='"+Administrador.dom_aux.getText()+"'";
 		    	 pst_rs_param = conn_param.prepareStatement(sql); 
 		    	 rs_param=pst_rs_param.executeQuery();
 		    	 prenche_dominios();

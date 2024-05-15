@@ -1,50 +1,36 @@
 package siar;
 import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.awt.event.ActionEvent;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-
 import java.awt.*;
 import javax.swing.*;
 
 
 public class Login {
 
-	JFrame frame;
+	public static JFrame frame;
 	private JLabel lblteste;
 	private JLabel lblData;
 	private JLabel lblHora;
-	Connection conn_utilizador = null;
-	Connection conn_utilizador_des = null;
+	static Connection conn_utilizador = null;
 	Data mostra_data;
-	int conta=0;  
-	private JPasswordField passField;
+	public static JPasswordField passField;
 	public static JTextField txtUser;
-	ResultSet rs = null;
-	ResultSet rs_des = null;
-	ResultSet rs_admin = null;
-	ResultSet rs_gecan = null;
-	PreparedStatement pst = null;
-	PreparedStatement pst_des = null;
-	PreparedStatement stmt =null;
+	static ResultSet rs = null;
+	static PreparedStatement pst = null;
 	String nome_utilizador = null;
-    public static String numero;
 	String Nome;
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
+			@SuppressWarnings("static-access")
 			public void run() {
 				try {
 					Login window = new Login();
@@ -64,7 +50,6 @@ public class Login {
 	public Login() 
 	{
 		conn_utilizador = JavaConection.ConnecrDb();
-		conn_utilizador_des = JavaConection.ConnecrDb();
 		initialize();
 		mostra_data = new Data();
         mostra_data.le_data();
@@ -75,7 +60,7 @@ public class Login {
         
         JLabel lblNewLabel = new JLabel("");
         Image img = new ImageIcon(this.getClass().getResource("/Siarfundo.jpg")).getImage();
-        lblData.setText(                              "Hoje é "+mostra_data.dia_semana+" ,dia "+mostra_data.dia+" de "+mostra_data.mes+" de "+mostra_data.ano);
+        lblData.setText(                              "Hoje Ã© "+mostra_data.dia_semana+" ,dia "+mostra_data.dia+" de "+mostra_data.mes+" de "+mostra_data.ano);
         lblNewLabel.setIcon(new ImageIcon(img));
         lblNewLabel.setBounds(0, 0, 444, 271);
         frame.getContentPane().add(lblNewLabel);
@@ -90,7 +75,7 @@ public class Login {
 	         }
 	         else
 	         {
-	        	 JOptionPane.showMessageDialog(null, "O Campo do Número Mecanográfico só pode conter números!"); 
+	        	 JOptionPane.showMessageDialog(null, "O Campo do NÃºmero MecanogrÃ¡fico sÃ³ pode conter nÃºmeros!"); 
 	         }
 	 }
   public void CurrentHour()
@@ -133,7 +118,7 @@ public class Login {
 		btnNewButton.setToolTipText("Acesso ao Sistema");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Valida_Login();
+				Check_Validation.Check_Validation.Valida_Login();
 			}	    
 		});
 		btnNewButton.setBounds(151, 139, 112, 33);
@@ -149,7 +134,7 @@ public class Login {
 		lblData.setFont(new Font("Calibri", Font.BOLD | Font.ITALIC, 14));
 		lblData.setBackground(Color.LIGHT_GRAY);
 		lblData.setForeground(SystemColor.textHighlight);
-		lblData.setBounds(168, 0, 266, 20);
+		lblData.setBounds(116, 0, 318, 20);
 		frame.getContentPane().add(lblData);
 		
 		JLabel lblPass = new JLabel("Pass:");
@@ -175,133 +160,18 @@ public class Login {
 		frame.getContentPane().add(txtUser);
 		txtUser.setColumns(10);
 		txtUser.addKeyListener(new KeyAdapter() {
-	            public void keyTyped(KeyEvent e) 
-	            {
-	                char caracter = e.getKeyChar();
-	                if (((caracter < '0') || (caracter > '9'))) 
-	                {
-	                    e.consume();
-	                }
-	            }
+		    public void keyTyped(KeyEvent e) 
+		    {
+		        char caracter = e.getKeyChar();
+		        if (((caracter < '0') || (caracter > '9'))) 
+		        {
+		            e.consume();
+		        	Login.txtUser.setText(null);
+		        	JOptionPane.showMessageDialog(null,"Only accept numbers!");
+		        }
+		    }
 		 });
 	}
-	public String prodQty(int num_mec)
-	 {
-	     String name = null;
-		  try
-		  {
-	      String sql="select nome_utilizador from siar.siar_utilizadores where Num_Mecanog='"+num_mec+"'";
-	      conn_utilizador.prepareStatement(sql);
-          pst=conn_utilizador.prepareStatement(sql,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-          rs=pst.executeQuery();
-	      while(rs.next())
-	        {
-	    	  name=rs.getString(1);
-	        }
-	      }
-	   catch (SQLException ex)
-		 {
-		   JOptionPane.showMessageDialog(null, ex);
-	     }
-	  return name;
-    }
-	@SuppressWarnings("deprecation")
-	public void Valida_Login()
-	{ 
-		    if(txtUser.getText().length()==0)
-		    {
-	             JOptionPane.showMessageDialog(null, "O Campo do Número Mecanográfico não pode ser nulo2!");
-	             txtUser.requestFocus();
-	             return; 
-	        }
-			if(passField.getText().length()==0)
-			{
-	             JOptionPane.showMessageDialog(null, "O Campo de Password não pode ser nulo!");
-	             passField.requestFocus();
-	             return;
-	        }
-				        if(conta<= 2)
-				         {    
-				            try
-				            {
-				               String sql="select * from siar.siar_utilizadores Where Num_Mecanog='"+txtUser.getText()+"' and Senha='"+passField.getText()+"'";
-				               conn_utilizador.prepareStatement(sql);
-				               pst=conn_utilizador.prepareStatement(sql,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-				               rs=pst.executeQuery();
-				               
-				               String sql_des="select * from siar.siar_utilizadores Where Num_Mecanog='"+txtUser.getText()+"' and Senha='"+passField.getText()+"'"
-				               		+ "and dta_desativo is not null";
-				               conn_utilizador_des.prepareStatement(sql_des);
-				               pst_des=conn_utilizador_des.prepareStatement(sql_des,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-				               rs_des=pst_des.executeQuery();
-				               
-				               String sql_admin="select * from siar.siar_dominios b"
-				               		+ " Where b.dominio='admin' and valor='"+txtUser.getText()+"'";
-				               conn_utilizador.prepareStatement(sql_admin);
-				               pst=conn_utilizador.prepareStatement(sql_admin,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-				               rs_admin=pst.executeQuery();
-				               
-				               String sql_gecan="select * from siar.siar_dominios b"
-					               		+ " Where b.dominio='gecan' and valor='"+txtUser.getText()+"'";
-				               conn_utilizador.prepareStatement(sql_gecan);
-				               pst=conn_utilizador.prepareStatement(sql_gecan,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-				               rs_gecan=pst.executeQuery();
-				               
-				               numero = txtUser.getText(); 
-				               
-				               if(rs_des.first())
-				               {
-				            	   JOptionPane.showMessageDialog(null, "Your acess is bloked, contact the administrator!"); 
-				               }
-				               	else
-				               {
-				            	      if(rs.first())
-						               {
-						            	   if(rs_admin.first())
-						            	   {
-						            		     JOptionPane.showMessageDialog(null, "Bem vindo senhor " + prodQty(Integer.parseInt(txtUser.getText())));
-								                 frame.dispose();
-						                         Administrador Admin = new Administrador();
-						                         Admin.setVisible(true);
-						                         Administrador.lblnum.setText(numero);
-						            	   }
-						            	   else if(rs_gecan.first()){
-								            	 JOptionPane.showMessageDialog(null, "Bem vindo senhor " + prodQty(Integer.parseInt(txtUser.getText())));
-								                 frame.dispose();
-						                         Gestor_Refeicoes Ges = new Gestor_Refeicoes();
-						                         Ges.setVisible(true);
-						                         Gestor_Refeicoes.lblnum.setText(numero);
-						            	   }
-						            	   else
-						            	   {
-								                 JOptionPane.showMessageDialog(null, "Bem vindo senhor " + prodQty(Integer.parseInt(txtUser.getText())));
-								                 frame.dispose();
-						                         Marcacoes Marc = new Marcacoes();
-						                         Marc.setVisible(true);
-						                         Marcacoes.lblNum.setText(numero);
-						                         Marcacoes.btn_back_menu.setVisible(false);
-						            	   }
-						               }
-						               else
-						               {
-						                   conta++; 
-						                   if(conta==1)
-						                   {    
-						                     JOptionPane.showMessageDialog(null, "Validação Incorecta!,Têm mais uma Oportunidade!");
-						                   }
-						                   else
-						                   {
-						                     JOptionPane.showMessageDialog(null, "Falhou outra Vez!");
-						                     System.exit(0);
-						                   }
-						               }
-				               } 
-					  }   
-				            catch(Exception e)
-				            {
-				                JOptionPane.showMessageDialog(null,e);
-				            }
-				    }
-	     }        
+	
  }
 

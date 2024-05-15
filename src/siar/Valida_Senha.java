@@ -1,8 +1,4 @@
 package siar;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -13,6 +9,7 @@ public class Valida_Senha
 	public String check_senha(String pass, String nome) 
     {
 		String str =pass;
+		@SuppressWarnings("unused")
 		int pequena = 0, digits = 0, blanks = 0,grande=0,c_espec=0;
 		char ch; 
 		String mess = null;

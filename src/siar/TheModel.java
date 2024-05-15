@@ -4,6 +4,7 @@ import javax.swing.table.AbstractTableModel;
 
 public class TheModel extends AbstractTableModel {
 
+	private static final long serialVersionUID = 1L;
 	private Object[][]rows;
 	private String[]columns;
 	
@@ -15,6 +16,7 @@ public class TheModel extends AbstractTableModel {
 		this.rows = data;
 	}
 	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public Class getColumnClass(int columnIndex)
 	{
 		if(columnIndex == 5)

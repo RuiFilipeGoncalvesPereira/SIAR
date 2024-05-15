@@ -1,5 +1,4 @@
 package siar;
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.sql.CallableStatement;
 import java.sql.Connection;
@@ -12,11 +11,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import oracle.jdbc.OracleTypes;
-
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -26,6 +22,10 @@ import javax.swing.JPasswordField;
 
 public class Altera_Password extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	public static JTextField textNum;
 	Connection conn_utilizador = null;
@@ -34,6 +34,7 @@ public class Altera_Password extends JFrame {
 	PreparedStatement  pst_ = null;
 	static ResultSet rs_admin = null;
 	static ResultSet rs_gecan = null;
+	static ResultSet  rs_ement = null;
 	String mess;
 	private JPasswordField pass_velha;
 	private JPasswordField pass_Nova;
@@ -59,7 +60,7 @@ public class Altera_Password extends JFrame {
 		initialize();
 	}
 	private void initialize() {
-		this.setTitle("Menu de Alteração de Password");
+		this.setTitle("Menu de AlteraÃ§Ã£o de Password");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 344, 243);
@@ -67,23 +68,24 @@ public class Altera_Password extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		JButton btnNewButton = new JButton("Alteração de Password");
+		JButton btnNewButton = new JButton("AlteraÃ§Ã£o de Password");
 		btnNewButton.addActionListener(new ActionListener()
 		{
+			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) 
 			{
 				if(pass_velha.getText().length()==0){
-		             JOptionPane.showMessageDialog(null, "O campo da senha anterior não pode ser nulo!");
+		             JOptionPane.showMessageDialog(null, "O campo da senha anterior nÃ£o pode ser nulo!");
 		             pass_velha.requestFocus();
 		             return;
 		        }
 				if(pass_Nova.getText().length()==0){
-		             JOptionPane.showMessageDialog(null, "O campo da senha nova não pode ser nulo!");
+		             JOptionPane.showMessageDialog(null, "O campo da senha nova nÃ£o pode ser nulo!");
 		             pass_Nova.requestFocus();
 		             return;
 		        }
 				if(pass_Nova.getText().length()> 100){
-		             JOptionPane.showMessageDialog(null, "O campo da senha nova não pode ter mais de 100 caracteres!");
+		             JOptionPane.showMessageDialog(null, "O campo da senha nova nÃ£o pode ter mais de 100 caracteres!");
 		             pass_Nova.requestFocus();
 		             return;
 		        }
@@ -93,7 +95,7 @@ public class Altera_Password extends JFrame {
 		             return;
 		        }
 				if(Pass_nova_2.getText().length()!=pass_Nova.getText().length()){
-		             JOptionPane.showMessageDialog(null, "A senha deve ser idêntica ao valor da nova Senha!");
+		             JOptionPane.showMessageDialog(null, "A senha deve ser idÃªntica ao valor da nova Senha!");
 		             pass_Nova.requestFocus();
 		             return;
 		        }
@@ -106,10 +108,10 @@ public class Altera_Password extends JFrame {
 					String mess = pst.getString(3);
     			JOptionPane.showMessageDialog(null, mess);
 				} catch (SQLException e1) {
-					JOptionPane.showMessageDialog(null, "Não foi possivél alterar a password!" + e1);
+					JOptionPane.showMessageDialog(null, "NÃ£o foi possivÃ©l alterar a password!" + e1);
 				}
 				 catch (Exception e2) {
-						JOptionPane.showMessageDialog(null, "Erro de Extração!" + e2);
+						JOptionPane.showMessageDialog(null, "Erro de ExtraÃ§Ã£o!" + e2);
 					}
 			}
 
@@ -158,12 +160,33 @@ public class Altera_Password extends JFrame {
 				} catch (SQLException e1) {
 					e1.printStackTrace();
 				}
-		           try {
+		         try {
 					rs_gecan=pst_.executeQuery();
 				} catch (SQLException e1) {
 					e1.printStackTrace();
+				} 
+		         
+		           String sql_ement="select * from siar.siar_dominios b"
+		               		+ " Where b.dominio='gemen' and valor='"+Integer.parseInt(Login.txtUser.getText())+"'";
+		           try {
+					conn_utilizador.prepareStatement(sql_ement);
+				} catch (SQLException e1) {
+					e1.printStackTrace();
 				}
-		    	  try {
+		           try {
+		        	   pst_=conn_utilizador.prepareStatement(sql_ement,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+		         try {
+					rs_ement=pst_.executeQuery();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				} 
+		         
+		         
+		         
+	    	  try {
 					if(rs_admin.first())
 					   {
 		                dispose();
@@ -174,6 +197,13 @@ public class Altera_Password extends JFrame {
 					else
 						try {
 							if(rs_gecan.first())
+							  {
+				                dispose();
+				        		Marcacoes Marc = new Marcacoes();
+								Marc.setVisible(true);
+								Marcacoes.btn_back_menu.setVisible(true);
+							   }
+							else if(rs_ement.first())
 							  {
 				                dispose();
 				        		Marcacoes Marc = new Marcacoes();
