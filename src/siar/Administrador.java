@@ -206,7 +206,7 @@ public class Administrador extends JFrame {
 		prencheFeriados();
 		prencherRefeicao();
 		parametros.parametros.prenche_parametros();
-		parametros.prato.prencher_pratos();
+		parametros.pratos.prencher_pratos();
 		parametros.dominios.prenche_dominios();
 		GetName Gn = new GetName();
 		@SuppressWarnings("static-access")
@@ -288,7 +288,7 @@ public class Administrador extends JFrame {
 		contentPane.add(tabbedPane);
 		
 		JPanel Ges_Uti = new JPanel();
-		tabbedPane.addTab("Gest\u00E3o de Utilizadores", null, Ges_Uti, null);
+		tabbedPane.addTab("Gestão de Utilizadores", null, Ges_Uti, null);
 		Ges_Uti.setLayout(null);
 		
 		Nome_Uti = new JTextField();
@@ -536,7 +536,7 @@ public class Administrador extends JFrame {
 		
 	
 		JPanel Ges_Ref = new JPanel();
-		tabbedPane.addTab("Gest\u00E3o de Refei\u00E7\u00F5es", null, Ges_Ref, null);
+		tabbedPane.addTab("Gestão de Refei\u00E7\u00F5es", null, Ges_Ref, null);
 		Ges_Ref.setLayout(null);
 		
 		Desc_Ref = new JTextField();
@@ -578,7 +578,7 @@ public class Administrador extends JFrame {
 		});
 		scrollPane_1.setViewportView(table_3);
 		
-		JLabel lblNewLabel_3 = new JLabel("Refei\u00E7\u00E3o");
+		JLabel lblNewLabel_3 = new JLabel("Refeição");
 		lblNewLabel_3.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_3.setBounds(135, 11, 65, 14);
 		Ges_Ref.add(lblNewLabel_3);
@@ -595,7 +595,7 @@ public class Administrador extends JFrame {
 			}
 		});
 		button_9.setIcon(new ImageIcon("C:\\Users\\Rui Pereira\\Documents\\Icons_Geral\\Icons\\001_05.gif"));
-		button_9.setToolTipText("Desativar Refei\u00E7\u00E3o");
+		button_9.setToolTipText("Desativar Refeição");
 		button_9.setBounds(566, 69, 27, 28);
 		Ges_Ref.add(button_9);
 		
@@ -630,7 +630,7 @@ public class Administrador extends JFrame {
 		dta_ref_aux.setColumns(10);
 		
 		JPanel Ges_Pr = new JPanel();
-		tabbedPane.addTab("Gest\u00E3o de Pratos", null, Ges_Pr, null);
+		tabbedPane.addTab("Gestão de Pratos", null, Ges_Pr, null);
 		Ges_Pr.setLayout(null);
 		
 		Desc_Prato = new JTextField();
@@ -642,8 +642,8 @@ public class Administrador extends JFrame {
 		button_10.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					parametros.prato.Insere_prato();
-					parametros.prato.prencher_pratos();
+					parametros.pratos.Insere_prato();
+					parametros.pratos.prencher_pratos();
 				} catch (SQLException e1) {
 					e1.printStackTrace();
 				}
@@ -657,11 +657,11 @@ public class Administrador extends JFrame {
 		JButton button_11 = new JButton("");
 		button_11.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				parametros.prato.remove_prato();
+				parametros.pratos.remove_prato();
 			}
 		});
 		button_11.setIcon(new ImageIcon("C:\\Users\\Rui Pereira\\Documents\\Icons_Geral\\Icons\\001_05.gif"));
-		button_11.setToolTipText("Desativar Refei\u00E7\u00E3o");
+		button_11.setToolTipText("Desativar Refeição");
 		button_11.setBounds(412, 69, 27, 28);
 		Ges_Pr.add(button_11);
 		
@@ -683,7 +683,7 @@ public class Administrador extends JFrame {
 		table_4.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				parametros.prato.seleciona_linha_prat();
+				parametros.pratos.seleciona_linha_prat();
 			}
 		});
 		scrollPane_2.setViewportView(table_4);
@@ -713,7 +713,7 @@ public class Administrador extends JFrame {
 		dta_reg_prato.setColumns(10);
 		
 		JPanel Ges_Par = new JPanel();
-		tabbedPane.addTab("Gest\u00E3o de Parametros", null, Ges_Par, null);
+		tabbedPane.addTab("Gestão de Parametros", null, Ges_Par, null);
 		Ges_Par.setLayout(null);
 		
 		Val_Par = new JTextField();
@@ -762,7 +762,7 @@ public class Administrador extends JFrame {
 			}
 		});
 		button_15.setIcon(new ImageIcon("C:\\Users\\Rui Pereira\\Documents\\Icons_Geral\\Icons\\001_05.gif"));
-		button_15.setToolTipText("Desativar Refei\u00E7\u00E3o");
+		button_15.setToolTipText("Desativar Refeição");
 		button_15.setBounds(699, 69, 27, 28);
 		Ges_Par.add(button_15);
 		
@@ -770,12 +770,12 @@ public class Administrador extends JFrame {
 		lblNewLabel_10.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_10.setBounds(102, 11, 46, 14);
 		Ges_Par.add(lblNewLabel_10);
-		JLabel lblNewLabel_11 = new JLabel("Descri\u00E7\u00E3o do P\u00E2rametro");
+		JLabel lblNewLabel_11 = new JLabel("Descrição do Pârametro");
 		lblNewLabel_11.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_11.setBounds(259, 11, 197, 14);
 		Ges_Par.add(lblNewLabel_11);
 		
-		JLabel lblNewLabel_15 = new JLabel("Par\u00E2metros:");
+		JLabel lblNewLabel_15 = new JLabel("Pârametros:");
 		lblNewLabel_15.setBounds(88, 372, 75, 14);
 		Ges_Par.add(lblNewLabel_15);
 		
@@ -807,7 +807,7 @@ public class Administrador extends JFrame {
 		Ges_Par.add(button_19_1);
 		
 		JPanel Ges_Dom = new JPanel();
-		tabbedPane.addTab("Gest�o de Dominios", null, Ges_Dom, null);
+		tabbedPane.addTab("Gestão de Dominios", null, Ges_Dom, null);
 		Ges_Dom.setLayout(null);
 		
 		Dom = new JTextField();
@@ -894,7 +894,7 @@ public class Administrador extends JFrame {
 			}
 		});
 		button_13.setIcon(new ImageIcon("C:\\Users\\Rui Pereira\\Documents\\Icons_Geral\\Icons\\001_05.gif"));
-		button_13.setToolTipText("Desativar Refei\u00E7\u00E3o");
+		button_13.setToolTipText("Desativar Refeição");
 		button_13.setBounds(500, 69, 27, 28);
 		Ges_Dom.add(button_13);
 		
@@ -912,7 +912,7 @@ public class Administrador extends JFrame {
 		lblNewLabel_8.setBounds(131, 11, 46, 14);
 		Ges_Dom.add(lblNewLabel_8);
 		
-		JLabel lblNewLabel_9 = new JLabel("Descric\u00E3o do Dominio");
+		JLabel lblNewLabel_9 = new JLabel("Descrição do Dominio");
 		lblNewLabel_9.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_9.setBounds(274, 11, 147, 14);
 		Ges_Dom.add(lblNewLabel_9);
@@ -948,7 +948,7 @@ public class Administrador extends JFrame {
 		Ges_Dom.add(desc_aux_dom);
 		desc_aux_dom.setColumns(10);
 		JPanel Ges_Fer = new JPanel();
-		tabbedPane.addTab("Gest�o de Feriados", null, Ges_Fer, null);
+		tabbedPane.addTab("Gestão de Feriados", null, Ges_Fer, null);
 		Ges_Fer.setLayout(null);
 		
 		JLabel lbl_date = new JLabel("Data do Feriado");
@@ -1286,7 +1286,7 @@ public class Administrador extends JFrame {
       }
          catch(Exception e)
          {
-        	 JOptionPane.showMessageDialog(null, "Erro ao Listar as refei��es!"+e);
+        	 JOptionPane.showMessageDialog(null, "Erro ao Listar as refeições!"+e);
          }
     }
 	public void pesq_utilizador()
@@ -1295,7 +1295,7 @@ public class Administrador extends JFrame {
 		button_4.setVisible(true);
 		MyQuery mq = new MyQuery();
 		ArrayList<Product> list = mq.pesq_utilizador(Nome_Uti.getText());
-		String[] columnName = {"N�mero Mec.","Nome do Utilizador","Senha","Dta.Desativo","Email","Imagem"}; 
+		String[] columnName = {"Número Mec.","Nome do Utilizador","Senha","Dta.Desativo","Email","Imagem"}; 
 		Object [][] rows = new Object[list.size()][6];
 			for(int i = 0; i < list.size(); i++)
 			{
@@ -1465,7 +1465,7 @@ public class Administrador extends JFrame {
 		}
 		else if((!regexMaster.matches())) 
 		{
-		    JOptionPane.showMessageDialog(null, "Formato email "+Email.getText()+", inv�lido!");
+		    JOptionPane.showMessageDialog(null, "Formato email "+Email.getText()+", inválido!");
 		}
     	else
     	{	
@@ -1525,13 +1525,13 @@ public class Administrador extends JFrame {
 	{
         if(((JTextField)DC_ref.getDateEditor().getUiComponent()).getText().isEmpty())
         {
-            JOptionPane.showMessageDialog(null, "Deve Inserir a Data da Refei��o!");
+            JOptionPane.showMessageDialog(null, "Deve Inserir a Data da Refeição!");
             ((JTextField)DC_ref.getDateEditor().getUiComponent()).requestFocus();
             return;
         }
     	if((Desc_Ref.getText().length()==0))
     	{
-    	 JOptionPane.showMessageDialog(null,"Deve Introduzir a Descri��o da Refei��o!");
+    	 JOptionPane.showMessageDialog(null,"Deve Introduzir a Descri��o da Refeição!");
     	}
     	else
     	{	
@@ -1542,7 +1542,7 @@ public class Administrador extends JFrame {
 	        pst_insref.setString(2,Desc_Ref.getText());
 	        pst_insref.setDate(3,convertUtilDateToSqlDate(DC_ref.getDate()));
 	        pst_insref.executeQuery();
-	        JOptionPane.showMessageDialog(null,"Refei��o Inserida com Sucesso!");
+	        JOptionPane.showMessageDialog(null,"Refeição Inserida com Sucesso!");
 	        DC_ref.setDate(null);
 	        Desc_Ref.setText(null);
     	}
@@ -1667,7 +1667,7 @@ public class Administrador extends JFrame {
     	}
      	else
     	{
-	        int p = JOptionPane.showConfirmDialog(null, "Deseja Realmente Remover a Refei��o!","Refei��o Removida!",JOptionPane.YES_NO_OPTION);
+	        int p = JOptionPane.showConfirmDialog(null, "Deseja Realmente Remover a Refeição!","Refeição Removida!",JOptionPane.YES_NO_OPTION);
 	        if(p==0)
 	        {
 		          try{
@@ -1698,7 +1698,7 @@ public class Administrador extends JFrame {
     	}
 		else if((!regexMaster.matches())) 
 		{
-		    JOptionPane.showMessageDialog(null, "Formato email "+email_aux.getText()+", inv�lido!");
+		    JOptionPane.showMessageDialog(null, "Formato email "+email_aux.getText()+", inválido!");
 		} 
 		else
 		{		
@@ -1716,7 +1716,7 @@ public class Administrador extends JFrame {
 		     }
 	         catch(Exception e)
 	         {
-	        	 JOptionPane.showMessageDialog(null, "Erro ao atualizar informa��o do utilizador!"+e);
+	        	 JOptionPane.showMessageDialog(null, "Erro ao atualizar informação do utilizador!"+e);
 	         }
     	}
 	}

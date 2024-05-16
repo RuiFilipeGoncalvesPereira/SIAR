@@ -167,7 +167,7 @@ public class Marcacoes extends JFrame {
 	     }
     }
 	private void initialize() {
-		this.setTitle("Menu de Marca��o de Refei��es");
+		this.setTitle("Menu de Marca��o de refeições");
 		setAutoRequestFocus(false);
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 698, 471);
@@ -542,129 +542,129 @@ public class Marcacoes extends JFrame {
 			
 	         if(((JTextField)dt_ref.getDateEditor().getUiComponent()).getText().isEmpty())
 	         {
-	             JOptionPane.showMessageDialog(null, "Deve Inserir a Data da Refei��o!");
+	             JOptionPane.showMessageDialog(null, "Deve Inserir a Data da Refeição!");
 	             ((JTextField)dt_ref.getDateEditor().getUiComponent()).requestFocus();
 	             return;
 	         }
 	         
 			if ((strDate.compareTo(Imaculada)==0) && (dataobtida.compareTo(Imaculada)==0))
 			{
-				 JOptionPane.showMessageDialog(null, "� Dia da Imaculada Con�ei��o n�o Pode Marcar Refei��es para Amanh�");
+				 JOptionPane.showMessageDialog(null, "Dia da Imaculada Conçeição não Pode Marcar Refeições para Amanhâ");
 				 dt_ref.requestFocus();
 				 return;
 			}
 			if ((strDate.compareTo(Natal)==0) && (dataobtida.compareTo(Natal)==0))
 			{
-				 JOptionPane.showMessageDialog(null, "� Dia de Natal n�o Pode Marcar Refei��es para Amanh�");
+				 JOptionPane.showMessageDialog(null, "Dia de Natal não Pode Marcar Refeições para Amanhâ");
 				 dt_ref.requestFocus();
 				 return;
 			}
 			if ((strDate.compareTo(AssunSenhora)==0) && (dataobtida.compareTo(AssunSenhora)==0))
 			{
-				 JOptionPane.showMessageDialog(null, "� de nossa Senhora da Assun��o n�o Pode Marcar Refei��es para Amanh�");
+				 JOptionPane.showMessageDialog(null, "Dia de nossa Senhora da Assunção não Pode Marcar Refeições para Amanhã");
 				 dt_ref.requestFocus();
 				 return;
 			}
 			if ((strDate.compareTo(DPortugal)==0) && (dataobtida.compareTo(DPortugal)==0))
 			{
-				 JOptionPane.showMessageDialog(null, "� Dia de Portugal n�o Pode Marcar Refei��es para Amanh�");
+				 JOptionPane.showMessageDialog(null, "Dia de Portugal não Pode Marcar Refeições para Amanhâ");
 				 dt_ref.requestFocus();
 				 return;
 			}
 			if ((strDate.compareTo(DTrabalhador)==0) && (dataobtida.compareTo(DTrabalhador)==0))
 			{
-				 JOptionPane.showMessageDialog(null, "� Dia do trabalhador n�o Pode Marcar Refei��es para Amanh�");
+				 JOptionPane.showMessageDialog(null, "Dia do trabalhador não Pode Marcar Refeições para Amanhâ");
 				 dt_ref.requestFocus();
 				 return;
 			}
 			if ((strDate.compareTo(Fmunicipal)==0) && (dataobtida.compareTo(Fmunicipal)==0))
 			{
-				 JOptionPane.showMessageDialog(null, "� Feriado Municipal n�o Pode Marcar Refei��es para Amanh�");
+				 JOptionPane.showMessageDialog(null, "Feriado Municipal Não Pode Marcar refeições para Amanhâ");
 				 dt_ref.requestFocus();
 				 return;
 			}
 			if ((strDate.compareTo(Dliberdade)==0) && (dataobtida.compareTo(Dliberdade)==0))
 			{
-				 JOptionPane.showMessageDialog(null, "� Dia da liberdade n�o Pode Marcar Refei��es para Amanh�");
+				 JOptionPane.showMessageDialog(null, "� Dia da liberdade Não Pode Marcar refeições para Amanhâ");
 				 dt_ref.requestFocus();
 				 return;
 			}
 			if ((strDate.compareTo(Pascoa)==0) && (dataobtida.compareTo(Pascoa)==0))
 			{
-				 JOptionPane.showMessageDialog(null, "� P�scoa n�o Pode Marcar Refei��es para Amanh�");
+				 JOptionPane.showMessageDialog(null, "� P�scoa Não Pode Marcar refeições para Amanhâ");
 				 dt_ref.requestFocus();
 				 return;
 			}
 			if ((strDate.compareTo(SextaSanta)==0) && (dataobtida.compareTo(SextaSanta)==0))
 			{
-				 JOptionPane.showMessageDialog(null, "� Sexta Feira Santa n�o Pode Marcar Refei��es para Amanh�");
+				 JOptionPane.showMessageDialog(null, "� Sexta Feira Santa Não Pode Marcar refeições para Amanhâ");
 				 dt_ref.requestFocus();
 				 return;
 			}
 			if ((strDate.compareTo(AnoNovo)==0) && (dataobtida.compareTo(AnoNovo)==0))
 			{
-				 JOptionPane.showMessageDialog(null, "� Ano Novo n�o Pode Marcar Refei��es para Amanh�");
+				 JOptionPane.showMessageDialog(null, "� Ano Novo Não Pode Marcar refeições para Amanhâ");
 				 dt_ref.requestFocus();
 				 return;
 			}
 			if ((val == 6) && (dataobtida.compareTo(strcalendar)==0) && (mostra_data.horamin.compareTo(horalimite)>=0))
 			{
-				 JOptionPane.showMessageDialog(null, "Sexta,J� passa das "+horalimite+" !,N�o pode marcar refei��es para S�bado!");
+				 JOptionPane.showMessageDialog(null, "Sexta,Já passa das "+horalimite+" !,Não pode marcar refeições para Sábado!");
 				 dt_ref.requestFocus();
 				 return;
 			}
 			if ((val == 6) && (dataobtida.compareTo(strcalum)==0) && (mostra_data.horamin.compareTo(horalimite)>=0))
 			{
-				 JOptionPane.showMessageDialog(null, "Sexta,J� passa das "+horalimite+" !,N�o pode marcar refei��es para Domingo!");
+				 JOptionPane.showMessageDialog(null, "Sexta,Já passa das "+horalimite+" !,Não pode marcar refeições para Domingo!");
 				 dt_ref.requestFocus();
 				 return;
 			}
 			if ((val == 6) && (dataobtida.compareTo(strcaldois)==0)&& (mostra_data.horamin.compareTo(horalimite)>=0))
 			{
-				 JOptionPane.showMessageDialog(null, "Sexta,J� passa das "+horalimite+" !,N�o pode marcar refei��es para Segunda!");
+				 JOptionPane.showMessageDialog(null, "Sexta,Já passa das "+horalimite+" !,Não pode marcar refeições para Segunda!");
 				 dt_ref.requestFocus();
 				 return;
 			}
 			if ((val == 7) && (dataobtida.compareTo(strcalendar)==0))
 			{
-				 JOptionPane.showMessageDialog(null, "S�bado!,N�o pode marcar refei��es para domingo!");
+				 JOptionPane.showMessageDialog(null, "Sábado!,Não pode marcar refeições para domingo!");
 				 dt_ref.requestFocus();
 				 return;
 			}
 			if ((val == 7) && (dataobtida.compareTo(strcalum)==0))
 			{
-				 JOptionPane.showMessageDialog(null, "S�bado!,N�o pode marcar refei��es para Segunda!");
+				 JOptionPane.showMessageDialog(null, "Sábado!,Não pode marcar refeições para Segunda!");
 				 dt_ref.requestFocus();
 				 return;
 			}
 			if ((val == 1) && (dataobtida.compareTo(strcalendar)==0))
 			{
-				 JOptionPane.showMessageDialog(null, "Domingo!,N�o pode marcar refei��es para segunda!");
+				 JOptionPane.showMessageDialog(null, "Domingo!,Não pode marcar refeições para segunda!");
 				 dt_ref.requestFocus();
 				 return;
 			}
 			
 			if(dataobtida.compareTo(strcalendar)==0 && (mostra_data.horamin.compareTo(horalimite)>=0))
 	        {
-			 JOptionPane.showMessageDialog(null, "J� passa das "+horalimite+" n�o pode marcar refei��es para Amanh�!");
+			 JOptionPane.showMessageDialog(null, "Já passa das "+horalimite+" Não pode marcar refeições para Amanhâ!");
 			 dt_ref.requestFocus();
 			 return;
 	        }
 	        if(sqlStartDate.after(sqlDateTrinta))
 	        {
-			 JOptionPane.showMessageDialog(null, "N�o pode marcar refei��es para daqui a mais de 31 dias!");
+			 JOptionPane.showMessageDialog(null, "Não pode marcar refeições para daqui a mais de 31 dias!");
 			 dt_ref.requestFocus();
 			 return;
 	        }
 			if(dataobtida.equals(strDate))
 	    	{
-			 JOptionPane.showMessageDialog(null, "Erro!,N�o pode marcar refei��es para hoje!");
+			 JOptionPane.showMessageDialog(null, "Erro!,Não pode marcar refeições para hoje!");
 			 dt_ref.requestFocus();
 			 return;
 			}
 			else if(sqlStartDate.before(sqlDate)) 
 			{
-			 JOptionPane.showMessageDialog(null, "Erro!,Est� a tentar marcar refei��es para datas passadas!");
+			 JOptionPane.showMessageDialog(null, "Erro!,Está a tentar marcar refeições para datas passadas!");
 			 dt_ref.requestFocus();
 			 return;
 			}
@@ -690,11 +690,11 @@ public class Marcacoes extends JFrame {
             rs_prato_rem.next();
             int conta_ref_rem = rs_prato_rem.getInt(1);
 
-            if(conta_ref > 0) // Entra aqui quando j� existe o agendamento especifico
+            if(conta_ref > 0) // Entra aqui quando Já existe o agendamento especifico
               {
                 if (conta_ref_rem == 0) 
                 {	
-            	 JOptionPane.showMessageDialog(null,"Essa Refei��o j� foi Agendada Noutra Altura!"); 
+            	 JOptionPane.showMessageDialog(null,"Essa Refeição Já foi Agendada Noutra Altura!"); 
                  return;
                 } 
               }
@@ -720,7 +720,7 @@ public class Marcacoes extends JFrame {
 			            	String sql="update siar.siar_marcacoes set dta_desativo = null, cod_prato = '"+jcodprato.getText()+"' where Num_Mecanog='"+Login.txtUser.getText()+"'and to_char(dta_Refeicao,'dd-mm-yyyy')='"+dataref+"' and Cod_Refeicao='"+jcodref.getText()+"' and dta_desativo is not null"; 
 				            pstprato=conn_prato.prepareStatement(sql);
 				            pstprato.executeQuery();
-			                JOptionPane.showMessageDialog(null,"Refei��o Remarcada!"); 
+			                JOptionPane.showMessageDialog(null,"Refeição Remarcada!"); 
 		            	  }
 		     	       catch(Exception e)
 				        {
@@ -791,12 +791,12 @@ public class Marcacoes extends JFrame {
     	}
      	else
     	{
-	        int p = JOptionPane.showConfirmDialog(null, "Deseja Realmente Desmarcar a Refei��o!","Refei��o Desmarcada!",JOptionPane.YES_NO_OPTION);
+	        int p = JOptionPane.showConfirmDialog(null, "Deseja Realmente Desmarcar a Refeição!","Refeição Desmarcada!",JOptionPane.YES_NO_OPTION);
 	        if(p==0)
 	        {
 	        	if ((mostra_data.horamin.compareTo(des_horalimite)>=0) && (dta_ref_aux.getText().equals(strDate)))
 	        	{
-	        		JOptionPane.showMessageDialog(null,"J� passa das "+des_horalimite+", n�o pode desmarcar a refei��o!");
+	        		JOptionPane.showMessageDialog(null,"Já passa das "+des_horalimite+", Não pode desmarcar a Refeição!");
 	        	}
 	        	else
 	        	{	
@@ -829,7 +829,7 @@ public class Marcacoes extends JFrame {
 			        	String sql="update siar.siar_marcacoes set dta_desativo = sysdate where Num_Mecanog='"+nmec_aux.getText()+"' and to_char(Dta_Refeicao,'dd-mm-yyyy')='"+dta_ref_aux.getText()+"' and Cod_Refeicao='"+cod_ref_aux.getText()+"'";
 			        	pstconn_mar=conn_mar.prepareStatement(sql);
 			        	pstconn_mar.executeQuery();
-			        	JOptionPane.showMessageDialog(null,"Refei��o Desmarcada com Sucesso!"); 
+			        	JOptionPane.showMessageDialog(null,"Refeição Desmarcada com Sucesso!"); 
 			          }
 				       catch(Exception e2)
 					  {
@@ -872,12 +872,12 @@ public class Marcacoes extends JFrame {
    	      sportColumnum.setCellEditor(new DefaultCellEditor(Jcolum));
    	      table.getColumnModel().getColumn(1).setResizable(false);
    	      table.getColumnModel().getColumn(1).setPreferredWidth(140);
-   	      table.getColumnModel().getColumn(1).setHeaderValue("Data da Refei��o");
+   	      table.getColumnModel().getColumn(1).setHeaderValue("Data da Refeição");
   	      TableColumn sportColumdois = table.getColumnModel().getColumn(2);
    	      sportColumdois.setCellEditor(new DefaultCellEditor(Jcoldois));
    	      table.getColumnModel().getColumn(2).setResizable(false);
    	      table.getColumnModel().getColumn(2).setPreferredWidth(110);
-   	      table.getColumnModel().getColumn(2).setHeaderValue("Refei��o");
+   	      table.getColumnModel().getColumn(2).setHeaderValue("Refeição");
  	      TableColumn sportColumtres = table.getColumnModel().getColumn(3);
    	      sportColumtres.setCellEditor(new DefaultCellEditor(Jcoltres));
    	      table.getColumnModel().getColumn(3).setResizable(false);
@@ -954,12 +954,12 @@ public class Marcacoes extends JFrame {
 	      sportColumnum.setCellEditor(new DefaultCellEditor(Jcolum));
 	      table.getColumnModel().getColumn(1).setResizable(false);
 	      table.getColumnModel().getColumn(1).setPreferredWidth(140);
-	      table.getColumnModel().getColumn(1).setHeaderValue("Data da Refei��o");
+	      table.getColumnModel().getColumn(1).setHeaderValue("Data da Refeição");
 	      TableColumn sportColumdois = table.getColumnModel().getColumn(2);
 	      sportColumdois.setCellEditor(new DefaultCellEditor(Jcoldois));
 	      table.getColumnModel().getColumn(2).setResizable(false);
 	      table.getColumnModel().getColumn(2).setPreferredWidth(110);
-	      table.getColumnModel().getColumn(2).setHeaderValue("Refei��o");
+	      table.getColumnModel().getColumn(2).setHeaderValue("Refeição");
 	      TableColumn sportColumtres = table.getColumnModel().getColumn(3);
 	      sportColumtres.setCellEditor(new DefaultCellEditor(Jcoltres));
 	      table.getColumnModel().getColumn(3).setResizable(false);
@@ -1032,12 +1032,12 @@ public class Marcacoes extends JFrame {
 		      sportColumnum.setCellEditor(new DefaultCellEditor(Jcolum));
 		      table.getColumnModel().getColumn(1).setResizable(false);
 		      table.getColumnModel().getColumn(1).setPreferredWidth(140);
-		      table.getColumnModel().getColumn(1).setHeaderValue("Data da Refei��o");
+		      table.getColumnModel().getColumn(1).setHeaderValue("Data da Refeição");
 		      TableColumn sportColumdois = table.getColumnModel().getColumn(2);
 		      sportColumdois.setCellEditor(new DefaultCellEditor(Jcoldois));
 		      table.getColumnModel().getColumn(2).setResizable(false);
 		      table.getColumnModel().getColumn(2).setPreferredWidth(110);
-		      table.getColumnModel().getColumn(2).setHeaderValue("Refei��o");
+		      table.getColumnModel().getColumn(2).setHeaderValue("Refeição");
 		      TableColumn sportColumtres = table.getColumnModel().getColumn(3);
 		      sportColumtres.setCellEditor(new DefaultCellEditor(Jcoltres));
 		      table.getColumnModel().getColumn(3).setResizable(false);
@@ -1078,7 +1078,7 @@ public class Marcacoes extends JFrame {
 		  }
 		     catch(Exception e)
 		     {
-		    	 JOptionPane.showMessageDialog(null, "Erro ao Listar na Tabela4!"+e);
+		    	 JOptionPane.showMessageDialog(null, "Erro ao Listar na Tabela das Marcações Passadas!"+e);
 		     }	
 	}
 }

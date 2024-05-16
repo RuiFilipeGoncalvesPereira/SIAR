@@ -35,7 +35,7 @@ public class get_ref {
 	    }
 		catch(Exception e)
 	   	{
-		    JOptionPane.showMessageDialog(null, "Erro ao obter Refeição!"+e);
+		    JOptionPane.showMessageDialog(null, "Erro ao obter RefeiÃ§Ã£o!"+e);
 		}
     } 
 	
@@ -55,7 +55,7 @@ public class get_ref {
 	       }
 	       catch(Exception e3)
 	       {
-	       JOptionPane.showMessageDialog(null, "Erro ao Obter Refeição_2!"+e3);
+	       JOptionPane.showMessageDialog(null, "Erro ao Obter RefeiÃ§Ã£o(CÃ³digo)!"+e3);
 	       }
     }
 

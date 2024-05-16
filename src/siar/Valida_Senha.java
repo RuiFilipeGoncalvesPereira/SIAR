@@ -42,13 +42,13 @@ public class Valida_Senha
 		}
 			if((pequena<4))
 			{		
-			JOptionPane.showMessageDialog(null, "Têm de inserir pelo menos 4 letras minúsculas!");
+			JOptionPane.showMessageDialog(null, "TÃªm de inserir pelo menos 4 letras minÃºsculas!");
 			mess="";
 			/*return;*/
 			}
 			if((grande<2))
 			{		
-			JOptionPane.showMessageDialog(null, "Têm de inserir pelo menos duas letras maiúsculas!");
+			JOptionPane.showMessageDialog(null, "TÃªm de inserir pelo menos duas letras maiÃºsculas!");
 			mess="";
 			}
 			if((c_espec<2))
@@ -58,11 +58,11 @@ public class Valida_Senha
 			}
 			if((digits<2))
 			{		
-			JOptionPane.showMessageDialog(null, "Têm de inserir pelo dois digitos!");
+			JOptionPane.showMessageDialog(null, "TÃªm de inserir pelo dois digitos!");
 			mess="";		
 			}
 			String Senha_Pattern = "^[a-zA-Z0-9]{1,9}$";
-		    String Letras_Pattern = "[A-Za-záéíóúãâçÁÉÍÓÚÃÂ]+(\\s[A-Za-záéíóúãâçÁÉÍÓÚÃÂ]+)*";
+		    String Letras_Pattern = "[A-Za-zï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½]+(\\s[A-Za-zï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½]+)*";
 			
 		    Pattern pattern = Pattern.compile(Senha_Pattern);
 			Pattern L_pattern = Pattern.compile(Letras_Pattern);
@@ -71,12 +71,12 @@ public class Valida_Senha
 			Matcher l_Master = L_pattern.matcher(nome);
 				if((!regexMaster.matches())) //&& (l_Master.matches()))
 				   {
-				    JOptionPane.showMessageDialog(null, "Formato Incorrecto na Senha "+pass+", Caracter inválido!");
+				    JOptionPane.showMessageDialog(null, "Formato Incorrecto na Senha "+pass+", Caracter invÃ¡lido!");
 				    mess="";
 				   }  
 				else if ((!l_Master.matches())) //((regexMaster.matches()) && 
 				   {
-				    JOptionPane.showMessageDialog(null, "O campo nome só aceita letras!");
+				    JOptionPane.showMessageDialog(null, "O campo nome sÃ³ aceita letras!");
 				    mess="";
 				   } 
 	 return mess;		

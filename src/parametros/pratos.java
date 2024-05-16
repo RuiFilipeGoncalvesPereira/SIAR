@@ -4,77 +4,47 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
-import javax.swing.DefaultCellEditor;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
 
 //package default;
 
-import net.proteanit.sql.DbUtils;
 import siar.Administrador;
 import siar.Marcacoes;
+import siar.MyQuery;
+import siar.prato;
+import siar.TheModel;
 
 
-public class prato {
+public class pratos {
 	
 	public static String ad_prato; 
+	
 	public static void prencher_pratos()
-    {
-		Connection conn_prato_cod = null;
-		ResultSet rs_prato_cod = null;
-		PreparedStatement pst_rs_prato_cod = null;
-		conn_prato_cod = siar.JavaConection.ConnecrDb(); 
-		JTextField Jcolzero = new JTextField();
-		JTextField Jcolum = new JTextField();
-		JTextField Jcoldois = new JTextField();
-		@SuppressWarnings("unused")
-		int linha = 0;
-     try
-      {
-    	 String sql="select siar_prato.cod_prato,siar_prato.desc_prato,to_char(siar_prato.Dta_registo,'dd-mm-yyyy')from siar.siar_prato";
-    	 pst_rs_prato_cod = conn_prato_cod.prepareStatement(sql); 
-    	 rs_prato_cod=pst_rs_prato_cod.executeQuery();
- 		 do
- 		 {	
- 		  Administrador.table_4.setModel(DbUtils.resultSetToTableModel(rs_prato_cod));
-   	      TableColumn sportColumnzero = Administrador.table_4.getColumnModel().getColumn(0);
-   	      sportColumnzero.setCellEditor(new DefaultCellEditor(Jcolzero));
-   	      Administrador.table_4.getColumnModel().getColumn(0).setResizable(false);
-   	      Administrador.table_4.getColumnModel().getColumn(0).setPreferredWidth(45);
-   	      Administrador.table_4.getColumnModel().getColumn(0).setHeaderValue("Num Mec.");
-   	      Administrador.table_4.getColumnModel().getColumn(0).setMinWidth(0);
-   	      Administrador.table_4.getColumnModel().getColumn(0).setMaxWidth(0);
-  	      TableColumn sportColumnum = Administrador.table_4.getColumnModel().getColumn(1);
-   	      sportColumnum.setCellEditor(new DefaultCellEditor(Jcolum));
-   	      Administrador.table_4.getColumnModel().getColumn(1).setResizable(false);
-   	      Administrador.table_4.getColumnModel().getColumn(1).setPreferredWidth(140);
-   	      Administrador.table_4.getColumnModel().getColumn(1).setHeaderValue("Descrição do Prato");
-  	      TableColumn sportColumdois = Administrador.table_4.getColumnModel().getColumn(2);
-   	      sportColumdois.setCellEditor(new DefaultCellEditor(Jcoldois));
-   	      Administrador.table_4.getColumnModel().getColumn(2).setResizable(false);
-   	      Administrador.table_4.getColumnModel().getColumn(2).setPreferredWidth(110);
-   	      Administrador.table_4.getColumnModel().getColumn(2).setHeaderValue("Data de Registo");
-         } while (rs_prato_cod.next());
-          DefaultTableModel modelo = (DefaultTableModel)Administrador.table_4.getModel();
-          modelo.setNumRows(30);
-          Administrador.table_4.getTableHeader().setReorderingAllowed(false);
-   	      Jcolzero.setEditable(false);
-   	      Jcolum.setEditable(false);
-   	      Jcoldois.setEditable(false);
-   	      Administrador.table_4.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-   	      Administrador.table_4.changeSelection(0, 0, false, false);
-          linha = Administrador.table_4.getSelectedRow();
-          Administrador.table_4.requestFocus();
-      }
-         catch(Exception e)
-         {
-        	 JOptionPane.showMessageDialog(null, "Erro ao Listar na Tabela2!"+e);
-         }
-      }
+	{
+		MyQuery mq = new MyQuery();
+		ArrayList<prato> list = mq.Mostra_Pratos();
+		String[] columnName = {"CÃ³digo","DescriÃ§Ã£o do Prato","Data de Registo"}; 
+		Object [][] rows = new Object[list.size()][3];
+		for(int i = 0; i < list.size(); i++)
+			{
+				rows[i][0] = list.get(i).getCod_prato();
+				rows[i][1] = list.get(i).getDesc_prato();
+				rows[i][2] = list.get(i).getDta_reg();
+			}
+		TheModel model = new TheModel(rows, columnName);
+		Administrador.table_4.setModel(model);
+		Administrador.table_4.setRowHeight(30);
+		Administrador.table_4.getColumnModel().getColumn(0).setPreferredWidth(45);
+		Administrador.table_4.getColumnModel().getColumn(1).setPreferredWidth(140);
+		Administrador.table_4.getColumnModel().getColumn(2).setPreferredWidth(110);
+		Administrador.table_4.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		Administrador.table_4.getTableHeader().setReorderingAllowed(false);
+	}
+	
 	public static void Insere_prato() throws SQLException
 	{
 		Connection conn_prato_cod = null;
@@ -91,7 +61,7 @@ public class prato {
         }
     	if((Administrador.Desc_Prato.getText().length()==0))
     	{
-    	 JOptionPane.showMessageDialog(null,"Deve Introduzir a Descrição do Prato!");
+    	 JOptionPane.showMessageDialog(null,"Deve Introduzir a DescriÃ§Ã£o do Prato!");
     	}
     	else
     	{	
@@ -125,7 +95,7 @@ public class prato {
 	      }
          catch(Exception e)
          {
-        	 JOptionPane.showMessageDialog(null, "Erro ao atualizar Sequência prato!"+e);
+        	 JOptionPane.showMessageDialog(null, "Erro ao atualizar SequÃªncia prato!"+e);
          }
       }
 	public static void remove_prato()

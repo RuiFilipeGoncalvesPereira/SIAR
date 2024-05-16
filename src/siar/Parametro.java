@@ -21,9 +21,9 @@ public class Parametro {
 	}
 
 
-	public void setCod_param(int cod_param) {
+	/*public void setCod_param(int cod_param) {
 		this.cod_param = cod_param;
-	}
+	}*/
 
 
 	public String getValor_param() {

@@ -21,8 +21,8 @@ public class parametros {
 	{
 		MyQuery mq = new MyQuery();
 		ArrayList<Parametro> list = mq.Mostra_Parametros();
-		String[] columnName = {"C�digo","Valor","Descri��o do P�rametro"}; 
-		Object [][] rows = new Object[list.size()][6];
+		String[] columnName = {"Código","Valor","Descrição do Parâmetro"}; 
+		Object [][] rows = new Object[list.size()][3];
 		for(int i = 0; i < list.size(); i++)
 			{
 				rows[i][0] = list.get(i).getCod_param();
@@ -47,11 +47,11 @@ public class parametros {
 		conn_param = siar.JavaConection.ConnecrDb(); 
 		if((Administrador.Val_Par.getText().length()==0))
     	{
-    	 JOptionPane.showMessageDialog(null,"Deve Introduzir o Valor do Par�metro!");
+    	 JOptionPane.showMessageDialog(null,"Deve Introduzir o Valor do Parâmetro!");
     	}
     	if((Administrador.Desc_Par.getText().length()==0))
     	{
-    	 JOptionPane.showMessageDialog(null,"Deve Introduzir a Descri��o do Par�metro!");
+    	 JOptionPane.showMessageDialog(null,"Deve Introduzir a Descrição do Parâmetro!");
     	}
     	else
     	{	
@@ -85,7 +85,7 @@ public class parametros {
 	      }
          catch(Exception e)
          {
-        	 JOptionPane.showMessageDialog(null, "Erro ao atualizar Sequ�ncia Parametro!"+e);
+        	 JOptionPane.showMessageDialog(null, "Erro ao atualizar Sequência Parâmetro!"+e);
          }
       }
 	public static void seleciona_linha_param()
@@ -136,7 +136,7 @@ public class parametros {
     	}
      	else
     	{
-	        int p = JOptionPane.showConfirmDialog(null, "Deseja Realmente Remover o Par�metro!","Par�metro Removido!",JOptionPane.YES_NO_OPTION);
+	        int p = JOptionPane.showConfirmDialog(null, "Deseja Realmente Remover o Parâmetro!","Parâmetro Removido!",JOptionPane.YES_NO_OPTION);
 	        if(p==0)
 	        {
 		          try{
@@ -175,7 +175,7 @@ public class parametros {
 		      }
 	         catch(Exception e)
 	         {
-	        	 JOptionPane.showMessageDialog(null, "Erro ao alterar parametro!"+e);
+	        	 JOptionPane.showMessageDialog(null, "Erro ao alterar Parâmetro!"+e);
 	         }
     	}
       }

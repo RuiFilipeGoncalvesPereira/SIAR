@@ -44,9 +44,7 @@ public class Login {
 		});
 	}
 
-	/**
-	 * Create the application.
-	 */
+	@SuppressWarnings("unused")
 	public Login() 
 	{
 		conn_utilizador = JavaConection.ConnecrDb();
@@ -57,12 +55,12 @@ public class Login {
         passField = new JPasswordField();
         passField.setBounds(151, 114, 112, 20);
         frame.getContentPane().add(passField);
-        
-        JLabel lblNewLabel = new JLabel("");
         Image img = new ImageIcon(this.getClass().getResource("/Siarfundo.jpg")).getImage();
         lblData.setText(                              "Hoje é "+mostra_data.dia_semana+" ,dia "+mostra_data.dia+" de "+mostra_data.mes+" de "+mostra_data.ano);
-        lblNewLabel.setIcon(new ImageIcon(img));
-        lblNewLabel.setBounds(0, 0, 444, 271);
+        
+        JLabel lblNewLabel = new JLabel("");
+        lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Rui Pereira\\eclipse-workspace\\AlimentacaoJava_Demo\\Img\\Siarfundo.jpg"));
+        lblNewLabel.setBounds(0, 0, 459, 261);
         frame.getContentPane().add(lblNewLabel);
 	}
   public void replace(String str)      
@@ -105,9 +103,9 @@ public class Login {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Rui Pereira\\Desktop\\Siarfundo.jpg"));
+		frame.setSize(new Dimension(512, 300));
 		frame.setResizable(false);
-		frame.setBounds(100, 100, 450, 300);
+		frame.setBounds(100, 100, 475, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setTitle("Menu de acesso ao Sistema");
 		frame.getContentPane().setLayout(null);
@@ -124,29 +122,29 @@ public class Login {
 		btnNewButton.setBounds(151, 139, 112, 33);
 		frame.getContentPane().add(btnNewButton);
 		
-		JLabel lblUsername = new JLabel("N\u00BA Mecanogr\u00E1fico:");
+		JLabel lblUsername = new JLabel("Número Mecan.:");
 		lblUsername.setBackground(Color.ORANGE);
-		lblUsername.setForeground(Color.BLACK);
-		lblUsername.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 13));
-		lblUsername.setBounds(23, 89, 127, 14);
+		lblUsername.setForeground(new Color(255, 0, 0));
+		lblUsername.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblUsername.setBounds(33, 88, 127, 14);
 		frame.getContentPane().add(lblUsername);
 		lblData = new JLabel("");
 		lblData.setFont(new Font("Calibri", Font.BOLD | Font.ITALIC, 14));
 		lblData.setBackground(Color.LIGHT_GRAY);
-		lblData.setForeground(SystemColor.textHighlight);
+		lblData.setForeground(new Color(255, 0, 0));
 		lblData.setBounds(116, 0, 318, 20);
 		frame.getContentPane().add(lblData);
 		
 		JLabel lblPass = new JLabel("Pass:");
 		lblPass.setBackground(Color.ORANGE);
-		lblPass.setForeground(Color.BLACK);
+		lblPass.setForeground(new Color(255, 0, 0));
 		lblPass.setFont(new Font("Tahoma", Font.BOLD, 13));
 		lblPass.setBounds(104, 114, 46, 14);
 		frame.getContentPane().add(lblPass);
 		
 		lblHora = new JLabel();
 		lblHora.setFont(new Font("Calibri", Font.BOLD | Font.ITALIC, 14));
-		lblHora.setForeground(SystemColor.textHighlight);
+		lblHora.setForeground(new Color(255, 0, 0));
 		lblHora.setBackground(Color.GRAY);
 		lblHora.setBounds(344, 240, 90, 20);
 		frame.getContentPane().add(lblHora);
@@ -172,6 +170,5 @@ public class Login {
 		    }
 		 });
 	}
-	
  }
 

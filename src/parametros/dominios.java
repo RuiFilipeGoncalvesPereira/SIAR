@@ -20,7 +20,7 @@ public class dominios {
 	{
 		MyQuery mq = new MyQuery();
 		ArrayList<Dominio> list = mq.Mostra_Dominio();
-		String[] columnName = {"Valor","Dominio","Descrição do Dominio"}; 
+		String[] columnName = {"Valor","Dominio","DescriÃ§Ã£o do Dominio"}; 
 		Object [][] rows = new Object[list.size()][3];
 		for(int i = 0; i < list.size(); i++)
 			{
@@ -50,7 +50,7 @@ public class dominios {
     	}
     	if((Administrador.Desc_dom.getText().length()==0))
     	{
-    	 JOptionPane.showMessageDialog(null,"Deve Introduzir a Descrição do Dominio!");
+    	 JOptionPane.showMessageDialog(null,"Deve Introduzir a DescriÃ§Ã£o do Dominio!");
     	}
     	if((Administrador.Val.getText().length()==0))
     	{

@@ -122,7 +122,7 @@ public class Gestor_Refeicoes extends JFrame {
 	}
 	private void initialize() 
 	{
-		setTitle("Gest�o de Refei��es"); 
+		setTitle("Gest�o de Refeições"); 
 		setAutoRequestFocus(false);
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 698, 471);
@@ -170,7 +170,7 @@ public class Gestor_Refeicoes extends JFrame {
                 Marcacoes.lblNum.setText(Login.txtUser.getText());
 			}
 		});
-		bt_mar.setToolTipText("Agendar Refei\u00E7oes");
+		bt_mar.setToolTipText("Agendar Refeições");
 		bt_mar.setBounds(10, 60, 43, 36);
 		contentPane.add(bt_mar);
 		
@@ -200,8 +200,8 @@ public class Gestor_Refeicoes extends JFrame {
 				 String path ="";
 				 String numero ="N�mero";
 				 String nome ="Nome";
-				 String Dta_Refeicao ="Data Refei��o";
-				 String Refeicao ="Refei��o";
+				 String Dta_Refeicao ="Data Refeição";
+				 String Refeicao ="Refeição";
 				 String Prato ="Prato";
 				 String dta_reg ="Data Registo";
 				 String value1="";
@@ -226,7 +226,7 @@ public class Gestor_Refeicoes extends JFrame {
 					Image logo = Image.getInstance("C:\\Users\\Rui Pereira\\eclipse-workspace\\AlimentacaoJava_Demo\\Img\\logo.png");
                     document.add(logo);
 					PdfPTable tab=new PdfPTable(6);
-					PdfPCell cell = new PdfPCell(new Paragraph("REFEI��ES"));
+					PdfPCell cell = new PdfPCell(new Paragraph("Refeições"));
 					cell.setColspan(6);
 					cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 					cell.setBackgroundColor(BaseColor.BLUE);
@@ -302,7 +302,7 @@ public class Gestor_Refeicoes extends JFrame {
 					tab.addCell(value5);
 					tab.addCell(value6);
 					}
-					Paragraph title = new Paragraph("Refei��es do dia",FontFactory.getFont(FontFactory.TIMES_BOLD,18,Font.BOLD,BaseColor.RED));
+					Paragraph title = new Paragraph("Refeições do dia",FontFactory.getFont(FontFactory.TIMES_BOLD,18,Font.BOLD,BaseColor.RED));
 				    title.setAlignment(Element.ALIGN_CENTER);
 					document.add(title);
 				    Paragraph rtime = new Paragraph("Produzido por "+lblNome.getText()+" em " + strDate + " �s " + formatter.format(currentTime),FontFactory.getFont(FontFactory.TIMES_BOLD,11,Font.BOLD,BaseColor.BLACK));
@@ -478,7 +478,7 @@ public class Gestor_Refeicoes extends JFrame {
 	            	{
 						e1.printStackTrace();
 					}
-				    JOptionPane.showMessageDialog(null,"Refei��o Servida!");
+				    JOptionPane.showMessageDialog(null,"Refeição Servida!");
 				}
 				marcacoes_diarias();
 				Check_ref.setSelected(false);
@@ -512,7 +512,7 @@ public class Gestor_Refeicoes extends JFrame {
 	            	{
 						e1.printStackTrace();
 					}
-				    JOptionPane.showMessageDialog(null,"Refei��o n�o Servida!");
+				    JOptionPane.showMessageDialog(null,"Refeição não Servida!");
 				}
 	 			marcacoes_diarias_checadas();
 	 			Check_corr_ref.setSelected(false);
@@ -537,7 +537,7 @@ public class Gestor_Refeicoes extends JFrame {
 		String horamaxja = CH.check_holiday(85);
 		if ((mostra_data.horamin.compareTo(horamin)>=0) && (mostra_data.horamin.compareTo(horamax)<0))//&& (dta_ref_aux.getText().equals(strDate)))
 		{
-		 //JOptionPane.showMessageDialog(null, "S� pode validar refei��es entre as "+CH.check_holiday(81)+" e as "+CH.check_holiday(83));
+		 //JOptionPane.showMessageDialog(null, "S� pode validar Refeições entre as "+CH.check_holiday(81)+" e as "+CH.check_holiday(83));
 			 String sql="select siar.siar_marcacoes.Num_Mecanog,siar.siar_utilizadores.nome_utilizador,to_char(siar.siar_marcacoes.Dta_Refeicao,'dd-mm-yyyy')dtaref,siar.siar_refeicao.Desc_Refeicao,siar.siar_prato.Desc_Prato,to_char(siar.siar_marcacoes.Dta_Registo,'dd-mm-yyyy')dtareg,siar.siar_marcacoes.Cod_Refeicao,siar.siar_marcacoes.Cod_prato from siar.siar_marcacoes,siar.siar_refeicao,siar.siar_prato,siar.siar_utilizadores Where siar.siar_marcacoes.Cod_Refeicao=siar.siar_refeicao.Cod_Refeicao and siar.siar_marcacoes.Cod_Prato=siar.siar_prato.Cod_Prato and siar.siar_marcacoes.Num_Mecanog=siar.siar_utilizadores.Num_Mecanog and trunc(siar.siar_marcacoes.Dta_Refeicao) = trunc(sysdate) and siar.siar_marcacoes.verificacao = 'N' and siar.siar_marcacoes.Cod_Refeicao = 1 order by siar.siar_marcacoes.Dta_Registo desc"; 
 			 pstconn_verifica=conn_verifica.prepareStatement(sql,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
 			 rs_conn_verifica=pstconn_verifica.executeQuery();
@@ -563,7 +563,7 @@ public class Gestor_Refeicoes extends JFrame {
 		      sportColumtres.setCellEditor(new DefaultCellEditor(Jcoltres));
 		      table.getColumnModel().getColumn(3).setResizable(false);
 		      table.getColumnModel().getColumn(3).setPreferredWidth(110);
-		      table.getColumnModel().getColumn(3).setHeaderValue("Refei��o");
+		      table.getColumnModel().getColumn(3).setHeaderValue("Refeição");
 		      TableColumn sportColumquatro = table.getColumnModel().getColumn(4);
 		      sportColumquatro.setCellEditor(new DefaultCellEditor(Jcolquatro));
 		      table.getColumnModel().getColumn(4).setResizable(false);
@@ -607,7 +607,7 @@ public class Gestor_Refeicoes extends JFrame {
 		      sportColumtres.setCellEditor(new DefaultCellEditor(Jcoltres));
 		      table.getColumnModel().getColumn(3).setResizable(false);
 		      table.getColumnModel().getColumn(3).setPreferredWidth(110);
-		      table.getColumnModel().getColumn(3).setHeaderValue("Refei��o");
+		      table.getColumnModel().getColumn(3).setHeaderValue("Refeição");
 		      TableColumn sportColumquatro = table.getColumnModel().getColumn(4);
 		      sportColumquatro.setCellEditor(new DefaultCellEditor(Jcolquatro));
 		      table.getColumnModel().getColumn(4).setResizable(false);
@@ -651,7 +651,7 @@ public class Gestor_Refeicoes extends JFrame {
 		      sportColumtres.setCellEditor(new DefaultCellEditor(Jcoltres));
 		      table.getColumnModel().getColumn(3).setResizable(false);
 		      table.getColumnModel().getColumn(3).setPreferredWidth(110);
-		      table.getColumnModel().getColumn(3).setHeaderValue("Refei��o");
+		      table.getColumnModel().getColumn(3).setHeaderValue("Refeição");
 		      TableColumn sportColumquatro = table.getColumnModel().getColumn(4);
 		      sportColumquatro.setCellEditor(new DefaultCellEditor(Jcolquatro));
 		      table.getColumnModel().getColumn(4).setResizable(false);
@@ -764,7 +764,7 @@ public class Gestor_Refeicoes extends JFrame {
 	      sportColumtres.setCellEditor(new DefaultCellEditor(Jcoltres));
 	      table.getColumnModel().getColumn(3).setResizable(false);
 	      table.getColumnModel().getColumn(3).setPreferredWidth(110);
-	      table.getColumnModel().getColumn(3).setHeaderValue("Refei��o");
+	      table.getColumnModel().getColumn(3).setHeaderValue("Refeição");
 	      TableColumn sportColumquatro = table.getColumnModel().getColumn(4);
 	      sportColumquatro.setCellEditor(new DefaultCellEditor(Jcolquatro));
 	      table.getColumnModel().getColumn(4).setResizable(false);

@@ -71,17 +71,17 @@ public class ementas {
 		
 		if(((JTextField)Gestor_Cantina.dt_ementa.getDateEditor().getUiComponent()).getText().isEmpty())
         {
-            JOptionPane.showMessageDialog(null, "Deve Inserir a Data da Refeição!");
+            JOptionPane.showMessageDialog(null, "Deve Inserir a Data da RefeiÃ§Ã£o!");
             ((JTextField)Gestor_Cantina.dt_ementa.getDateEditor().getUiComponent()).requestFocus();
             return;
         }
     	if((Gestor_Cantina.txt_ref.getText().length()==0))
     	{
-    	 JOptionPane.showMessageDialog(null,"Deve Introduzir o Código da Refeição!");
+    	 JOptionPane.showMessageDialog(null,"Deve Introduzir o CÃ³digo da RefeiÃ§Ã£o!");
     	}
     	if((Gestor_Cantina.txt_prato.getText().length()==0))
     	{
-    	 JOptionPane.showMessageDialog(null,"Deve Introduzir o Código do Prato!");
+    	 JOptionPane.showMessageDialog(null,"Deve Introduzir o CÃ³digo do Prato!");
     	}
     	if((Gestor_Cantina.txt_ementa.getText().length()==0))
     	{

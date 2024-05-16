@@ -22,6 +22,9 @@ public class MyQuery {
 	Statement pst_parametro = null;
 	Connection conn_parametro = null;
 	ResultSet resparametro= null;
+	Statement pst_prato = null;
+	Connection conn_prato = null;
+	ResultSet resprato= null;
 	Statement pst_dominio = null;
 	Connection conn_dominio = null;
 	ResultSet resdominio = null;
@@ -139,6 +142,31 @@ public class MyQuery {
 				catch(Exception e)
 				{
 					JOptionPane.showMessageDialog(null, "Erro na querie de Parametros!"+e);
+				}
+				return list;
+			}
+			public ArrayList<prato> Mostra_Pratos()
+			{
+				conn_prato = JavaConection.ConnecrDb();
+				ArrayList<prato> list = new ArrayList<prato>();
+				try
+				{
+					pst_prato = conn_prato.createStatement();
+					resprato = pst_prato.executeQuery("select siar_prato.cod_prato as codpra,siar_prato.desc_prato as descpra,to_char(siar_prato.Dta_registo,'dd-mm-yyyy') as dtapra from siar.siar_prato");
+					prato p;
+					while(resprato.next())
+					{
+						p = new prato(
+								   resprato.getInt("codpra"),
+								   resprato.getString("descpra"),
+								   resprato.getString("dtapra")
+									);
+								list.add(p);
+					}
+				}
+				catch(Exception e)
+				{
+					JOptionPane.showMessageDialog(null, "Erro na querie de Pratos!"+e);
 				}
 				return list;
 			}

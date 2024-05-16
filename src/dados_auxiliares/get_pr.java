@@ -35,7 +35,7 @@ public class get_pr {
         }
         catch(Exception e)
 	     {
-	            JOptionPane.showMessageDialog(null, "Erro ao Listar na Tabela1!"+e);
+	            JOptionPane.showMessageDialog(null, "Erro ao Prencher a Lista de Pratos!"+e);
 	     }
     }
 	
