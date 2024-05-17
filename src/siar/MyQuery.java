@@ -25,6 +25,9 @@ public class MyQuery {
 	Statement pst_prato = null;
 	Connection conn_prato = null;
 	ResultSet resprato= null;
+	Statement pst_refeicao = null;
+	Connection conn_refeicao = null;
+	ResultSet resrefeicao= null;
 	Statement pst_dominio = null;
 	Connection conn_dominio = null;
 	ResultSet resdominio = null;
@@ -167,6 +170,31 @@ public class MyQuery {
 				catch(Exception e)
 				{
 					JOptionPane.showMessageDialog(null, "Erro na querie de Pratos!"+e);
+				}
+				return list;
+			}
+			public ArrayList<Refeicao> Mostra_Refeicoes()
+			{
+				conn_refeicao = JavaConection.ConnecrDb();
+				ArrayList<Refeicao> list = new ArrayList<Refeicao>();
+				try
+				{
+					pst_refeicao = conn_refeicao.createStatement();
+					resrefeicao = pst_refeicao.executeQuery("select siar.siar_refeicao.cod_refeicao codref,siar.siar_refeicao.desc_refeicao desre,to_char(siar.siar_refeicao.dta_registo,'dd-MM-YYYY hh24:mi:ss') dtare from siar.siar_refeicao order by cod_refeicao");
+					Refeicao p;
+					while(resrefeicao.next())
+					{
+						p = new Refeicao(
+							       resrefeicao.getInt("codref"),
+							       resrefeicao.getString("desre"),
+							       resrefeicao.getString("dtare")
+									);
+								list.add(p);
+					}
+				}
+				catch(Exception e)
+				{
+					JOptionPane.showMessageDialog(null, "Erro na querie de obtenção de Refeições!"+e);
 				}
 				return list;
 			}

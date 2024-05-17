@@ -49,8 +49,6 @@ public class pratos {
 	{
 		Connection conn_prato_cod = null;
 		@SuppressWarnings("unused")
-		ResultSet rs_prato_cod;
-		rs_prato_cod = null;
 		PreparedStatement pst_rs_prato_cod = null;
 		conn_prato_cod = siar.JavaConection.ConnecrDb(); 
 		if(((JTextField)Administrador.DC_prato.getDateEditor().getUiComponent()).getText().isEmpty())
