@@ -49,7 +49,7 @@ public class Administrador extends JFrame {
 	public static JLabel lblnum, lblNome;
 	private JPanel contentPane;
 	private JLabel lblDesc;
-	private JTable table;
+	public static JTable table;
 	private JTextField Nome_Uti;
 	private JTextField Senha;
 	private JTable table_1;
