@@ -76,7 +76,7 @@ public class Marcacoes extends JFrame {
     Calendar caldia = Calendar.getInstance();
     SimpleDateFormat df2 = new SimpleDateFormat("dd-MM-yyyy");
     Data mostra_data;
-    Date now = new Date(System.currentTimeMillis());
+    public static Date now = new Date(System.currentTimeMillis());
     String strDate = df2.format(now);
     java.util.Date data_hoje = new java.util.Date();
     java.sql.Date sqlDate = new java.sql.Date(data_hoje.getTime());
@@ -89,12 +89,12 @@ public class Marcacoes extends JFrame {
 	public static JTextField jcodref;
 	public static JTextField jcodprato;
 	public static JTextPane ementa;
-	private JTextField nmec_aux;
-	private JTextField cod_ref_aux;
-	private JTextField cod_pra_aux;
-	private JTextField dta_ref_aux;
-	private JTextField dta_registo_aux;
-	private JScrollPane scrollPane;
+	public static JTextField nmec_aux;
+	public static JTextField cod_ref_aux;
+	public static JTextField cod_pra_aux;
+	public static JTextField dta_ref_aux;
+	public static JTextField dta_registo_aux;
+	public static JScrollPane scrollPane;
 	Check_Holiday CH = new Check_Holiday();
 	private JLabel lblNewLabel_2;
 	private JLabel lblNewLabel_2_1;
@@ -124,10 +124,10 @@ public class Marcacoes extends JFrame {
 		conn_ref_cod = JavaConection.ConnecrDb(); 
 		conn_prato = JavaConection.ConnecrDb(); 
 		conn_prato_cod = JavaConection.ConnecrDb(); 
-		//conn_mar = JavaConection.ConnecrDb(); 
 	    conn_rem = JavaConection.ConnecrDb(); 
 	    conn_anuladas = JavaConection.ConnecrDb(); 
 		conn_coferiado = JavaConection.ConnecrDb();
+		conn_mar = JavaConection.ConnecrDb();
 	    mostra_data = new Data();
         mostra_data.le_data();  
         mostra_data.le_hora();
@@ -288,7 +288,7 @@ public class Marcacoes extends JFrame {
 		table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				seleciona_linha();	
+				parametros.marcacoes.seleciona_linha();	
 			}
 		});
 		scrollPane.setViewportView(table);
@@ -296,7 +296,7 @@ public class Marcacoes extends JFrame {
 		btn_anula = new JButton("");
 		btn_anula.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				anula_refeicao();
+				parametros.marcacoes.anula_refeicao();
 			}
 		});
 		btn_anula.setToolTipText("Desmarcar Refei\u00E7\u00E3o");
@@ -662,178 +662,7 @@ public class Marcacoes extends JFrame {
 			 dt_ref.requestFocus();
 			 return;
 			}
-			efetua_Marcacoes();
+			parametros.marcacoes.efetua_Marcacoes();
     }
-	public void efetua_Marcacoes()
-	{
-		String dataref = df2.format(dt_ref.getDate());
-		try
-		{
-			String conta="select count(*) from siar.siar_marcacoes where Num_Mecanog='"+Login.txtUser.getText()+"' and to_char(dta_Refeicao,'dd-mm-yyyy')='"+dataref+"' and Cod_Refeicao='"+jcodref.getText()+"' and dta_desativo is null";
-			pstconn_mar=conn_mar.prepareStatement(conta);
-			pstconn_mar=conn_mar.prepareStatement(conta ,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-			rs_conn_mar=pstconn_mar.executeQuery();
-			
-            String conta2="select count(*) from siar.siar_marcacoes where Num_Mecanog='"+Login.txtUser.getText()+"' and to_char(dta_Refeicao,'dd-mm-yyyy')='"+dataref+"' and Cod_Refeicao='"+jcodref.getText()+"' and dta_desativo is not null";
-			pstprato_rem=conn_rem.prepareStatement(conta2);
-            pstprato_rem=conn_rem.prepareStatement(conta2 ,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            rs_prato_rem=pstprato_rem.executeQuery();
-
-            rs_conn_mar.next();
-            int conta_ref = rs_conn_mar.getInt(1);
-            rs_prato_rem.next();
-            int conta_ref_rem = rs_prato_rem.getInt(1);
-
-            if(conta_ref > 0) // Entra aqui quando Já existe o agendamento especifico
-              {
-                if (conta_ref_rem == 0) 
-                {	
-            	 JOptionPane.showMessageDialog(null,"Essa Refeição Já foi Agendada Noutra Altura!"); 
-                 return;
-                } 
-              }
-            else if(conta_ref == 0)
-            {  
-	             if(conta_ref_rem == 0)	
-	             {	 
-	            	String sql="insert into siar.siar_marcacoes(Num_Mecanog,Dta_Refeicao,Cod_Refeicao,Cod_Prato,Dta_Desativo,Dta_Registo,Verificacao)values(?,?,?,?,?,?,?)"; 
-		            pstprato=conn_prato.prepareStatement(sql);
-		            pstprato.setString(1, Login.txtUser.getText());
-		            pstprato.setDate(2,convertUtilDateToSqlDate(dt_ref.getDate()));
-		            pstprato.setString(3, jcodref.getText());
-		            pstprato.setString(4, jcodprato.getText()); 
-		            pstprato.setDate(5,null);
-		            pstprato.setDate(6,now);
-		            pstprato.setString(7, "N");
-		            pstprato.executeQuery();
-		            JOptionPane.showMessageDialog(null,"Dados Inseridos com Sucesso!");
-	             }
-		        else if (conta_ref_rem > 0)
-		         {
-		        	 try{
-			            	String sql="update siar.siar_marcacoes set dta_desativo = null, cod_prato = '"+jcodprato.getText()+"' where Num_Mecanog='"+Login.txtUser.getText()+"'and to_char(dta_Refeicao,'dd-mm-yyyy')='"+dataref+"' and Cod_Refeicao='"+jcodref.getText()+"' and dta_desativo is not null"; 
-				            pstprato=conn_prato.prepareStatement(sql);
-				            pstprato.executeQuery();
-			                JOptionPane.showMessageDialog(null,"Refeição Remarcada!"); 
-		            	  }
-		     	       catch(Exception e)
-				        {
-				           JOptionPane.showMessageDialog(null,e); 
-				        }
-		              try{
-				        	String sql="delete from siar.siar_anulacoes where Num_Mec='"+Login.txtUser.getText()+"'and to_char(dta_Refeicao,'dd-mm-yyyy')='"+dataref+"' and Cod_Refeicao='"+jcodref.getText()+"'"; 
-				        	P_prato_cod=conn_prato_cod.prepareStatement(sql);
-				        	P_prato_cod.executeQuery();
-				            }
-					       catch(Exception e2)
-					        {
-					           JOptionPane.showMessageDialog(null,e2); 
-					        }
-		         }
-            }
-       }
-       catch(Exception e)
-        {
-           JOptionPane.showMessageDialog(null,e); 
-        }
-		parametros.marcacoes.prencher_marcacoes();
-	}
-	public void seleciona_linha()
-	{
-		int row = table.getSelectedRow();
-		if (row >= 0)	
-		{	
-		try{
-					String clica_tabela =(table.getModel().getValueAt(row, 0).toString());
-					String clica_data =(table.getModel().getValueAt(row, 1)).toString();
-					String clica_dta_res =(table.getModel().getValueAt(row, 5)).toString();
-					String clica_codigo =(table.getModel().getValueAt(row, 7).toString());
-					String clica_pra =(table.getModel().getValueAt(row, 8)).toString(); 
-		            String conta="select * from siar.siar_marcacoes where siar.siar_marcacoes.Num_Mecanog='"+clica_tabela+"'and to_char(siar.siar_marcacoes.Dta_Refeicao,'dd-mm-yyyy')='"+clica_data+"'and siar.siar_marcacoes.Cod_refeicao='"+clica_codigo+"'and siar.siar_marcacoes.Cod_prato='"+clica_pra+"'and to_char(siar.siar_marcacoes.Dta_Registo,'dd-mm-yyyy')='"+clica_dta_res+"'";
-					pstconn_mar=conn_mar.prepareStatement(conta);
-					rs_conn_mar=pstconn_mar.executeQuery();
-			           if(rs_conn_mar.next())
-			            {
-  			        	    String ad1 = rs_conn_mar.getString("Num_Mecanog");
-			            	nmec_aux.setText(ad1);
-			            	Date ad2 = rs_conn_mar.getDate("Dta_Refeicao");
-			            	dta_ref_aux.setText(df2.format(ad2));
-			            	String ad3 = rs_conn_mar.getString("Cod_Refeicao");
-			            	cod_ref_aux.setText(ad3);
-			            	String ad4 = rs_conn_mar.getString("Cod_Prato");
-			            	cod_pra_aux.setText(ad4);
-			            	Date ad5 = rs_conn_mar.getDate("Dta_Registo");
-			            	dta_registo_aux.setText(df2.format(ad5));
-			            }
-			}
-			catch(Exception e)
-			{
-				nmec_aux.setText(null);
-				dta_ref_aux.setText(null);
-				cod_ref_aux.setText(null);
-				cod_pra_aux.setText(null);
-				dta_registo_aux.setText(null);
-			}
-          }
-	}
-	public void anula_refeicao()
-	{
-		String des_horalimite = CH.check_holiday(41);
-    	if((nmec_aux.getText().length()==0) || (dta_ref_aux.getText().length()==0) || (cod_ref_aux.getText().length()==0))
-    	{
-    	 JOptionPane.showMessageDialog(null,"Nenhum Registo Selecionado!");
-    	}
-     	else
-    	{
-	        int p = JOptionPane.showConfirmDialog(null, "Deseja Realmente Desmarcar a Refeição!","Refeição Desmarcada!",JOptionPane.YES_NO_OPTION);
-	        if(p==0)
-	        {
-	        	if ((mostra_data.horamin.compareTo(des_horalimite)>=0) && (dta_ref_aux.getText().equals(strDate)))
-	        	{
-	        		JOptionPane.showMessageDialog(null,"Já passa das "+des_horalimite+", Não pode desmarcar a Refeição!");
-	        	}
-	        	else
-	        	{	
-		          try{
-			        	String sql="insert into siar.siar_anulacoes(Num_Mec,Cod_Refeicao,Cod_Prato,Dta_Refeicao,Dta_Desativo,Dta_Registo_Inicial,Dta_Registo_final)values(?,?,?,?,?,?,?)"; 
-			            pstprato=conn_prato.prepareStatement(sql);
-			    		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
-			            java.util.Date invoiceDate = formatter.parse(dta_ref_aux.getText());
-			            java.util.Date invoiceDta_Res = formatter.parse(dta_registo_aux.getText());
-
-			            java.sql.Date sqlDate = new java.sql.Date(invoiceDate.getTime());
-			            java.sql.Date sqlDate_res = new java.sql.Date(invoiceDta_Res.getTime());
-			            
-
-			            pstprato.setString(1, nmec_aux.getText());
-			            pstprato.setString(2,cod_ref_aux.getText());
-			            pstprato.setString(3, cod_pra_aux.getText());
-			            pstprato.setDate(4,sqlDate);
-			            pstprato.setDate(5,now);
-			            pstprato.setDate(6,sqlDate_res);
-			            pstprato.setDate(7,now);
-			            pstprato.executeQuery();
-			          }
-				       catch(Exception e2)
-				      {
-				           JOptionPane.showMessageDialog(null,e2); 
-				      }
-			         try
-			         {
-			        	String sql="update siar.siar_marcacoes set dta_desativo = sysdate where Num_Mecanog='"+nmec_aux.getText()+"' and to_char(Dta_Refeicao,'dd-mm-yyyy')='"+dta_ref_aux.getText()+"' and Cod_Refeicao='"+cod_ref_aux.getText()+"'";
-			        	pstconn_mar=conn_mar.prepareStatement(sql);
-			        	pstconn_mar.executeQuery();
-			        	JOptionPane.showMessageDialog(null,"Refeição Desmarcada com Sucesso!"); 
-			          }
-				       catch(Exception e2)
-					  {
-				           JOptionPane.showMessageDialog(null,e2);
-				      }
-			           parametros.marcacoes.prencher_marcacoes();
-					   seleciona_linha();
-	        	}	       
-	        } 
-    	}   
-	}
 }
 

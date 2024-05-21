@@ -49,10 +49,7 @@ public class Marcacao {
    public String getDta_reg() {
 		return dta_reg;
 	}
-	public void getDta_reg(String dta_reg) {
-		this.dta_reg = dta_reg;
-	}
-
+   
 	public String getVerec() {
 		return verec;
 	}

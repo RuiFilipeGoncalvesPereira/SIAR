@@ -415,34 +415,34 @@ public class Administrador extends JFrame {
 		Ges_Uti.add(button_16);
 		
 		nmec_aux = new JTextField();
-		nmec_aux.setBounds(10, 373, 50, 20);
+		nmec_aux.setBounds(86, 373, 80, 20);
 		Ges_Uti.add(nmec_aux);
 		nmec_aux.setEditable(false);
 		nmec_aux.setColumns(10);
 		
 		nome_aux = new JTextField();
-		nome_aux.setBounds(70, 373, 361, 20);
+		nome_aux.setBounds(176, 373, 361, 20);
 		Ges_Uti.add(nome_aux);
 		nome_aux.setColumns(10);
 		
 		email_aux = new JTextField();
-		email_aux.setBounds(441, 373, 215, 20);
+		email_aux.setBounds(547, 373, 215, 20);
 		Ges_Uti.add(email_aux);
 		email_aux.setColumns(10);
 		
 		JLabel lblNMec = new JLabel("Número Mec");
 		lblNMec.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNMec.setBounds(10, 358, 50, 14);
+		lblNMec.setBounds(86, 358, 80, 14);
 		Ges_Uti.add(lblNMec);
 		
 		JLabel label = new JLabel("Nome do Utilizador");
-		label.setBounds(176, 358, 161, 14);
+		label.setBounds(259, 358, 161, 14);
 		Ges_Uti.add(label);
 		label.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		JLabel lblEmail = new JLabel("Email");
 		lblEmail.setHorizontalAlignment(SwingConstants.CENTER);
-		lblEmail.setBounds(532, 358, 46, 14);
+		lblEmail.setBounds(620, 358, 46, 14);
 		Ges_Uti.add(lblEmail);
 		
 		Email = new JTextField();
@@ -497,7 +497,7 @@ public class Administrador extends JFrame {
 			}
 		});
 		button_17.setIcon(new ImageIcon("C:\\Users\\Rui Pereira\\Documents\\Icons_Geral\\Icons\\folder_files.gif"));
-		button_17.setBounds(666, 365, 27, 28);
+		button_17.setBounds(767, 365, 27, 28);
 		Ges_Uti.add(button_17);
 		
 	

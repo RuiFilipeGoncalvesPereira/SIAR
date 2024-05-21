@@ -2,7 +2,8 @@ package siar;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 public class Data {
-		  String mes,dia,ano,dia_semana,hora,horamin;
+		  String mes,dia,ano,dia_semana,hora;
+		public String horamin;
 		  SimpleDateFormat horaformatada = new SimpleDateFormat("HH:mm:ss");
 		  SimpleDateFormat horaminform = new SimpleDateFormat("HH:mm");
 		    
@@ -24,17 +25,17 @@ public class Data {
 		    {
 		        case 0: dia_semana ="Domingo";break;
 		        case 1: dia_semana ="Segunda-Feira";break;
-		        case 2: dia_semana ="Terça-Feira";break;
+		        case 2: dia_semana ="TerÃ§a-Feira";break;
 		        case 3: dia_semana ="Quarta-Feira";break;
 		        case 4: dia_semana ="Quinta-Feira";break;
 		        case 5: dia_semana ="Sexta-Feira";break;
-		        case 6: dia_semana ="Sábado";break;    
+		        case 6: dia_semana ="SÃ¡bado";break;    
 		    }    
 		    switch(data.getMonth())
 		    {
 		        case 0: mes ="Janeiro";break;
 		        case 1: mes ="Fevereiro";break;
-		        case 2: mes ="Março";break;
+		        case 2: mes ="MarÃ§o";break;
 		        case 3: mes ="Abril";break;
 		        case 4: mes ="Maio";break;
 		        case 5: mes ="Junho";break;
