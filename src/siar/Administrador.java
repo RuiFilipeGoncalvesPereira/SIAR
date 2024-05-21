@@ -999,15 +999,6 @@ public class Administrador extends JFrame {
 		Ges_Fer.add(Desc_Fed);
 		Desc_Fed.setColumns(10);
 	}
-	public static java.sql.Date convertUtilDateToSqlDate(java.util.Date date)
-	{
-	    if(date != null) 
-	    {
-	        java.sql.Date sqlDate = new java.sql.Date(date.getTime());
-	        return sqlDate;
-	    }
-	    return null;
-	}
 	public void upload_imagem_upd()
 	{
 		JFileChooser chooser=new JFileChooser();

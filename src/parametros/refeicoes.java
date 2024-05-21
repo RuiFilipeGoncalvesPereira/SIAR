@@ -10,10 +10,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 
-
+import Data.Data;
 import siar.Administrador;
 import siar.JavaConection;
-import siar.Marcacoes;
 import siar.MyQuery;
 import siar.Refeicao;
 import siar.TheModel;
@@ -68,7 +67,7 @@ public class refeicoes {
 	        atua_seq_refeicao();
 	        pst_insref.setString(1,ad_refeicao);
 	        pst_insref.setString(2,Administrador.Desc_Ref.getText());
-	        pst_insref.setDate(3,Marcacoes.convertUtilDateToSqlDate(Administrador.DC_ref.getDate()));
+	        pst_insref.setDate(3,Data.convertUtilDateToSqlDate(Administrador.DC_ref.getDate()));
 	        pst_insref.executeQuery();
 	        JOptionPane.showMessageDialog(null,"Refeição Inserida com Sucesso!");
 	        Administrador.DC_ref.setDate(null);

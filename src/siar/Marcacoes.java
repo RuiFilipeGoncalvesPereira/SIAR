@@ -2,17 +2,11 @@ package siar;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.EventQueue;
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
@@ -22,6 +16,8 @@ import javax.swing.JComboBox;
 import javax.swing.JTextPane;
 
 import com.toedter.calendar.JDateChooser;
+
+import Check_Validation.Check_Schedules_Meals_Rules;
 
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
@@ -37,52 +33,16 @@ import java.awt.Font;
 public class Marcacoes extends JFrame {
 	private JPanel contentPane;
 	public static JLabel lblNum;
-	Connection conn_utilizador = null;
-	Connection conn_rem = null;
-	Connection conn_prato= null;
-	Connection conn_ref= null;
-	Connection conn_ref_cod= null;
-	Connection conn_prato_cod= null;
-	Connection conn_mar= null;
-	Connection conn_anuladas= null;
-	ResultSet rs_admin = null;
-	ResultSet rs_gecan = null;
-	public JComboBox<String> jcomboprato,jcomborefeicao;
+	public static JComboBox<String> jcomboprato;
+	public static JComboBox<String> jcomborefeicao;
 	public static JDateChooser dt_ref;
-	ResultSet rs = null;
-	PreparedStatement pst = null;
-	ResultSet rs_prato = null;
-	PreparedStatement pstprato = null;
-	ResultSet rs_ref = null;
-	PreparedStatement pstref= null;
-	ResultSet rs_ref_cod = null;
-	PreparedStatement pstref_cod= null;
-	ResultSet rs_conn_prato_cod = null;
-	PreparedStatement P_prato_cod= null;
-	ResultSet rs_prato_rem = null;
-	PreparedStatement pstprato_rem = null;
-	ResultSet rs_conn_mar = null;
-	PreparedStatement pstconn_mar = null;
-	ResultSet rs_conn_anuladas = null;
-	PreparedStatement pstconn_anuladas = null;
-	PreparedStatement pst_inferiado = null;
-	Connection conn_coferiado  = null;
-	ResultSet rsinferiado = null;
 	public static JLabel lblNome;
-	Calendar cal = Calendar.getInstance();
-    Calendar calum = Calendar.getInstance();
-    Calendar caldois = Calendar.getInstance(); 
-    Calendar calmaiortrinta = Calendar.getInstance();
-    Calendar caldia = Calendar.getInstance();
-    SimpleDateFormat df2 = new SimpleDateFormat("dd-MM-yyyy");
+	public static Calendar cal = Calendar.getInstance();
+	public static Calendar calum = Calendar.getInstance();
+	public static Calendar caldois = Calendar.getInstance(); 
+    Check_Holiday CH = new Check_Holiday();
+    public static Calendar calmaiortrinta = Calendar.getInstance();
     Data mostra_data;
-    public static Date now = new Date(System.currentTimeMillis());
-    String strDate = df2.format(now);
-    java.util.Date data_hoje = new java.util.Date();
-    java.sql.Date sqlDate = new java.sql.Date(data_hoje.getTime());
-	int val = caldia.get(Calendar.DAY_OF_WEEK);
-	int hour = caldia.get(Calendar.HOUR_OF_DAY);
-	int minute = caldia.get(Calendar.MINUTE);
 	public static JButton btn_anula;
 	public static JButton btn_back_menu;
 	public static JTable table;
@@ -95,7 +55,6 @@ public class Marcacoes extends JFrame {
 	public static JTextField dta_ref_aux;
 	public static JTextField dta_registo_aux;
 	public static JScrollPane scrollPane;
-	Check_Holiday CH = new Check_Holiday();
 	private JLabel lblNewLabel_2;
 	private JLabel lblNewLabel_2_1;
 	private JLabel lblNewLabel_2_2;
@@ -119,21 +78,12 @@ public class Marcacoes extends JFrame {
 	 */
 	public Marcacoes() {
 		setBackground(SystemColor.control);
-		conn_utilizador = JavaConection.ConnecrDb(); 
-		conn_ref = JavaConection.ConnecrDb(); 
-		conn_ref_cod = JavaConection.ConnecrDb(); 
-		conn_prato = JavaConection.ConnecrDb(); 
-		conn_prato_cod = JavaConection.ConnecrDb(); 
-	    conn_rem = JavaConection.ConnecrDb(); 
-	    conn_anuladas = JavaConection.ConnecrDb(); 
-		conn_coferiado = JavaConection.ConnecrDb();
-		conn_mar = JavaConection.ConnecrDb();
 	    mostra_data = new Data();
         mostra_data.le_data();  
         mostra_data.le_hora();
 		initialize();
-		FillReFeicao();
-		FillPrato();
+		dados_auxiliares.getfill_meals.FillReFeicao();
+		dados_auxiliares.getfill_dishes.FillPrato();
 		GetName Gn = new GetName();
 		@SuppressWarnings("static-access")
 		String nome = Gn.GETNAME(Integer.parseInt(Login.txtUser.getText()));
@@ -141,25 +91,6 @@ public class Marcacoes extends JFrame {
 		lblNum.setVisible(false);
 		parametros.marcacoes.prencher_marcacoes();
 	}
-	public void FillPrato()
-	{
-		try
-        {
-            String sql_prato = "select * from siar.siar_prato";
-            conn_prato.prepareStatement(sql_prato); 
-            pstprato=conn_prato.prepareStatement(sql_prato ,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            rs_prato=pstprato.executeQuery();
-            while(rs_prato.next())
-            {
-               String prato = rs_prato.getString("Desc_Prato");
-               jcomboprato.addItem(prato);
-            }  
-        }
-        catch(Exception e)
-	     {
-	            JOptionPane.showMessageDialog(null, "Erro ao Listar na Tabela1!"+e);
-	     }
-    }
 	private void initialize() {
 		this.setTitle("Menu de Marcação de refeições");
 		setAutoRequestFocus(false);
@@ -203,7 +134,8 @@ public class Marcacoes extends JFrame {
 		{
 			public void actionPerformed(ActionEvent arg0)
 			{
-				Alterar_Password();
+				dispose();
+				Password.Call_Pass_Form.Alterar_Password();
 			}
 		});
 		button.setIcon(new ImageIcon("C:\\Users\\Rui Pereira\\Documents\\Icons_Geral\\Icons\\001_41.gif"));
@@ -214,7 +146,7 @@ public class Marcacoes extends JFrame {
 		jcomborefeicao = new JComboBox<String>();
 		jcomborefeicao.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Busca_Ref_cod();
+			 dados_auxiliares.getfill_meals_cod.Busca_Ref_cod();
 			}
 		});
 		jcomborefeicao.setBounds(196, 78, 73, 20);
@@ -231,7 +163,7 @@ public class Marcacoes extends JFrame {
 		jcomboprato = new JComboBox<String>();
 		jcomboprato.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Busca_Prato_Cod();
+				dados_auxiliares.getfill_dishes_cod.Busca_Prato_Cod();
 			}
 		});
 		jcomboprato.setBounds(279, 78, 73, 20);
@@ -241,7 +173,7 @@ public class Marcacoes extends JFrame {
 		lblData.setBounds(79, 53, 46, 14);
 		contentPane.add(lblData);
 		
-		JLabel lblNewLabel = new JLabel("Refei\u00E7\u00E3o");
+		JLabel lblNewLabel = new JLabel("Refeições");
 		lblNewLabel.setBounds(196, 53, 64, 14);
 		contentPane.add(lblNewLabel);
 		
@@ -260,7 +192,7 @@ public class Marcacoes extends JFrame {
 		{
 			public void actionPerformed(ActionEvent arg0)
 			{
-				ValidaDatas();
+				Check_Schedules_Meals_Rules.ValidaDatas();
 			}
 		});
 		btn_add_Refeicao.setIcon(new ImageIcon("C:\\Users\\Rui Pereira\\Documents\\Icons_Geral\\Icons\\action_add.gif"));
@@ -274,7 +206,7 @@ public class Marcacoes extends JFrame {
 			}
 		});
 		dt_ref.setDateFormatString("dd-MM-yyyy");
-		Calcular_Dia_Correto();
+		parametros.marcacoes.Calcular_Dia_Correto();
 		dt_ref.setBounds(79, 78, 107, 20);
 		dt_ref.getJCalendar().setPreferredSize(new Dimension(300, 200));  
 		contentPane.add(dt_ref);
@@ -402,267 +334,5 @@ public class Marcacoes extends JFrame {
 		calmaiortrinta.add(Calendar.DATE,Integer.parseInt(CH.check_holiday(51)));
 		
         }
-	public static java.sql.Date convertUtilDateToSqlDate(java.util.Date date)
-	{
-	    if(date != null) 
-	    {
-	        java.sql.Date sqlDate = new java.sql.Date(date.getTime());
-	        return sqlDate;
-	    }
-	    return null;
-	}
-	public void Alterar_Password()
-	{
-        dispose();
-        Altera_Password Altera = new Altera_Password();
-        Altera.setVisible(true);
-        Altera_Password.textNum.setText(Login.txtUser.getText());
-	}
-	public void Calcular_Dia_Correto()
-	{
-		dt_ref.setDate(now);
-		String horalimite = CH.check_holiday(2);
-		//JOptionPane.showMessageDialog(null, "horalimite!"+horalimite);
-		//JOptionPane.showMessageDialog(null, "mostra_data.horamin!"+mostra_data.horamin);
-		
-		if((mostra_data.horamin.compareTo(horalimite)>=0))
-		{  
-			Calendar cal = Calendar.getInstance();
-			cal.setTime(dt_ref.getDate());
-			cal.add(Calendar.DAY_OF_MONTH, 2);
-			java.util.Date futureDate2 = cal.getTime();	
-			dt_ref.setDate(futureDate2);
-		}
-		else
-		{
-			Calendar cal = Calendar.getInstance();
-			cal.setTime(dt_ref.getDate());
-			cal.add(Calendar.DAY_OF_MONTH, 1);
-			java.util.Date futureDate1 = cal.getTime();	
-			dt_ref.setDate(futureDate1);	
-		}
-
-	}
-	public void Busca_Prato_Cod()
-	{
-		try{
-	         String sql = "select * from siar.siar_prato where Desc_Prato=?";
-	         P_prato_cod=conn_prato_cod.prepareStatement(sql);
-	         P_prato_cod=conn_prato_cod.prepareStatement(sql ,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-	         P_prato_cod.setString(1,(String) jcomboprato.getSelectedItem());
-	         rs_conn_prato_cod = P_prato_cod.executeQuery();
-	            while(rs_conn_prato_cod.next())
-	            {
-	              jcodprato.setText(rs_conn_prato_cod.getString("Cod_Prato"));
-	            }   
-	            dados_auxiliares.get_ementa.get_ref(Marcacoes.dt_ref.getDate(),Marcacoes.jcodref.getText(),Marcacoes.jcodprato.getText());   
-	       }
-	       catch(Exception e3)
-	       {
-	       JOptionPane.showMessageDialog(null, "Erro ao Listar na Tabela4!"+e3);
-	       }
-	}
-	public void FillReFeicao()
-	{
-		try
-	    {
-	        String sqlref = "select * from siar.siar_refeicao";
-	        conn_ref.prepareStatement(sqlref); 
-	        pstref=conn_ref.prepareStatement(sqlref ,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-	        rs_ref=pstref.executeQuery();
-	        while(rs_ref.next())
-	        {
-	           String refeicao = rs_ref.getString("Desc_Refeicao");
-	           jcomborefeicao.addItem(refeicao);
-	        }  
-	    }
-		    catch(Exception e)
-	    	{
-		        JOptionPane.showMessageDialog(null, "Erro ao Listar na Tabela2!"+e);
-		    }
-	} 
-	public void Busca_Ref_cod()
-	{
-		try{
-	         String sql="select * from siar.siar_refeicao where Desc_refeicao=?";
-	         conn_ref_cod.prepareStatement(sql);
-	         pstref_cod=conn_ref_cod.prepareStatement(sql ,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-	         pstref_cod.setString(1, (String) jcomborefeicao.getSelectedItem());
-             rs_ref_cod=pstref_cod.executeQuery();
-	            while(rs_ref_cod.next())
-	            {
-	            	jcodref.setText(rs_ref_cod.getString("Cod_Refeicao"));
-	            }   
-	            dados_auxiliares.get_ementa.get_ref(Marcacoes.dt_ref.getDate(),Marcacoes.jcodref.getText(),Marcacoes.jcodprato.getText());  
-	       }
-		   
-	       catch(Exception e3)
-	       {
-	       JOptionPane.showMessageDialog(null, "Erro ao Listar na Tabela5!"+e3);
-	       }
-	}
-	public void ValidaDatas()
-	{
-			String strcalendar = null;
-			String strcalum = null;
-			String strcaldois = null;
-			String horalimite = CH.check_holiday(2);
-			String Imaculada = CH.check_Feriado(1);
-			String Natal = CH.check_Feriado(2);
-			String AssunSenhora = CH.check_Feriado(3);
-			String DPortugal = CH.check_Feriado(4);
-			String DTrabalhador = CH.check_Feriado(5);
-			String Fmunicipal = CH.check_Feriado(6);
-			String Dliberdade = CH.check_Feriado(7);
-			String Pascoa = CH.check_Feriado(8);
-			String SextaSanta = CH.check_Feriado(9);
-			String AnoNovo = CH.check_Feriado(10);
-			java.util.Date utilStartDate = dt_ref.getDate();
-			java.sql.Date sqlStartDate = new java.sql.Date(utilStartDate.getTime());
-			java.sql.Date sqlDateTrinta =  new java.sql.Date(calmaiortrinta.getTime().getTime());
-	
-			SimpleDateFormat sdfcalendar = new SimpleDateFormat("dd-MM-yyyy");
-			String dataobtida = df2.format(dt_ref.getDate());
-			
-			if (cal != null) {
-				strcalendar = sdfcalendar.format(cal.getTime());
-				}
-			if (calum != null) {
-				strcalum = sdfcalendar.format(calum.getTime());
-				}
-			if (caldois != null) {
-				strcaldois = sdfcalendar.format(caldois.getTime());
-				}
-			
-	         if(((JTextField)dt_ref.getDateEditor().getUiComponent()).getText().isEmpty())
-	         {
-	             JOptionPane.showMessageDialog(null, "Deve Inserir a Data da Refeição!");
-	             ((JTextField)dt_ref.getDateEditor().getUiComponent()).requestFocus();
-	             return;
-	         }
-	         
-			if ((strDate.compareTo(Imaculada)==0) && (dataobtida.compareTo(Imaculada)==0))
-			{
-				 JOptionPane.showMessageDialog(null, "Dia da Imaculada Conçeição não Pode Marcar Refeições para Amanhâ");
-				 dt_ref.requestFocus();
-				 return;
-			}
-			if ((strDate.compareTo(Natal)==0) && (dataobtida.compareTo(Natal)==0))
-			{
-				 JOptionPane.showMessageDialog(null, "Dia de Natal não Pode Marcar Refeições para Amanhâ");
-				 dt_ref.requestFocus();
-				 return;
-			}
-			if ((strDate.compareTo(AssunSenhora)==0) && (dataobtida.compareTo(AssunSenhora)==0))
-			{
-				 JOptionPane.showMessageDialog(null, "Dia de nossa Senhora da Assunção não Pode Marcar Refeições para Amanhã");
-				 dt_ref.requestFocus();
-				 return;
-			}
-			if ((strDate.compareTo(DPortugal)==0) && (dataobtida.compareTo(DPortugal)==0))
-			{
-				 JOptionPane.showMessageDialog(null, "Dia de Portugal não Pode Marcar Refeições para Amanhâ");
-				 dt_ref.requestFocus();
-				 return;
-			}
-			if ((strDate.compareTo(DTrabalhador)==0) && (dataobtida.compareTo(DTrabalhador)==0))
-			{
-				 JOptionPane.showMessageDialog(null, "Dia do trabalhador não Pode Marcar Refeições para Amanhâ");
-				 dt_ref.requestFocus();
-				 return;
-			}
-			if ((strDate.compareTo(Fmunicipal)==0) && (dataobtida.compareTo(Fmunicipal)==0))
-			{
-				 JOptionPane.showMessageDialog(null, "Feriado Municipal Não Pode Marcar refeições para Amanhâ");
-				 dt_ref.requestFocus();
-				 return;
-			}
-			if ((strDate.compareTo(Dliberdade)==0) && (dataobtida.compareTo(Dliberdade)==0))
-			{
-				 JOptionPane.showMessageDialog(null, "Dia da liberdade Não Pode Marcar refeições para Amanhâ");
-				 dt_ref.requestFocus();
-				 return;
-			}
-			if ((strDate.compareTo(Pascoa)==0) && (dataobtida.compareTo(Pascoa)==0))
-			{
-				 JOptionPane.showMessageDialog(null, "Páscoa Não Pode Marcar refeições para Amanhâ");
-				 dt_ref.requestFocus();
-				 return;
-			}
-			if ((strDate.compareTo(SextaSanta)==0) && (dataobtida.compareTo(SextaSanta)==0))
-			{
-				 JOptionPane.showMessageDialog(null, "Sexta Feira Santa Não Pode Marcar refeições para Amanhâ");
-				 dt_ref.requestFocus();
-				 return;
-			}
-			if ((strDate.compareTo(AnoNovo)==0) && (dataobtida.compareTo(AnoNovo)==0))
-			{
-				 JOptionPane.showMessageDialog(null, "Ano Novo Não Pode Marcar refeições para Amanhâ");
-				 dt_ref.requestFocus();
-				 return;
-			}
-			if ((val == 6) && (dataobtida.compareTo(strcalendar)==0) && (mostra_data.horamin.compareTo(horalimite)>=0))
-			{
-				 JOptionPane.showMessageDialog(null, "Sexta,Já passa das "+horalimite+" !,Não pode marcar refeições para Sábado!");
-				 dt_ref.requestFocus();
-				 return;
-			}
-			if ((val == 6) && (dataobtida.compareTo(strcalum)==0) && (mostra_data.horamin.compareTo(horalimite)>=0))
-			{
-				 JOptionPane.showMessageDialog(null, "Sexta,Já passa das "+horalimite+" !,Não pode marcar refeições para Domingo!");
-				 dt_ref.requestFocus();
-				 return;
-			}
-			if ((val == 6) && (dataobtida.compareTo(strcaldois)==0)&& (mostra_data.horamin.compareTo(horalimite)>=0))
-			{
-				 JOptionPane.showMessageDialog(null, "Sexta,Já passa das "+horalimite+" !,Não pode marcar refeições para Segunda!");
-				 dt_ref.requestFocus();
-				 return;
-			}
-			if ((val == 7) && (dataobtida.compareTo(strcalendar)==0))
-			{
-				 JOptionPane.showMessageDialog(null, "Sábado!,Não pode marcar refeições para domingo!");
-				 dt_ref.requestFocus();
-				 return;
-			}
-			if ((val == 7) && (dataobtida.compareTo(strcalum)==0))
-			{
-				 JOptionPane.showMessageDialog(null, "Sábado!,Não pode marcar refeições para Segunda!");
-				 dt_ref.requestFocus();
-				 return;
-			}
-			if ((val == 1) && (dataobtida.compareTo(strcalendar)==0))
-			{
-				 JOptionPane.showMessageDialog(null, "Domingo!,Não pode marcar refeições para segunda!");
-				 dt_ref.requestFocus();
-				 return;
-			}
-			
-			if(dataobtida.compareTo(strcalendar)==0 && (mostra_data.horamin.compareTo(horalimite)>=0))
-	        {
-			 JOptionPane.showMessageDialog(null, "Já passa das "+horalimite+" Não pode marcar refeições para Amanhâ!");
-			 dt_ref.requestFocus();
-			 return;
-	        }
-	        if(sqlStartDate.after(sqlDateTrinta))
-	        {
-			 JOptionPane.showMessageDialog(null, "Não pode marcar refeições para daqui a mais de 31 dias!");
-			 dt_ref.requestFocus();
-			 return;
-	        }
-			if(dataobtida.equals(strDate))
-	    	{
-			 JOptionPane.showMessageDialog(null, "Erro!,Não pode marcar refeições para hoje!");
-			 dt_ref.requestFocus();
-			 return;
-			}
-			else if(sqlStartDate.before(sqlDate)) 
-			{
-			 JOptionPane.showMessageDialog(null, "Erro!,Está a tentar marcar refeições para datas passadas!");
-			 dt_ref.requestFocus();
-			 return;
-			}
-			parametros.marcacoes.efetua_Marcacoes();
-    }
 }
 

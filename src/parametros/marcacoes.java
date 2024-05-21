@@ -6,12 +6,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 
-import siar.Administrador;
 import siar.Check_Holiday;
 import siar.Data;
 import siar.JavaConection;
@@ -190,7 +190,7 @@ public class marcacoes {
 	            	String sql="insert into siar.siar_marcacoes(Num_Mecanog,Dta_Refeicao,Cod_Refeicao,Cod_Prato,Dta_Desativo,Dta_Registo,Verificacao)values(?,?,?,?,?,?,?)"; 
 		            pstprato=conn_prato.prepareStatement(sql);
 		            pstprato.setString(1, Login.txtUser.getText());
-		            pstprato.setDate(2,Administrador.convertUtilDateToSqlDate(Marcacoes.dt_ref.getDate()));
+		            pstprato.setDate(2,Data.convertUtilDateToSqlDate(Marcacoes.dt_ref.getDate()));
 		            pstprato.setString(3, Marcacoes.jcodref.getText());
 		            pstprato.setString(4, Marcacoes.jcodprato.getText()); 
 		            pstprato.setDate(5,null);
@@ -330,6 +330,30 @@ public class marcacoes {
 	        	}	       
 	        } 
     	}   
+	}
+	public static void Calcular_Dia_Correto()
+	{
+		
+	    mostra_data = new Data();
+        mostra_data.le_hora();
+		Marcacoes.dt_ref.setDate(now);
+		String horalimite = CH.check_holiday(2);
+		if((mostra_data.horamin.compareTo(horalimite)>=0))
+		{  
+			Calendar cal = Calendar.getInstance();
+			cal.setTime(Marcacoes.dt_ref.getDate());
+			cal.add(Calendar.DAY_OF_MONTH, 2);
+			java.util.Date futureDate2 = cal.getTime();	
+			Marcacoes.dt_ref.setDate(futureDate2);
+		}
+		else
+		{
+			Calendar cal = Calendar.getInstance();
+			cal.setTime(Marcacoes.dt_ref.getDate());
+			cal.add(Calendar.DAY_OF_MONTH, 1);
+			java.util.Date futureDate1 = cal.getTime();	
+			Marcacoes.dt_ref.setDate(futureDate1);	
+		}
 	}
 
 }

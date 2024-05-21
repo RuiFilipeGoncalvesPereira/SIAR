@@ -10,15 +10,14 @@ import java.awt.event.ActionEvent;
 import java.awt.*;
 import javax.swing.*;
 
-
 public class Login {
 
 	public static JFrame frame;
 	private JLabel lblteste;
 	private JLabel lblData;
-	private JLabel lblHora;
+	public static JLabel lblHora;
 	static Connection conn_utilizador = null;
-	Data mostra_data;
+	//static Data mostra_data;
 	public static JPasswordField passField;
 	public static JTextField txtUser;
 	static ResultSet rs = null;
@@ -49,21 +48,21 @@ public class Login {
 	{
 		conn_utilizador = JavaConection.ConnecrDb();
 		initialize();
-		mostra_data = new Data();
-        mostra_data.le_data();
-        CurrentHour();
+		Data.mostra_data = new Data();
+		Data.mostra_data.le_data();
+        Data.CurrentHour();
         passField = new JPasswordField();
         passField.setBounds(151, 114, 112, 20);
         frame.getContentPane().add(passField);
         Image img = new ImageIcon(this.getClass().getResource("/Siarfundo.jpg")).getImage();
-        lblData.setText(                              "Hoje é "+mostra_data.dia_semana+" ,dia "+mostra_data.dia+" de "+mostra_data.mes+" de "+mostra_data.ano);
+        lblData.setText(                              "Hoje é "+Data.mostra_data.dia_semana+" ,dia "+Data.mostra_data.dia+" de "+Data.mostra_data.mes+" de "+Data.mostra_data.ano);
         
         JLabel lblNewLabel = new JLabel("");
         lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Rui Pereira\\eclipse-workspace\\AlimentacaoJava_Demo\\Img\\Siarfundo.jpg"));
         lblNewLabel.setBounds(0, 0, 459, 261);
         frame.getContentPane().add(lblNewLabel);
 	}
-  public void replace(String str)      
+  /*public void replace(String str)      
 	 {      
 	
 	  for( int i = 0; i < str.length(); i++ )      
@@ -75,32 +74,7 @@ public class Login {
 	         {
 	        	 JOptionPane.showMessageDialog(null, "O Campo do Número Mecanográfico só pode conter números!"); 
 	         }
-	 }
-  public void CurrentHour()
-   {
-	  Thread clock=new Thread()
-	  {
-		  public void run()
-		  {
-			  for(;;)
-			  {
-			       mostra_data.le_hora();	  
-			       lblHora.setText("Hora: "+mostra_data.hora);	
-                try {
-		              sleep(1000);
-	                }
-                catch (InterruptedException e) 
-                   {
-                	e.printStackTrace();
-	               }
-             }
-         }
-      };
-    clock.start();
-  }
-	/**
-	 * Initialize the contents of the frame.
-	 */
+	 }*/
 	private void initialize() {
 		frame = new JFrame();
 		frame.setSize(new Dimension(512, 300));
