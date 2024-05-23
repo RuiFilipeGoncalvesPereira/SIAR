@@ -13,34 +13,17 @@ import javax.swing.ImageIcon;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.sql.CallableStatement;
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Types;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import java.awt.event.ActionEvent;
 import javax.swing.JTable;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
-import javax.swing.ListSelectionModel;
 
-import java.awt.Image;
 
 import javax.swing.JScrollPane;
-import javax.swing.JFileChooser;
 import javax.swing.SwingConstants;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
 import com.toedter.calendar.JDateChooser;
 
 public class Administrador extends JFrame {
@@ -50,8 +33,8 @@ public class Administrador extends JFrame {
 	private JPanel contentPane;
 	private JLabel lblDesc;
 	public static JTable table;
-	private JTextField Nome_Uti;
-	private JTextField Senha;
+	public static JTextField Nome_Uti;
+	public static JTextField Senha;
 	private JTable table_1;
 	public static JTextField Desc_Ref;
 	public static JTable table_3;
@@ -70,50 +53,21 @@ public class Administrador extends JFrame {
 	public static JDateChooser dta_feriado;
 	public static JButton button_3;
 	public static JButton button_4;
-	Connection conn_utilizador = null;
-	ResultSet rs = null;
-	PreparedStatement pst = null;
-	Connection conn_ativa = null;
-	ResultSet rs_at = null;
-	PreparedStatement pst_at = null;
-	Connection conn_des = null;
-	ResultSet rs_des = null;
-	PreparedStatement pst_des = null;
-	Connection conn_sel = null;
-	ResultSet rs_sel = null;
-	PreparedStatement pst_sel = null;
-	Connection conn_insuti = null;
-	PreparedStatement pstinsuti = null;
-	PreparedStatement pst_upd = null;
-	Connection conn_upd = null;
-	ResultSet resupd = null;
-	Connection conn_atu_ref  = null;
-	private JTable table_2;
-	private JTextField nmec_aux;
-	private JTextField nome_aux;
-	private JTextField email_aux;
-	public String ad1; 
-	Date now = new Date(System.currentTimeMillis());
-	SimpleDateFormat df2 = new SimpleDateFormat("dd-MM-yyyy");
-	String strDate = df2.format(now);
+	public static JTable table_2;
+	public static JTextField nmec_aux;
+	public static JTextField nome_aux;
+	public static JTextField email_aux;
+
 	 
-	public JLabel Jlnome;
-	public JLabel lblimg2;
+	public static JLabel Jlnome;
+	public static JLabel lblimg2;
     java.util.Date data_hoje = new java.util.Date();
     java.sql.Date sqlDate = new java.sql.Date(data_hoje.getTime());
 	Valida_Senha VS = new Valida_Senha();
-	byte[] IMAGEM=null;
-	String filename = null;
-	private JTextField Email;
-	private JTextField img;
+	public static JTextField Email;
+	public static JTextField img;
 	public static JTextField desc_feriado;
 	public static JTable table_8;
-	public static final String ATI_DES_UTILIZADOR = "{CALL siar.PKG1.Ati_Des_Uti(?,?)}";
-	Connection conn_pst_ati_des = null;
-	CallableStatement  pst_ati_des = null;
-	PreparedStatement pst_feriado = null;
-	Connection conn_feriado = null;
-	ResultSet resferiado = null;
 	
 	public static JTextField cod_aux;
 	public static JTextField ref_aux;
@@ -158,17 +112,8 @@ public class Administrador extends JFrame {
 
 	public Administrador() {
 		setAutoRequestFocus(false);
-		conn_utilizador = JavaConection.ConnecrDb(); 
-		conn_ativa = JavaConection.ConnecrDb();
-		conn_des = JavaConection.ConnecrDb();
-		conn_sel = JavaConection.ConnecrDb();
-		conn_insuti = JavaConection.ConnecrDb();
-		conn_upd = JavaConection.ConnecrDb();
-		conn_pst_ati_des = JavaConection.ConnecrDb();
-        conn_feriado = JavaConection.ConnecrDb();
-    	conn_atu_ref = JavaConection.ConnecrDb();
 		initialize();
-		prencheUtilizadores();
+		parametros.utilizadores.prencheUtilizadores();
 		parametros.feriados.prencher_Feriados();
 		parametros.refeicoes.prencher_Refeicoes();
 		parametros.parametros.prenche_parametros();
@@ -273,7 +218,7 @@ public class Administrador extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				pesq_utilizador();
+				parametros.utilizadores.pesq_utilizador();
 			}
 		});
 		button_3.setToolTipText("Pesquisar Utilizador");
@@ -287,7 +232,7 @@ public class Administrador extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e)
 			{
-				prencheUtilizadores();
+				parametros.utilizadores.prencheUtilizadores();
 			}
 		});
 		button_4.setToolTipText("Ver Todos  os Utilizadores");
@@ -301,8 +246,8 @@ public class Administrador extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				try
 				{
-					Insere_Utilizador();
-					prencheUtilizadores();
+					parametros.utilizadores.Insere_Utilizador();
+					parametros.utilizadores.prencheUtilizadores();
 				} 
 				catch (SQLException e1)
 				{
@@ -337,11 +282,11 @@ public class Administrador extends JFrame {
 			{
 				try
 				{
-					ativa_desat();
-					String mess = pst_ati_des.getString(2);
+					parametros.utilizadores.ativa_desat();
+					String mess = parametros.utilizadores.pst_ati_des.getString(2);
 				    if(mess == null)
 				    {	
-					  ativa_uti();
+				    	parametros.utilizadores.ativa_uti();
 				    }  
 				    else
 				    {
@@ -366,11 +311,11 @@ public class Administrador extends JFrame {
 			{
 				try
 				{
-					ativa_desat();
-					String mess = pst_ati_des.getString(2);
+					parametros.utilizadores.ativa_desat();
+					String mess = parametros.utilizadores.pst_ati_des.getString(2);
 				    if(mess == null)
 				    {	
-         			  desativa_uti();
+				    	parametros.utilizadores.desativa_uti();
 				    }  
 				    else
 				    {
@@ -396,7 +341,7 @@ public class Administrador extends JFrame {
 		table_2.addMouseListener(new MouseAdapter()
 		{
 			public void mousePressed(MouseEvent e) {
-				seleciona_linha();	
+				parametros.utilizadores.seleciona_linha();	
 			}
 		});
 		scrollPane.setViewportView(table_2);
@@ -406,7 +351,7 @@ public class Administrador extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e)
 			{
-				atualiza_uti();
+				parametros.utilizadores.atualiza_uti();
 			}
 		});
 		button_16.setIcon(new ImageIcon("C:\\Users\\Rui Pereira\\Documents\\Icons_Geral\\Icons\\affldsav.gif"));
@@ -469,7 +414,7 @@ public class Administrador extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e)
 			{
-				upload_imagem();
+				parametros.utilizadores.upload_imagem();
 			}
 		});
 		btnNewButton.setIcon(new ImageIcon("C:\\Users\\Rui Pereira\\Documents\\Icons_Geral\\Icons\\affldopn.gif"));
@@ -493,7 +438,7 @@ public class Administrador extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				upload_imagem_upd();
+				parametros.utilizadores.upload_imagem_upd();
 			}
 		});
 		button_17.setIcon(new ImageIcon("C:\\Users\\Rui Pereira\\Documents\\Icons_Geral\\Icons\\folder_files.gif"));
@@ -998,367 +943,5 @@ public class Administrador extends JFrame {
 		Desc_Fed.setBounds(179, 276, 170, 20);
 		Ges_Fer.add(Desc_Fed);
 		Desc_Fed.setColumns(10);
-	}
-	public void upload_imagem_upd()
-	{
-		JFileChooser chooser=new JFileChooser();
-		chooser.showOpenDialog(null);
-		File f =chooser.getSelectedFile();
-		lblimg2.setIcon(new ImageIcon(f.toString()));
-		filename=f.getAbsolutePath();
-				try 
-				{
-					File image = new File(filename);
-					@SuppressWarnings("resource")
-					FileInputStream  fis = new FileInputStream(image);
-					ByteArrayOutputStream bos=new ByteArrayOutputStream();
-					byte[] buf = new byte[1024];
-					for(int readNum; (readNum=fis.read(buf))!=-1;)
-					   {
-					       bos.write(buf,0,readNum);
-					   }
-					IMAGEM=bos.toByteArray();
-				} 
-				catch (IOException e1)
-				{
-					JOptionPane.showMessageDialog(null, "Erro ao Pegar Imagem!"+e1);
-				}
-	}
-	public void upload_imagem()
-	{
-		JFileChooser chooser=new JFileChooser();
-		chooser.showOpenDialog(null);
-		File f =chooser.getSelectedFile();
-		Jlnome.setIcon(new ImageIcon(f.toString()));
-		filename=f.getAbsolutePath();
-		img.setText(filename);
-				try 
-				{
-					File image = new File(filename);
-					@SuppressWarnings("resource")
-					FileInputStream fis=new FileInputStream(image);
-					ByteArrayOutputStream bos=new ByteArrayOutputStream();
-					byte[] buf = new byte[1024];
-					for(int readNum; (readNum=fis.read(buf))!=-1;)
-					   {
-					       bos.write(buf,0,readNum);
-					   }
-					IMAGEM=bos.toByteArray();
-				} 
-				catch (IOException e1)
-				{
-					JOptionPane.showMessageDialog(null, "Erro ao Pegar Imagem!"+e1);
-				}
-	}
-	public void prencheUtilizadores()
-	{
-		button_4.setVisible(false);
-		button_3.setVisible(true);
-		MyQuery mq = new MyQuery();
-		ArrayList<Product> list = mq.BindTable();
-		String[] columnName = {"Num.Mec.","Nome do Utilizador","Senha","Dta.Desativo","Email","Imagem"}; 
-		Object [][] rows = new Object[list.size()][6];
-		for(int i = 0; i < list.size(); i++)
-			{
-				rows[i][0] = list.get(i).getNmec();
-				rows[i][1] = list.get(i).getN_uti();
-				rows[i][2] = "*********";
-				//rows[i][2] = list.get(i).getSenha();
-				if(list.get(i).getDta_desativo() != null)
-				{	
-				  rows[i][3] = list.get(i).getDta_desativo();
-				}
-				else
-				{
-				  rows[i][3] = null;	
-				}
-				if(list.get(i).getEmail() != null)
-				{	
-				  rows[i][4] = list.get(i).getEmail();
-				}
-				else
-				{
-				  rows[i][4] = null;	
-				}
-				
-				if(list.get(i).getMyImage() != null)
-				{	
-					ImageIcon image = new ImageIcon(new ImageIcon(list.get(i).getMyImage())
-					.getImage().getScaledInstance(90, 30, Image.SCALE_SMOOTH));			
-					rows[i][5] = image;
-				}
-				else
-				{
-					rows[i][5] = null;
-				}
-			}
-		TheModel model = new TheModel(rows, columnName);
-		table_2.setModel(model);
-		table_2.setRowHeight(30);
-		table_2.getColumnModel().getColumn(0).setPreferredWidth(25);
-		table_2.getColumnModel().getColumn(1).setPreferredWidth(170);
-		table_2.getColumnModel().getColumn(2).setPreferredWidth(60);
-		table_2.getColumnModel().getColumn(3).setPreferredWidth(35);
-		table_2.getColumnModel().getColumn(4).setPreferredWidth(100);
-		table_2.getColumnModel().getColumn(5).setPreferredWidth(80);
-		table_2.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		table_2.getTableHeader().setReorderingAllowed(false);
-	}
-	public void pesq_utilizador()
-	{
-		button_3.setVisible(false);
-		button_4.setVisible(true);
-		MyQuery mq = new MyQuery();
-		ArrayList<Product> list = mq.pesq_utilizador(Nome_Uti.getText());
-		String[] columnName = {"Número Mec.","Nome do Utilizador","Senha","Dta.Desativo","Email","Imagem"}; 
-		Object [][] rows = new Object[list.size()][6];
-			for(int i = 0; i < list.size(); i++)
-			{
-				rows[i][0] = list.get(i).getNmec();
-				rows[i][1] = list.get(i).getN_uti();
-				rows[i][2] = "*********";
-				//rows[i][2] = list.get(i).getSenha();
-				if(list.get(i).getDta_desativo() != null)
-				{	
-				  rows[i][3] = list.get(i).getDta_desativo();
-				}
-				else
-				{
-				  rows[i][3] = null;	
-				}
-				if(list.get(i).getEmail() != null)
-				{	
-				  rows[i][4] = list.get(i).getEmail();
-				}
-				else
-				{
-				  rows[i][4] = null;	
-				}
-				
-				if(list.get(i).getMyImage() != null)
-				{	
-					ImageIcon image = new ImageIcon(new ImageIcon(list.get(i).getMyImage())
-					.getImage().getScaledInstance(90, 30, Image.SCALE_SMOOTH));			
-					rows[i][5] = image;
-				}
-				else
-				{
-					rows[i][5] = null;
-				}
-			}
-			TheModel model = new TheModel(rows, columnName);
-			table_2.setModel(model);
-			table_2.setRowHeight(30);
-			table_2.getColumnModel().getColumn(0).setPreferredWidth(25);
-			table_2.getColumnModel().getColumn(1).setPreferredWidth(170);
-			table_2.getColumnModel().getColumn(2).setPreferredWidth(60);
-			table_2.getColumnModel().getColumn(3).setPreferredWidth(35);
-			table_2.getColumnModel().getColumn(4).setPreferredWidth(100);
-			table_2.getColumnModel().getColumn(5).setPreferredWidth(80);
-			table_2.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-			table_2.getTableHeader().setReorderingAllowed(false);
-	}
-	public void desativa_uti()
-    {
-		if((nmec_aux.getText().length()==0)||(nome_aux.getText().length()==0))
-    	{
-    	 JOptionPane.showMessageDialog(null,"Nenhum Registo Selecionado!");
-    	}
-    	else
-    	{		
-		   try
-		     {
-     			 String sql="update siar.siar_utilizadores set dta_desativo = sysdate, activo = 'N' where siar.siar_utilizadores.num_mecanog='"+nmec_aux.getText()+"'";
-		    	 pst_at=conn_ativa.prepareStatement(sql); 
-		    	 rs_at=pst_at.executeQuery();
-		    	 prencheUtilizadores();
-		     }
-	         catch(Exception e)
-	         {
-	        	 JOptionPane.showMessageDialog(null, "Erro ao desativar utilizador!"+e);
-	         }
-    	}
-     }
-	public void ativa_desat() throws SQLException
-    {
-		pst_ati_des = conn_pst_ati_des.prepareCall(ATI_DES_UTILIZADOR);
-		pst_ati_des.setString(1,strDate);
-		pst_ati_des.registerOutParameter(2, Types.VARCHAR);
-		pst_ati_des.execute();
-    }
-	public void ativa_uti()
-    {
-    	if((nmec_aux.getText().length()==0)||(nome_aux.getText().length()==0))
-    	{
-    	 JOptionPane.showMessageDialog(null,"Nenhum Registo Selecionado!");
-    	}
-    	else
-    	{
-			try
-		      {
-		    	 String sql="update siar.siar_utilizadores set dta_desativo = null, activo = 'S' where siar.siar_utilizadores.num_mecanog='"+nmec_aux.getText()+"'";
-		    	 pst_des = conn_des.prepareStatement(sql); 
-		    	 rs_des=pst_des.executeQuery();
-		    	 prencheUtilizadores();
-		      }
-	         catch(Exception e)
-	         {
-	        	 JOptionPane.showMessageDialog(null, "Erro ao desativar utilizador!"+e);
-	         }
-    	}
-      }
-	public void atua_seq()
-    {
-		try
-	      {
-	    	 String sql="select siar.GERA_NMEC_SEQ.nextval as seguinte from dual";
-	    	 pst_des = conn_des.prepareStatement(sql); 
-	    	 rs_des=pst_des.executeQuery();
-	           if(rs_des.next())
-	            {
-		        	 ad1 =rs_des.getString("seguinte");
-	            }
-	      }
-         catch(Exception e)
-         {
-        	 JOptionPane.showMessageDialog(null, "Erro ao atualizar Sequ�ncia!"+e);
-         }
-      }
-	public void Insere_Utilizador() throws SQLException
-	{
-		String email_Pattern = "^[a-zA-Z0-9_+&*-]+(?:\\."+  
-				               "[a-zA-Z0-9_+&*-]+)*@" + 
-				               "(?:[a-zA-Z0-9-]+\\.)+[a-z"+ 
-				               "A-Z]{2,7}$";      
-        Pattern pattern = Pattern.compile(email_Pattern);
-		Matcher regexMaster = pattern.matcher(Email.getText());
-		if((Nome_Uti.getText().length()==0))
-    	{
-    	 JOptionPane.showMessageDialog(null,"Deve Introduzir o Nome!");
-    	}
-    	if((Email.getText().length()==0))
-    	{
-    	 JOptionPane.showMessageDialog(null,"Deve Introduzir o Email!");
-    	}
-		if((img.getText().length()==0))
-		{
-			JOptionPane.showMessageDialog(null,"Deve Introduzir a Imagem!");	
-		}
-		else if((!regexMaster.matches())) 
-		{
-		    JOptionPane.showMessageDialog(null, "Formato email "+Email.getText()+", inválido!");
-		}
-    	else
-    	{	
-			CallableStatement cstmt = conn_insuti.prepareCall("BEGIN ? := siar.GERA_PASS_USER_NOME(?); END;");
-			String sql="insert into siar.siar_utilizadores(Num_mecanog,Nome_Utilizador,Senha,Dta_Desativo,Creation_Date,Email,Imagem_nome,Imagem)values(?,?,?,?,?,?,?,?)"; 
-	        pstinsuti=conn_insuti.prepareStatement(sql);
-	        atua_seq();
-	        pstinsuti.setString(1, ad1);
-	        pstinsuti.setString(2,Nome_Uti.getText());
-	        cstmt.registerOutParameter(1,Types.VARCHAR);
-	        cstmt.setString(2,Nome_Uti.getText());
-	        cstmt.execute();
-	        String output = cstmt.getString(1);
-	        Senha.setText(output);
-	        pstinsuti.setString(3, output);
-	        pstinsuti.setDate(4, null); 
-	        pstinsuti.setDate(5,now);
-	        pstinsuti.setString(6,Email.getText());
-	        pstinsuti.setString(7,img.getText());
-	        pstinsuti.setBytes(8,IMAGEM);
-	        pstinsuti.executeQuery();
-	        JOptionPane.showMessageDialog(null,"Dados Inseridos com Sucesso!");
-	        Nome_Uti.setText(null);
-	        Senha.setText(null);
-	        Email.setText(null);
-	        Jlnome.setIcon(new ImageIcon());
-    	}
-    }  
-	
-	public void seleciona_linha()
-	{
-		int row = table_2.getSelectedRow();
-		if (row >= 0)	
-		{	
-		try
-		 {
-					String clica_tabela =(table_2.getModel().getValueAt(row, 0).toString());
-    				ImageIcon image1 = (ImageIcon)table_2.getValueAt(row, 5);
-		            String conta="select siar.siar_utilizadores.Num_Mecanog Num_Mecanog,siar.siar_utilizadores.nome_utilizador Nome_Utilizador,siar.siar_utilizadores.senha pass, Dta_Desativo dta_des,siar.siar_utilizadores.email email,siar.siar_utilizadores.imagem from siar.siar_utilizadores "
-		            		+ " where siar.siar_utilizadores.num_mecanog='"+clica_tabela+"'";
-		            pst_sel=conn_sel.prepareStatement(conta);
-					rs_sel =pst_sel.executeQuery();
-			           if(rs_sel.next())
-			            {
-  			        	    String ad1 =rs_sel.getString("Num_Mecanog");
-			            	nmec_aux.setText(ad1);
-  			        	    String ad2 =rs_sel.getString("Nome_Utilizador");
-  			        	    nome_aux.setText(ad2);
-  			        	    if(table_2.getModel().getValueAt(row, 4)!= null)
-  			        	    {
-  	  			        	    String ad3 =rs_sel.getString("email");
-  	  			        	    email_aux.setText(ad3);
-  			        	    }
-  			        	    else
-  			        	    {
-  			        	    	email_aux.setText("");
-  			        	    }
-  							if(table_2.getValueAt(row, 5)!= null)
-  							{
-	  							Image image2 = image1.getImage().getScaledInstance(Jlnome.getWidth(),Jlnome.getHeight(),Image.SCALE_SMOOTH);
-	  							ImageIcon image3 = new ImageIcon(image2);
-	  							lblimg2.setIcon(image3);
-  							}
-  							else
-  							{
-  								lblimg2.setIcon(new ImageIcon());
-  							}
-			            }
-			}
-			catch(Exception e)
-			{
-				nmec_aux.setText("");
-				nome_aux.setText("");
-				email_aux.setText("");
-				JOptionPane.showMessageDialog(null,e+"erro ao selecionar");
-			}
-          }
-	}
-	public void atualiza_uti()
-	{
-		String email_Pattern = "^[a-zA-Z0-9_+&*-]+(?:\\."+  
-	               "[a-zA-Z0-9_+&*-]+)*@" + 
-	               "(?:[a-zA-Z0-9-]+\\.)+[a-z"+ 
-	               "A-Z]{2,7}$";  
-		Pattern pattern = Pattern.compile(email_Pattern);
-		Matcher regexMaster = pattern.matcher(email_aux.getText());
-		if((nmec_aux.getText().length()==0)||(nome_aux.getText().length()==0))
-    	{
-    	    JOptionPane.showMessageDialog(null,"Nenhum Registo Selecionado!");
-    	}
-		else if((!regexMaster.matches())) 
-		{
-		    JOptionPane.showMessageDialog(null, "Formato email "+email_aux.getText()+", inválido!");
-		} 
-		else
-		{		
-		   try
-		     {
-			   String sql="update siar.siar_utilizadores set nome_utilizador = ?,email= ? ,imagem_nome= ?,imagem= ? where siar.siar_utilizadores.num_mecanog='"+nmec_aux.getText()+"'"; 
-		       pst_upd=conn_upd.prepareStatement(sql); 
-		       pst_upd.setString(1,nome_aux.getText());
-		       pst_upd.setString(2,email_aux.getText());
-		       pst_upd.setString(3,img.getText());
-		       pst_upd.setBytes(4,IMAGEM);	 
-		       resupd=pst_upd.executeQuery();
-		       prencheUtilizadores();
-		       Jlnome.setIcon(new ImageIcon());
-		     }
-	         catch(Exception e)
-	         {
-	        	 JOptionPane.showMessageDialog(null, "Erro ao atualizar informação do utilizador!"+e);
-	         }
-    	}
 	}
 }

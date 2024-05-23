@@ -264,6 +264,7 @@ public class Marcacoes extends JFrame {
 		JButton btnNewButton_1 = new JButton("");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				btn_anula.setVisible(true);
 				parametros.marcacoes.prencher_marcacoes();
 			}
 		});
@@ -275,6 +276,7 @@ public class Marcacoes extends JFrame {
 		JButton button_1 = new JButton("");
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				btn_anula.setVisible(false);
 				parametros.marcacoes.prencher_marcacoes_Passadas();
 			}
 		});
@@ -288,6 +290,7 @@ public class Marcacoes extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
+				btn_anula.setVisible(false);
 				parametros.marcacoes.prencher_marcacoes_Desativadas();
 			}
 		});
