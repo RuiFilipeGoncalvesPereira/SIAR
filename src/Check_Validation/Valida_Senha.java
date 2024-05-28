@@ -1,4 +1,4 @@
-package siar;
+package Check_Validation;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -62,7 +62,7 @@ public class Valida_Senha
 			mess="";		
 			}
 			String Senha_Pattern = "^[a-zA-Z0-9]{1,9}$";
-		    String Letras_Pattern = "[A-Za-z���������������]+(\\s[A-Za-z���������������]+)*";
+		    String Letras_Pattern = "[A-Za-záéíóúãâçÁÉÍÓÚÃÂ]+(\\s[A-Za-záéíóúãâçÁÉÍÓÚÃÂ]+)*";
 			
 		    Pattern pattern = Pattern.compile(Senha_Pattern);
 			Pattern L_pattern = Pattern.compile(Letras_Pattern);

@@ -20,6 +20,9 @@ import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import com.toedter.calendar.JDateChooser;
+
+import dados_auxiliares.GetName;
+
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;

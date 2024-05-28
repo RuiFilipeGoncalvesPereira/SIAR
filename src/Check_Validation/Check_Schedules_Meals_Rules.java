@@ -7,7 +7,6 @@ import java.util.Calendar;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
-import siar.Check_Holiday;
 import siar.Data;
 import siar.Marcacoes;
 

@@ -38,8 +38,4 @@ public class Parametro {
 	public void setDesc_param(String desc_param) {
 		this.desc_param = desc_param;
 	}
-    
-    
-
-
 }

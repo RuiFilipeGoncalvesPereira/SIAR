@@ -26,6 +26,9 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import com.toedter.calendar.JDateChooser;
 
+import Check_Validation.Valida_Senha;
+import dados_auxiliares.GetName;
+
 public class Administrador extends JFrame {
 
 	private static final long serialVersionUID = 1L;

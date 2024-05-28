@@ -17,7 +17,6 @@ public class Login {
 	private JLabel lblData;
 	public static JLabel lblHora;
 	static Connection conn_utilizador = null;
-	//static Data mostra_data;
 	public static JPasswordField passField;
 	public static JTextField txtUser;
 	static ResultSet rs = null;

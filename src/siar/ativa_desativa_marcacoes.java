@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import dados_auxiliares.GetName;
+
 
 public class ativa_desativa_marcacoes {
 	

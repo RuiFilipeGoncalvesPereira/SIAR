@@ -76,5 +76,4 @@ public class Product {
     {
     	return imagem;
     }
-
 }

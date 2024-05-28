@@ -1,6 +1,5 @@
 package Password;
 
-import siar.Altera_Password;
 import siar.Login;
 
 public class Call_Pass_Form {

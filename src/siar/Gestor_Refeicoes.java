@@ -7,18 +7,9 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
-import com.itextpdf.text.BaseColor;
-import com.itextpdf.text.Document;
-import com.itextpdf.text.Element;
-import com.itextpdf.text.Font;
-import com.itextpdf.text.FontFactory;
-import com.itextpdf.text.Image;
-import com.itextpdf.text.PageSize;
-import com.itextpdf.text.Paragraph;
-import com.itextpdf.text.pdf.PdfPCell;
-import com.itextpdf.text.pdf.PdfPTable;
-import com.itextpdf.text.pdf.PdfWriter;
-
+import Check_Validation.Check_Holiday;
+import Check_Validation.Check_Meals_Served_Not_Served;
+import dados_auxiliares.GetName;
 import net.proteanit.sql.DbUtils;
 
 import javax.swing.JLabel;
@@ -31,10 +22,7 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.text.SimpleDateFormat;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
@@ -43,43 +31,33 @@ import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.FileOutputStream;
 import javax.swing.JCheckBox;
-import javax.swing.JFileChooser;
 public class Gestor_Refeicoes extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	public static JLabel lblnum,lblNome;
-	private JTable table;
-	Connection conn_verifica= null;
+	public static JTable table;
+	static Connection conn_verifica= null;
 	Connection conn_mar=null;
-	Connection val_marc=null;
-	ResultSet rs_conn_verifica= null;
-	PreparedStatement pstconn_verifica = null;
+	static ResultSet rs_conn_verifica= null;
+	static PreparedStatement pstconn_verifica = null;
 	ResultSet rs_conn_mar= null;
 	PreparedStatement pstconn_mar = null;
-	ResultSet rs_val_marc= null;
-	PreparedStatement pstval_marc = null;
 	Calendar cal = Calendar.getInstance();
     Calendar calum = Calendar.getInstance();
-	private JTextField nmec_aux;
-	private JTextField cod_ref_aux;
-	private JTextField cod_pra_aux;
-	private JTextField dta_ref_aux;
-	private JTextField dta_registo_aux;
-	SimpleDateFormat df2 = new SimpleDateFormat("dd-MM-yyyy");
-	JCheckBox Check_ref;
-	JCheckBox Check_corr_ref;
-	Date now = new Date(System.currentTimeMillis());
-	String strDate = df2.format(now);
+    public static JTextField nmec_aux;
+    public static JTextField cod_ref_aux;
+    public static JTextField cod_pra_aux;
+    public static JTextField dta_ref_aux;
+    public static JTextField dta_registo_aux;
+	public static JCheckBox Check_ref;
+	public static JCheckBox Check_corr_ref;
     java.util.Date data_hoje = new java.util.Date();
     java.sql.Date sqlDate = new java.sql.Date(data_hoje.getTime());
-	Check_Holiday CH = new Check_Holiday();
-	Data mostra_data;
-	LocalTime currentTime = LocalTime.now();
-	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
-
+	static Check_Holiday CH = new Check_Holiday();
+	static Data mostra_data;
+	SimpleDateFormat df2 = new SimpleDateFormat("dd-MM-yyyy");
 	//System.out.println(formatter.format(currentTime)); // 13:05:56;
 
   
@@ -106,7 +84,6 @@ public class Gestor_Refeicoes extends JFrame {
 		setAutoRequestFocus(false);
 		conn_verifica = JavaConection.ConnecrDb();
 		conn_mar = JavaConection.ConnecrDb();
-		val_marc = JavaConection.ConnecrDb();
 	    mostra_data = new Data();
         mostra_data.le_data();  
         mostra_data.le_hora();
@@ -193,175 +170,9 @@ public class Gestor_Refeicoes extends JFrame {
 		button_1.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
-			    //Imprimir valores de items em relat�rios
-			    //string value1=txt_empregado.getText();
-				//string value2=txt_empregadoid.getText();
-				//string value3=combo_age.getSelectedItem().toString();		
-				 String path ="";
-				 String numero ="N�mero";
-				 String nome ="Nome";
-				 String Dta_Refeicao ="Data Refeição";
-				 String Refeicao ="Refeição";
-				 String Prato ="Prato";
-				 String dta_reg ="Data Registo";
-				 String value1="";
-				 String value2="";
-				 String value3="";
-				 String value4="";
-				 String value5="";
-				 String value6="";
-				JFileChooser j= new JFileChooser();
-				j.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-				int x = j.showSaveDialog(null);
-				
-				if(x==JFileChooser.APPROVE_OPTION)
-				{	
-				 path = j.getSelectedFile().getPath(); 				
-			    }	
-				try{
-					int count=table.getRowCount();
-					Document document=new Document(PageSize.A4);
-					PdfWriter.getInstance(document,new FileOutputStream(path+"\\"+"Refeicoes_DIA.pdf"));
-					document.open();
-					Image logo = Image.getInstance("C:\\Users\\Rui Pereira\\eclipse-workspace\\AlimentacaoJava_Demo\\Img\\logo.png");
-                    document.add(logo);
-					PdfPTable tab=new PdfPTable(6);
-					PdfPCell cell = new PdfPCell(new Paragraph("Refeições"));
-					cell.setColspan(6);
-					cell.setHorizontalAlignment(Element.ALIGN_CENTER);
-					cell.setBackgroundColor(BaseColor.BLUE);
-					tab.addCell(cell);
-
-					tab.addCell(numero);
-					tab.addCell(nome);
-					tab.addCell(Dta_Refeicao);
-					tab.addCell(Refeicao);
-					tab.addCell(Prato);
-					tab.addCell(dta_reg);
-					for(int i=0;i<count;i++)
-					{
-					Object obj1 = GetData(table, i, 0);
-					Object obj2 = GetData(table, i, 1);
-					Object obj3 = GetData(table, i, 2);
-					Object obj4 = GetData(table, i, 3);
-					Object obj5 = GetData(table, i, 4);
-					Object obj6 = GetData(table, i, 5);
-					
-					if (obj1 != null)
-					{	
-					 value1=obj1.toString();
-					}
-					else
-					{
-					 value1= null;
-					}
-					if (obj2 != null)
-					{	
-					 value2=obj2.toString();
-					}
-					else
-					{
-					 value2= null;
-					}
-					if (obj3 != null)
-					{	
-					 value3=obj3.toString();
-					}
-					else
-					{
-					 value3= null;
-					}
-					if (obj4 != null)
-					{	
-					 value4=obj4.toString();
-					}
-					else
-					{
-					 value4= null;
-					}
-					if (obj5 != null)
-					{	
-					 value5=obj5.toString();
-					}
-					else
-					{
-					 value5= null;
-					}
-					if (obj6 != null)
-					{	
-					 value6=obj6.toString();
-					}
-					else
-					{
-					 value6= null;
-					}
-					tab.addCell(value1);
-					tab.addCell(value2);
-					tab.addCell(value3);
-					tab.addCell(value4);
-					tab.addCell(value5);
-					tab.addCell(value6);
-					}
-					Paragraph title = new Paragraph("Refeições do dia",FontFactory.getFont(FontFactory.TIMES_BOLD,18,Font.BOLD,BaseColor.RED));
-				    title.setAlignment(Element.ALIGN_CENTER);
-					document.add(title);
-				    Paragraph rtime = new Paragraph("Produzido por "+lblNome.getText()+" em " + strDate + " �s " + formatter.format(currentTime),FontFactory.getFont(FontFactory.TIMES_BOLD,11,Font.BOLD,BaseColor.BLACK));
-					rtime.setAlignment(Element.ALIGN_CENTER);
-					document.add(rtime);
-				    Paragraph rtime2 = new Paragraph("\n"); 
-					document.add(rtime2);
-					document.add(tab);
-					//Colocar uma lista de itens num report
-					/*com.itextpdf.text.List list = new com.itextpdf.text.List(true,20);
-					list.add("First Item");
-					list.add("Second Item");
-					list.add("Third Item");
-					list.add("Fourth Item");
-					list.add("Five Item");
-					list.add("Sixth Item");
-					document.add(list);*/
-					
-					//Colocar uma imagem num relat�rio
-					/*com.itextpdf.text.Image image1 = com.itextpdf.text.Image.getInstance("C:\\Users\\Rui Pereira\\eclipse-workspace\\AlimentacaoJava_Demo\\Img\\chart.png");
-					image1.setRotationDegrees(45.0f);
-					image1.scaleAbsolute(480, 300);
-					document.add(image1);*/
-					
-					document.close();
-					//https://www.tabnine.com/code/java/methods/com.itextpdf.text.Document/newPage
-					//https://www.youtube.com/watch?v=74pE3kLerAU&list=PLS1QulWo1RIayTWHnCGE_ttQG1_ajCBI4&index=15
-                    //https://pt.stackoverflow.com/questions/340500/banco-de-dados-trocando-acento-por
-					//https://www.youtube.com/@easy2excel927/playlists
-				 }
-				catch(Exception e2){
-					return;
-				 }
-				//Juntar dois Relat�rios PDF
-				/*try
-				 {
-					 String path_ ="";	
-					 JFileChooser j_= new JFileChooser();
-						j_.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-						int x_ = j_.showSaveDialog(null);
-						
-						if(x_==JFileChooser.APPROVE_OPTION)
-						{	
-						 path_ = j_.getSelectedFile().getPath(); 				
-					    }	
-					PdfReader report = new PdfReader(path_+"\\"+"Refeicoes_DIA.pdf");
-					PdfReader report1 = new PdfReader(path_+"\\"+"Refeicoes_DIA_2.pdf"); 
-					PdfCopyFields copy = new PdfCopyFields(new FileOutputStream(path_+"\\"+"Joined_Report.pdf"));
-					copy.addDocument(report); 
-					copy.addDocument(report1);
-					copy.close();
-					 JOptionPane.showMessageDialog(null,"Copy Saved!");
-				 }
-				 catch(Exception e3) 
-				 {
-					 return;
-				 }*/
-			}
-		 }		
+				PDF.Print_Meals_PDF.Print_PDF_Meals();
+		  }		
+		}
 		);
 		button_1.setIcon(new ImageIcon("C:\\Users\\Rui Pereira\\Documents\\Icons_Geral\\Icons\\pdf.gif"));
 		button_1.setToolTipText("");
@@ -430,7 +241,7 @@ public class Gestor_Refeicoes extends JFrame {
 		Check_ref = new JCheckBox("Valida Refei\u00E7\u00E3o");
 		Check_ref.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Re_Servidas();
+				Check_Meals_Served_Not_Served.Re_Servidas();
 			}
 		});
 		Check_ref.setBounds(63, 24, 240, 23);
@@ -439,87 +250,13 @@ public class Gestor_Refeicoes extends JFrame {
 		Check_corr_ref = new JCheckBox("Corrige Valida\u00E7\u00F5es");
 		Check_corr_ref.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Ref_N_Servidas();
+				Check_Meals_Served_Not_Served.Ref_N_Servidas();
 			}
 		});
 		Check_corr_ref.setBounds(63, 24, 240, 23);
 		contentPane.add(Check_corr_ref);
-        
 	}
-	public Object GetData(JTable table, int row_index, int col_index){
-		return table.getModel().getValueAt(row_index, col_index);
-		}
-	public void Re_Servidas()
-	{  
-
-		if((nmec_aux.getText().length()==0) || (dta_ref_aux.getText().length()==0) || (cod_ref_aux.getText().length()==0))
-        {
-	     JOptionPane.showMessageDialog(null,"Nenhum Registo Selecionado!");
-	     Check_ref.setSelected(false);
-	    }	
-	    else	
-	    {	 
-			if (Check_ref.isSelected())
-				{
-	            	String sql2="update siar.siar_marcacoes set siar.siar_marcacoes.verificacao='S' where siar.siar_marcacoes.Num_Mecanog='"+nmec_aux.getText()+"' and to_char(siar.siar_marcacoes.Dta_Refeicao,'dd-MM-yyyy')='"+dta_ref_aux.getText()+"' and siar.siar_marcacoes.Cod_Refeicao='"+cod_ref_aux.getText()+"'";
-	            	try 
-	            	{
-						pstval_marc = val_marc.prepareStatement(sql2);
-					} 
-	            	catch (SQLException e1) 
-	            	{
-						e1.printStackTrace();
-					}
-	            	try 
-	            	{
-						pstval_marc.executeQuery();
-					} 
-	            	catch (SQLException e1) 
-	            	{
-						e1.printStackTrace();
-					}
-				    JOptionPane.showMessageDialog(null,"Refeição Servida!");
-				}
-				marcacoes_diarias();
-				Check_ref.setSelected(false);
-	    }
-	}
-	public void Ref_N_Servidas()
-	{
-		if((nmec_aux.getText().length()==0) || (dta_ref_aux.getText().length()==0) || (cod_ref_aux.getText().length()==0))
-	    {
-	     JOptionPane.showMessageDialog(null,"Nenhum Registo Selecionado!");
-	     Check_corr_ref.setSelected(false);
-	    }	
-	    else
-	    {	
-			if (Check_corr_ref.isSelected())
-				{
-	            	String sql2="update siar.siar_marcacoes set siar.siar_marcacoes.verificacao='N' where siar.siar_marcacoes.Num_Mecanog='"+nmec_aux.getText()+"' and to_char(siar.siar_marcacoes.Dta_Refeicao,'dd-MM-yyyy')='"+dta_ref_aux.getText()+"' and siar.siar_marcacoes.Cod_Refeicao='"+cod_ref_aux.getText()+"'";
-	            	try 
-	            	{
-						pstval_marc = val_marc.prepareStatement(sql2);
-					}
-	            	catch (SQLException e1) 
-	            	{
-						e1.printStackTrace();
-					}
-	            	try
-	            	{
-						pstval_marc.executeQuery();
-					}
-	            	catch (SQLException e1)
-	            	{
-						e1.printStackTrace();
-					}
-				    JOptionPane.showMessageDialog(null,"Refeição não Servida!");
-				}
-	 			marcacoes_diarias_checadas();
-	 			Check_corr_ref.setSelected(false);
-	        }
-	}
-	
-	public void marcacoes_diarias()
+	public static void marcacoes_diarias()
 	{
 		JTextField Jcolzero = new JTextField();
 		JTextField Jcolum = new JTextField();
@@ -574,10 +311,6 @@ public class Gestor_Refeicoes extends JFrame {
 		      table.getColumnModel().getColumn(5).setResizable(false);
 		      table.getColumnModel().getColumn(5).setPreferredWidth(100);
 		      table.getColumnModel().getColumn(5).setHeaderValue("Dta Reg.");
-		     /* table.getColumnModel().getColumn(6).setMinWidth(0);
-		      table.getColumnModel().getColumn(6).setMaxWidth(0);
-		      table.getColumnModel().getColumn(7).setMinWidth(0);
-		      table.getColumnModel().getColumn(7).setMaxWidth(0);*/
 		     }while(rs_conn_verifica.next());	
         }
 		else if((mostra_data.horamin.compareTo(horaminja)>=0) && (mostra_data.horamin.compareTo(horamaxja)<0))
@@ -727,7 +460,7 @@ public class Gestor_Refeicoes extends JFrame {
 			}
           }
 	}
-	public void marcacoes_diarias_checadas()
+	public static void marcacoes_diarias_checadas()
 	{
 		JTextField Jcolzero = new JTextField();
 		JTextField Jcolum = new JTextField();
