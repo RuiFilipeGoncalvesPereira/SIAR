@@ -13,10 +13,12 @@ import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 
 import Check_Validation.Check_Holiday;
+import Entities.Marcacao;
+import Entities.Marcacao_Checada;
 import siar.Data;
+import siar.Gestor_Refeicoes;
 import siar.JavaConection;
 import siar.Login;
-import siar.Marcacao;
 import siar.Marcacoes;
 import siar.MyQuery_Marc;
 
@@ -354,6 +356,39 @@ public class marcacoes {
 			java.util.Date futureDate1 = cal.getTime();	
 			Marcacoes.dt_ref.setDate(futureDate1);	
 		}
+	}
+	public static void marcacoes_diarias_checadas()
+	{
+		MyQuery_Marc mq = new MyQuery_Marc();
+		ArrayList<Marcacao_Checada> list = mq.marcacoes_diarias_checadas();
+		String[] columnName = {"Num. Mec.","Nome","Dta. Refeição","Refeição","Prato","Dta. Reg.","Cod.Ref.","Cod.Pra."}; 
+		Object [][] rows = new Object[list.size()][9];
+		for(int i = 0; i < list.size(); i++)
+			{
+				rows[i][0] = list.get(i).getNum_mec();
+				rows[i][1] = list.get(i).getNome();
+				rows[i][2] = list.get(i).getDta_ref();
+				rows[i][3] = list.get(i).getDes_ref();
+				rows[i][4] = list.get(i).getDes_pr();
+				rows[i][5] = list.get(i).getDta_reg();
+				rows[i][6] = list.get(i).getCod_ref();
+				rows[i][7] = list.get(i).getCod_pr();
+			}
+		Model.Model_Schedules model = new Model.Model_Schedules(rows, columnName);
+		Gestor_Refeicoes.table.setModel(model);
+		Gestor_Refeicoes.table.setRowHeight(30);
+		Gestor_Refeicoes.table.getColumnModel().getColumn(0).setPreferredWidth(100);
+		Gestor_Refeicoes.table.getColumnModel().getColumn(1).setPreferredWidth(340);
+		Gestor_Refeicoes.table.getColumnModel().getColumn(2).setPreferredWidth(140);
+		Gestor_Refeicoes.table.getColumnModel().getColumn(3).setPreferredWidth(110);
+		Gestor_Refeicoes.table.getColumnModel().getColumn(4).setPreferredWidth(110);
+		Gestor_Refeicoes.table.getColumnModel().getColumn(5).setPreferredWidth(140);
+		Gestor_Refeicoes.table.getColumnModel().getColumn(6).setMinWidth(0);
+		Gestor_Refeicoes.table.getColumnModel().getColumn(6).setMaxWidth(0);
+		Gestor_Refeicoes.table.getColumnModel().getColumn(7).setMinWidth(0);
+		Gestor_Refeicoes.table.getColumnModel().getColumn(7).setMaxWidth(0);
+		Gestor_Refeicoes.table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		Gestor_Refeicoes.table.getTableHeader().setReorderingAllowed(false);
 	}
 
 }

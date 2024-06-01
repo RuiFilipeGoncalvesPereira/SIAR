@@ -82,7 +82,7 @@ public class Check_Meals_Served_Not_Served {
 					}
 				    JOptionPane.showMessageDialog(null,"Refeição não Servida!");
 				}
-			    Gestor_Refeicoes.marcacoes_diarias_checadas();
+			    parametros.marcacoes.marcacoes_diarias_checadas();
 	 			Gestor_Refeicoes.Check_corr_ref.setSelected(false);
 	        }
 	}

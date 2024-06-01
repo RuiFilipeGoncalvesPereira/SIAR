@@ -12,7 +12,7 @@ import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 
 import Data.Data;
-import siar.Ementas;
+import Entities.Ementas;
 import siar.Gestor_Cantina;
 import siar.MyQuery;
 import siar.TheModel;

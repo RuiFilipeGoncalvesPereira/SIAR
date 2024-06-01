@@ -201,7 +201,7 @@ public class Gestor_Refeicoes extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				marcacoes_diarias_checadas();
+				parametros.marcacoes.marcacoes_diarias_checadas();
 				Check_ref.setVisible(false);
 				Check_ref.setEnabled(false);
 				Check_corr_ref.setVisible(true);
@@ -459,77 +459,5 @@ public class Gestor_Refeicoes extends JFrame {
 				dta_registo_aux.setText(null);
 			}
           }
-	}
-	public static void marcacoes_diarias_checadas()
-	{
-		JTextField Jcolzero = new JTextField();
-		JTextField Jcolum = new JTextField();
-		JTextField Jcoldois = new JTextField();
-		JTextField Jcoltres = new JTextField();
-		JTextField Jcolquatro = new JTextField();
-	    JTextField Jcolcinco = new JTextField();
-	    @SuppressWarnings("unused")
-		int linha = 0;
-	 try
-	  {
-		 String sql="select siar.siar_marcacoes.Num_Mecanog,siar.siar_utilizadores.nome_utilizador,to_char(siar.siar_marcacoes.Dta_Refeicao,'dd-mm-yyyy')dtaref,siar.siar_refeicao.Desc_Refeicao,siar.siar_prato.Desc_Prato,to_char(siar.siar_marcacoes.Dta_Registo,'dd-mm-yyyy')dtareg,siar.siar_marcacoes.Cod_Refeicao,siar.siar_marcacoes.Cod_prato from siar.siar_marcacoes,siar.siar_refeicao,siar.siar_prato,siar.siar_utilizadores Where siar.siar_marcacoes.Cod_Refeicao=siar.siar_refeicao.Cod_Refeicao and siar.siar_marcacoes.Cod_Prato=siar.siar_prato.Cod_Prato and siar.siar_marcacoes.Num_Mecanog=siar.siar_utilizadores.Num_Mecanog and trunc(siar.siar_marcacoes.Dta_Refeicao) = trunc(sysdate) and siar.siar_marcacoes.verificacao = 'S' order by siar.siar_marcacoes.Dta_Registo desc"; 
-		 pstconn_verifica=conn_verifica.prepareStatement(sql,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-		 rs_conn_verifica=pstconn_verifica.executeQuery();
-		 do
-		 {	
-		  table.setModel(DbUtils.resultSetToTableModel(rs_conn_verifica));	
-	      TableColumn sportColumnzero = table.getColumnModel().getColumn(0);
-	      sportColumnzero.setCellEditor(new DefaultCellEditor(Jcolzero));
-	      table.getColumnModel().getColumn(0).setResizable(false);
-	      table.getColumnModel().getColumn(0).setPreferredWidth(45);
-	      table.getColumnModel().getColumn(0).setHeaderValue("N�");
-	      TableColumn sportColumnum = table.getColumnModel().getColumn(1);
-	      sportColumnum.setCellEditor(new DefaultCellEditor(Jcolum));
-	      table.getColumnModel().getColumn(1).setResizable(false);
-	      table.getColumnModel().getColumn(1).setPreferredWidth(340);
-	      table.getColumnModel().getColumn(1).setHeaderValue("Nome");
-	      TableColumn sportColumdois = table.getColumnModel().getColumn(2);
-	      sportColumdois.setCellEditor(new DefaultCellEditor(Jcoldois));
-	      table.getColumnModel().getColumn(2).setResizable(false);
-	      table.getColumnModel().getColumn(2).setPreferredWidth(140);
-	      table.getColumnModel().getColumn(2).setHeaderValue("Dta Ref.");
-	      TableColumn sportColumtres = table.getColumnModel().getColumn(3);
-	      sportColumtres.setCellEditor(new DefaultCellEditor(Jcoltres));
-	      table.getColumnModel().getColumn(3).setResizable(false);
-	      table.getColumnModel().getColumn(3).setPreferredWidth(110);
-	      table.getColumnModel().getColumn(3).setHeaderValue("Refeição");
-	      TableColumn sportColumquatro = table.getColumnModel().getColumn(4);
-	      sportColumquatro.setCellEditor(new DefaultCellEditor(Jcolquatro));
-	      table.getColumnModel().getColumn(4).setResizable(false);
-	      table.getColumnModel().getColumn(4).setPreferredWidth(100);
-	      table.getColumnModel().getColumn(4).setHeaderValue("Prato");
-	   	  TableColumn sportColumcinco = table.getColumnModel().getColumn(5);
-	      sportColumcinco.setCellEditor(new DefaultCellEditor(Jcolcinco));
-	      table.getColumnModel().getColumn(5).setResizable(false);
-	      table.getColumnModel().getColumn(5).setPreferredWidth(100);
-	      table.getColumnModel().getColumn(5).setHeaderValue("Dta Reg.");
-	      table.getColumnModel().getColumn(6).setMinWidth(0);
-	      table.getColumnModel().getColumn(6).setMaxWidth(0);
-	      table.getColumnModel().getColumn(7).setMinWidth(0);
-	      table.getColumnModel().getColumn(7).setMaxWidth(0);
-	     }while(rs_conn_verifica.next());
-	      DefaultTableModel modelo = (DefaultTableModel)table.getModel();
-	      modelo.setNumRows(30);
-	      table.getTableHeader().setReorderingAllowed(false);
-		  Jcolzero.setEditable(false);
-		  Jcolum.setEditable(false);
-		  Jcoldois.setEditable(false);
-		  Jcoltres.setEditable(false);
-		  Jcolquatro.setEditable(false);
-		  Jcolcinco.setEditable(false);
-	      table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-	      table.changeSelection(0, 0, false, false);
-	      linha = table.getSelectedRow();
-	      table.requestFocus();
-	  }
-	     catch(Exception e)
-	     {
-	    	 JOptionPane.showMessageDialog(null, "Erro ao Listar na Tabela3!"+e);
-	     }
 	}
 }

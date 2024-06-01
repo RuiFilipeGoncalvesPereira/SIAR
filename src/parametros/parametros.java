@@ -9,9 +9,9 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 
+import Entities.Parametro;
 import siar.Administrador;
 import siar.MyQuery;
-import siar.Parametro;
 import siar.TheModel;
 
 public class parametros {

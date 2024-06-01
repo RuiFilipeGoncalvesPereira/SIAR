@@ -8,6 +8,14 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
+import Entities.Dominio;
+import Entities.Ementas;
+import Entities.Feriado;
+import Entities.Parametro;
+import Entities.Product;
+import Entities.Refeicao;
+import Entities.prato;
+
 public class MyQuery {
 	
 	Statement pst_arr = null;

@@ -12,8 +12,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 
+import Entities.Feriado;
 import siar.Administrador;
-import siar.Feriado;
 import siar.JavaConection;
 import siar.MyQuery;
 import siar.TheModel;

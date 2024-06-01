@@ -1,4 +1,4 @@
-package siar;
+package Entities;
 
 public class Parametro {
 	private int cod_param;

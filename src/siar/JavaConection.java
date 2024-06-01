@@ -10,7 +10,6 @@ public class JavaConection
         try{
             Class.forName("oracle.jdbc.driver.OracleDriver");
             Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl","SYSTEM","123456"); 
-            //JOptionPane.showMessageDialog(null,"Conexão Estabelecida com Sucesso!");
             return conn;
            } 
            catch(Exception e)

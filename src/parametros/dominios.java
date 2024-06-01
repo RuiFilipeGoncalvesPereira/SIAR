@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 
+import Entities.Dominio;
 import siar.Administrador;
-import siar.Dominio;
 import siar.MyQuery;
 import siar.TheModel;
 

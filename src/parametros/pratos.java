@@ -11,12 +11,12 @@ import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 
 import Data.Data;
+import Entities.prato;
 
 //package default;
 
 import siar.Administrador;
 import siar.MyQuery;
-import siar.prato;
 import siar.TheModel;
 
 

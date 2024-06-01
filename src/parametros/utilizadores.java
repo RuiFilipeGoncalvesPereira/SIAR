@@ -22,10 +22,10 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 
+import Entities.Product;
 import siar.Administrador;
 import siar.JavaConection;
 import siar.MyQuery;
-import siar.Product;
 import siar.TheModel;
 
 public class utilizadores {

@@ -153,6 +153,8 @@ public class Check_Schedules_Meals_Rules {
 			}
 			if ((val == 7) && (dataobtida.compareTo(strcalum)==0))
 			{
+				 JOptionPane.showMessageDialog(null, "dataobtida " + dataobtida);
+				 JOptionPane.showMessageDialog(null, "strcalum " + strcalum);
 				 JOptionPane.showMessageDialog(null, "Sábado!,Não pode marcar refeições para Segunda!");
 				 Marcacoes.dt_ref.requestFocus();
 				 return;

@@ -11,10 +11,10 @@ import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 
 import Data.Data;
+import Entities.Refeicao;
 import siar.Administrador;
 import siar.JavaConection;
 import siar.MyQuery;
-import siar.Refeicao;
 import siar.TheModel;
 
 
