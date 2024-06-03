@@ -238,7 +238,7 @@ public class Gestor_Refeicoes extends JFrame {
 		dta_registo_aux.setBounds(179, 353, 1, 1);
 		contentPane.add(dta_registo_aux);
 		
-		Check_ref = new JCheckBox("Valida Refei\u00E7\u00E3o");
+		Check_ref = new JCheckBox("Valida Refeicoes");
 		Check_ref.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Check_Meals_Served_Not_Served.Re_Servidas();
@@ -247,7 +247,7 @@ public class Gestor_Refeicoes extends JFrame {
 		Check_ref.setBounds(63, 24, 240, 23);
 		contentPane.add(Check_ref);
 		
-		Check_corr_ref = new JCheckBox("Corrige Valida\u00E7\u00F5es");
+		Check_corr_ref = new JCheckBox("Corrige Validacoes");
 		Check_corr_ref.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Check_Meals_Served_Not_Served.Ref_N_Servidas();
@@ -418,46 +418,7 @@ public class Gestor_Refeicoes extends JFrame {
 	  }
 	     catch(Exception e)
 	     {
-	    	 JOptionPane.showMessageDialog(null, "Erro ao Listar na Tabela3!"+e);
+	    	 JOptionPane.showMessageDialog(null, "Erro ao Listar as Refeições do dia!"+e);
 	     }
 	}
-	/*public void seleciona_linha()
-	{
-		int row = table.getSelectedRow();
-		if (row >= 0)	
-		{	
-		try{
-					String clica_tabela =(table.getModel().getValueAt(row, 0).toString());
-					String clica_data =(table.getModel().getValueAt(row, 2)).toString();
-					String clica_dta_res =(table.getModel().getValueAt(row, 5)).toString();
-					String clica_codigo =(table.getModel().getValueAt(row, 6).toString());
-					String clica_pra =(table.getModel().getValueAt(row, 7)).toString(); 
-		            String conta="select * from siar.siar_marcacoes where siar.siar_marcacoes.Num_Mecanog='"+clica_tabela+"'and to_char(siar.siar_marcacoes.Dta_Refeicao,'dd-mm-yyyy')='"+clica_data+"'and siar.siar_marcacoes.Cod_refeicao='"+clica_codigo+"'and siar.siar_marcacoes.Cod_prato='"+clica_pra+"'and to_char(siar.siar_marcacoes.Dta_Registo,'dd-mm-yyyy')='"+clica_dta_res+"'";
-					pstconn_mar=conn_mar.prepareStatement(conta);
-					rs_conn_mar=pstconn_mar.executeQuery();
-			           if(rs_conn_mar.next())
-			            {
-  			        	    String ad1 = rs_conn_mar.getString("Num_Mecanog");
-			            	nmec_aux.setText(ad1);
-			            	Date ad2 = rs_conn_mar.getDate("Dta_Refeicao");
-			            	dta_ref_aux.setText(df2.format(ad2));
-			            	String ad3 = rs_conn_mar.getString("Cod_Refeicao");
-			            	cod_ref_aux.setText(ad3);
-			            	String ad4 = rs_conn_mar.getString("Cod_Prato");
-			            	cod_pra_aux.setText(ad4);
-			            	Date ad5 = rs_conn_mar.getDate("Dta_Registo");
-			            	dta_registo_aux.setText(df2.format(ad5));
-			            }
-
-			}
-			catch(Exception e)
-			{
-				nmec_aux.setText(null);
-				dta_ref_aux.setText(null);
-				cod_ref_aux.setText(null);
-				cod_pra_aux.setText(null);
-				dta_registo_aux.setText(null);
-			}
-          }
-	}*/
 }
