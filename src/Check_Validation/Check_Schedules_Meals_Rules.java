@@ -7,12 +7,12 @@ import java.util.Calendar;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
-import siar.Data;
+import Data.Data_Read_Values;
 import siar.Marcacoes;
 
 public class Check_Schedules_Meals_Rules {
 	
-    static Data mostra_data;
+    static Data_Read_Values mostra_data;
 	static SimpleDateFormat df2 = new SimpleDateFormat("dd-MM-yyyy");
 	public static Date now = new Date(System.currentTimeMillis());
 	static Calendar caldia = Calendar.getInstance();
@@ -24,7 +24,7 @@ public class Check_Schedules_Meals_Rules {
 	
 	public static void ValidaDatas()
 	{
-	        mostra_data = new Data();
+	        mostra_data = new Data_Read_Values();
             mostra_data.le_data();  
             mostra_data.le_hora();
         	Check_Holiday CH = new Check_Holiday();

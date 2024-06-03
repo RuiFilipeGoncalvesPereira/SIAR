@@ -11,7 +11,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 
-import Data.Data;
+import Data.Data_Read_Values;
 import Entities.Ementas;
 import siar.Gestor_Cantina;
 import siar.MyQuery;
@@ -98,7 +98,7 @@ public class ementas {
           else {	
     		String sql="insert into siar.siar_ementas(Dta_Refeicao,cod_refeicao,cod_prato,desc_ementa)values(?,?,?,?)"; 
 			pst_rs_param=conn_param.prepareStatement(sql);
-	        pst_rs_param.setDate(1,Data.convertUtilDateToSqlDate(Gestor_Cantina.dt_ementa.getDate()));
+	        pst_rs_param.setDate(1,Data_Read_Values.convertUtilDateToSqlDate(Gestor_Cantina.dt_ementa.getDate()));
 	        pst_rs_param.setString(2,Gestor_Cantina.txt_ref.getText());
 	        pst_rs_param.setString(3,Gestor_Cantina.txt_prato.getText());
 	        pst_rs_param.setString(4,Gestor_Cantina.txt_ementa.getText());

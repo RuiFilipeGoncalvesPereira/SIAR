@@ -1,14 +1,17 @@
-package siar;
+package Data;
 import java.util.Date;
+
+import siar.Login;
+
 import java.text.SimpleDateFormat;
 
 
-public class Data {
-		  String mes,dia,ano,dia_semana,hora;
+public class Data_Read_Values {
+	      public String mes,dia,ano,dia_semana,hora;
 		  public String horamin;
 		  SimpleDateFormat horaformatada = new SimpleDateFormat("HH:mm:ss");
 		  SimpleDateFormat horaminform = new SimpleDateFormat("HH:mm");
-		  public static Data mostra_data;
+		  public static Data_Read_Values mostra_data;
 		    
 		    public void le_hora()
 		    {
@@ -62,7 +65,7 @@ public class Data {
 		   }
 		   public static void CurrentHour()
 			   {
-				mostra_data = new Data();
+				mostra_data = new Data_Read_Values();
 		        mostra_data.le_data(); 
 			     Thread clock=new Thread()
 				  {

@@ -10,6 +10,8 @@ import java.awt.event.ActionEvent;
 import java.awt.*;
 import javax.swing.*;
 
+import Data.Data_Read_Values;
+
 public class Login {
 
 	public static JFrame frame;
@@ -47,14 +49,14 @@ public class Login {
 	{
 		conn_utilizador = JavaConection.ConnecrDb();
 		initialize();
-		Data.mostra_data = new Data();
-		Data.mostra_data.le_data();
-        Data.CurrentHour();
+		Data_Read_Values.mostra_data = new Data_Read_Values();
+		Data_Read_Values.mostra_data.le_data();
+		Data_Read_Values.CurrentHour();
         passField = new JPasswordField();
         passField.setBounds(151, 114, 112, 20);
         frame.getContentPane().add(passField);
         Image img = new ImageIcon(this.getClass().getResource("/Siarfundo.jpg")).getImage();
-        lblData.setText(                              "Hoje é "+Data.mostra_data.dia_semana+" ,dia "+Data.mostra_data.dia+" de "+Data.mostra_data.mes+" de "+Data.mostra_data.ano);
+        lblData.setText(                              "Hoje é "+Data_Read_Values.mostra_data.dia_semana+" ,dia "+Data_Read_Values.mostra_data.dia+" de "+Data_Read_Values.mostra_data.mes+" de "+Data_Read_Values.mostra_data.ano);
         
         JLabel lblNewLabel = new JLabel("");
         lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Rui Pereira\\eclipse-workspace\\AlimentacaoJava_Demo\\Img\\Siarfundo.jpg"));

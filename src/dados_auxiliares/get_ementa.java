@@ -9,12 +9,12 @@ import java.util.Date;
 
 import javax.swing.JOptionPane;
 
-import siar.Data;
+import Data.Data_Read_Values;
 
 
 public class get_ementa {
 	public static SimpleDateFormat df2 = new SimpleDateFormat("dd-MM-yyyy");
-    Data mostra_data;
+	Data_Read_Values mostra_data;
 	static PreparedStatement pstprato_rem = null;
 	static Connection conn_rem  = null;
 	static ResultSet rs_prato_rem = null;

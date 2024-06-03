@@ -21,6 +21,7 @@ import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import com.toedter.calendar.JDateChooser;
 
+import Data.Data_Read_Values;
 import dados_auxiliares.GetName;
 
 import javax.swing.JScrollPane;
@@ -44,7 +45,7 @@ public class Gestor_Cantina extends JFrame {
 	public static JComboBox<String> jcomborefeicao_can;
 	public static JComboBox<String> jcomboprato_can; 
     SimpleDateFormat df2 = new SimpleDateFormat("dd-MM-yyyy");
-    Data mostra_data;
+    Data_Read_Values mostra_data;
     Date now = new Date(System.currentTimeMillis());
     String strDate = df2.format(now);
     public static JTextField dt_ementa_aux;

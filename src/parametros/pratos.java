@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 
-import Data.Data;
+import Data.Data_Read_Values;
 import Entities.prato;
 
 //package default;
@@ -69,7 +69,7 @@ public class pratos {
     		atua_seq_prato();
 	        pst_rs_prato_cod.setString(1,ad_prato);
 	        pst_rs_prato_cod.setString(2,Administrador.Desc_Prato.getText());
-	        pst_rs_prato_cod.setDate(3,Data.convertUtilDateToSqlDate(Administrador.DC_prato.getDate()));
+	        pst_rs_prato_cod.setDate(3,Data_Read_Values.convertUtilDateToSqlDate(Administrador.DC_prato.getDate()));
 	        pst_rs_prato_cod.executeQuery();
 	        JOptionPane.showMessageDialog(null,"Prato Inserido com Sucesso!");
 	        Administrador.DC_prato.setDate(null);

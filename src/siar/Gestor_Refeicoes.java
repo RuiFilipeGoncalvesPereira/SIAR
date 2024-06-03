@@ -9,6 +9,7 @@ import javax.swing.table.TableColumn;
 
 import Check_Validation.Check_Holiday;
 import Check_Validation.Check_Meals_Served_Not_Served;
+import Data.Data_Read_Values;
 import dados_auxiliares.GetName;
 import net.proteanit.sql.DbUtils;
 
@@ -19,7 +20,6 @@ import javax.swing.DefaultCellEditor;
 import javax.swing.ImageIcon;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
@@ -56,7 +56,7 @@ public class Gestor_Refeicoes extends JFrame {
     java.util.Date data_hoje = new java.util.Date();
     java.sql.Date sqlDate = new java.sql.Date(data_hoje.getTime());
 	static Check_Holiday CH = new Check_Holiday();
-	static Data mostra_data;
+	static Data_Read_Values mostra_data;
 	SimpleDateFormat df2 = new SimpleDateFormat("dd-MM-yyyy");
 	//System.out.println(formatter.format(currentTime)); // 13:05:56;
 
@@ -84,7 +84,7 @@ public class Gestor_Refeicoes extends JFrame {
 		setAutoRequestFocus(false);
 		conn_verifica = JavaConection.ConnecrDb();
 		conn_mar = JavaConection.ConnecrDb();
-	    mostra_data = new Data();
+	    mostra_data = new Data_Read_Values();
         mostra_data.le_data();  
         mostra_data.le_hora();
 		initialize();
@@ -161,7 +161,7 @@ public class Gestor_Refeicoes extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent arg0) 
 			{
-				seleciona_linha();	
+				parametros.marcacoes.seleciona_linha_Checked_Meal();	
 			}
 		});
 		scrollPane.setViewportView(table);
@@ -421,7 +421,7 @@ public class Gestor_Refeicoes extends JFrame {
 	    	 JOptionPane.showMessageDialog(null, "Erro ao Listar na Tabela3!"+e);
 	     }
 	}
-	public void seleciona_linha()
+	/*public void seleciona_linha()
 	{
 		int row = table.getSelectedRow();
 		if (row >= 0)	
@@ -459,5 +459,5 @@ public class Gestor_Refeicoes extends JFrame {
 				dta_registo_aux.setText(null);
 			}
           }
-	}
+	}*/
 }

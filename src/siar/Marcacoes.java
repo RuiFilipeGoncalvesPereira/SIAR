@@ -19,6 +19,7 @@ import com.toedter.calendar.JDateChooser;
 
 import Check_Validation.Check_Holiday;
 import Check_Validation.Check_Schedules_Meals_Rules;
+import Data.Data_Read_Values;
 import dados_auxiliares.GetName;
 
 import javax.swing.JTable;
@@ -44,7 +45,7 @@ public class Marcacoes extends JFrame {
 	public static Calendar caldois = Calendar.getInstance(); 
     Check_Holiday CH = new Check_Holiday();
     public static Calendar calmaiortrinta = Calendar.getInstance();
-    Data mostra_data;
+    Data_Read_Values mostra_data;
 	public static JButton btn_anula;
 	public static JButton btn_back_menu;
 	public static JTable table;
@@ -80,7 +81,7 @@ public class Marcacoes extends JFrame {
 	 */
 	public Marcacoes() {
 		setBackground(SystemColor.control);
-	    mostra_data = new Data();
+	    mostra_data = new Data_Read_Values();
         mostra_data.le_data();  
         mostra_data.le_hora();
 		initialize();

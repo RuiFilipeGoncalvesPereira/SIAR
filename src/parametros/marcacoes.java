@@ -13,9 +13,9 @@ import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 
 import Check_Validation.Check_Holiday;
+import Data.Data_Read_Values;
 import Entities.Marcacao;
 import Entities.Marcacao_Checada;
-import siar.Data;
 import siar.Gestor_Refeicoes;
 import siar.JavaConection;
 import siar.Login;
@@ -41,7 +41,7 @@ public class marcacoes {
 	static String strDate = df2.format(now);
 	public static JScrollPane scrollPane;
 	static Check_Holiday CH = new Check_Holiday();
-	static Data mostra_data;
+	static Data_Read_Values mostra_data;
 	
 	public static void prencher_marcacoes()
 	{
@@ -192,7 +192,7 @@ public class marcacoes {
 	            	String sql="insert into siar.siar_marcacoes(Num_Mecanog,Dta_Refeicao,Cod_Refeicao,Cod_Prato,Dta_Desativo,Dta_Registo,Verificacao)values(?,?,?,?,?,?,?)"; 
 		            pstprato=conn_prato.prepareStatement(sql);
 		            pstprato.setString(1, Login.txtUser.getText());
-		            pstprato.setDate(2,Data.convertUtilDateToSqlDate(Marcacoes.dt_ref.getDate()));
+		            pstprato.setDate(2,Data_Read_Values.convertUtilDateToSqlDate(Marcacoes.dt_ref.getDate()));
 		            pstprato.setString(3, Marcacoes.jcodref.getText());
 		            pstprato.setString(4, Marcacoes.jcodprato.getText()); 
 		            pstprato.setDate(5,null);
@@ -235,7 +235,7 @@ public class marcacoes {
 	{
 		int row = Marcacoes.table.getSelectedRow();
 		conn_mar = JavaConection.ConnecrDb();
-	    mostra_data = new Data();
+	    mostra_data = new Data_Read_Values();
         mostra_data.le_hora();
 		if (row >= 0)	
 		{	
@@ -336,7 +336,7 @@ public class marcacoes {
 	public static void Calcular_Dia_Correto()
 	{
 		
-	    mostra_data = new Data();
+	    mostra_data = new Data_Read_Values();
         mostra_data.le_hora();
 		Marcacoes.dt_ref.setDate(now);
 		String horalimite = CH.check_holiday(2);
@@ -389,6 +389,45 @@ public class marcacoes {
 		Gestor_Refeicoes.table.getColumnModel().getColumn(7).setMaxWidth(0);
 		Gestor_Refeicoes.table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		Gestor_Refeicoes.table.getTableHeader().setReorderingAllowed(false);
+	}
+	public static void seleciona_linha_Checked_Meal()
+	{
+		int row = Gestor_Refeicoes.table.getSelectedRow();
+		if (row >= 0)	
+		{	
+		try{
+					String clica_tabela =(Gestor_Refeicoes.table.getModel().getValueAt(row, 0).toString());
+					String clica_data =(Gestor_Refeicoes.table.getModel().getValueAt(row, 2)).toString();
+					String clica_dta_res =(Gestor_Refeicoes.table.getModel().getValueAt(row, 5)).toString();
+					String clica_codigo =(Gestor_Refeicoes.table.getModel().getValueAt(row, 6).toString());
+					String clica_pra =(Gestor_Refeicoes.table.getModel().getValueAt(row, 7)).toString(); 
+		            String conta="select * from siar.siar_marcacoes where siar.siar_marcacoes.Num_Mecanog='"+clica_tabela+"'and to_char(siar.siar_marcacoes.Dta_Refeicao,'dd-mm-yyyy')='"+clica_data+"'and siar.siar_marcacoes.Cod_refeicao='"+clica_codigo+"'and siar.siar_marcacoes.Cod_prato='"+clica_pra+"'and to_char(siar.siar_marcacoes.Dta_Registo,'dd-mm-yyyy')='"+clica_dta_res+"'";
+					pstconn_mar=conn_mar.prepareStatement(conta);
+					rs_conn_mar=pstconn_mar.executeQuery();
+			           if(rs_conn_mar.next())
+			            {
+  			        	    String ad1 = rs_conn_mar.getString("Num_Mecanog");
+  			        	    Gestor_Refeicoes.nmec_aux.setText(ad1);
+			            	Date ad2 = rs_conn_mar.getDate("Dta_Refeicao");
+			            	Gestor_Refeicoes.dta_ref_aux.setText(df2.format(ad2));
+			            	String ad3 = rs_conn_mar.getString("Cod_Refeicao");
+			            	Gestor_Refeicoes.cod_ref_aux.setText(ad3);
+			            	String ad4 = rs_conn_mar.getString("Cod_Prato");
+			            	Gestor_Refeicoes.cod_pra_aux.setText(ad4);
+			            	Date ad5 = rs_conn_mar.getDate("Dta_Registo");
+			            	Gestor_Refeicoes.dta_registo_aux.setText(df2.format(ad5));
+			            }
+
+			}
+			catch(Exception e)
+			{
+				Gestor_Refeicoes.nmec_aux.setText(null);
+				Gestor_Refeicoes.dta_ref_aux.setText(null);
+				Gestor_Refeicoes.cod_ref_aux.setText(null);
+				Gestor_Refeicoes.cod_pra_aux.setText(null);
+				Gestor_Refeicoes.dta_registo_aux.setText(null);
+			}
+          }
 	}
 
 }
