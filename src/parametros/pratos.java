@@ -12,12 +12,12 @@ import javax.swing.ListSelectionModel;
 
 import Data.Data_Read_Values;
 import Entities.prato;
+import Model.TheModel;
 
 //package default;
 
 import siar.Administrador;
 import siar.MyQuery;
-import siar.TheModel;
 
 
 public class pratos {

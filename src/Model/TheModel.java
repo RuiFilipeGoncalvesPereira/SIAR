@@ -1,4 +1,4 @@
-package siar;
+package Model;
 import javax.swing.Icon;
 import javax.swing.table.AbstractTableModel;
 

@@ -1,4 +1,4 @@
-package siar;
+package Check_Validation;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -6,6 +6,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import dados_auxiliares.GetName;
+import siar.Administrador;
+import siar.Gestor_Cantina;
+import siar.Gestor_Refeicoes;
+import siar.JavaConection;
 
 
 public class ativa_desativa_marcacoes {
@@ -16,7 +20,7 @@ public class ativa_desativa_marcacoes {
 	static ResultSet rs_gemen = null;
 	static PreparedStatement pst = null; 
 
-	public static void ativa_desativa_marcacoes(int num_mec) {
+	public static void ativa_desativa_marcacoes_(int num_mec) {
 		conn_utilizador = JavaConection.ConnecrDb();
 		String sql_admin="select * from siar.siar_dominios b"
            		+ " Where b.dominio='admin' and valor='"+num_mec+"'";

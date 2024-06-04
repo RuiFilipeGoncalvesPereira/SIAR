@@ -392,6 +392,7 @@ public class marcacoes {
 	}
 	public static void seleciona_linha_Checked_Meal()
 	{
+		conn_mar = JavaConection.ConnecrDb();
 		int row = Gestor_Refeicoes.table.getSelectedRow();
 		if (row >= 0)	
 		{	
@@ -401,7 +402,7 @@ public class marcacoes {
 					String clica_dta_res =(Gestor_Refeicoes.table.getModel().getValueAt(row, 5)).toString();
 					String clica_codigo =(Gestor_Refeicoes.table.getModel().getValueAt(row, 6).toString());
 					String clica_pra =(Gestor_Refeicoes.table.getModel().getValueAt(row, 7)).toString(); 
-		            String conta="select * from siar.siar_marcacoes where siar.siar_marcacoes.Num_Mecanog='"+clica_tabela+"'and to_char(siar.siar_marcacoes.Dta_Refeicao,'dd-mm-yyyy')='"+clica_data+"'and siar.siar_marcacoes.Cod_refeicao='"+clica_codigo+"'and siar.siar_marcacoes.Cod_prato='"+clica_pra+"'and to_char(siar.siar_marcacoes.Dta_Registo,'dd-mm-yyyy')='"+clica_dta_res+"'";
+					String conta="select * from siar.siar_marcacoes where siar.siar_marcacoes.Num_Mecanog='"+clica_tabela+"'and to_char(siar.siar_marcacoes.Dta_Refeicao,'dd-mm-yyyy')='"+clica_data+"'and siar.siar_marcacoes.Cod_refeicao='"+clica_codigo+"'and siar.siar_marcacoes.Cod_prato='"+clica_pra+"'and to_char(siar.siar_marcacoes.Dta_Registo,'dd-mm-yyyy')='"+clica_dta_res+"'";
 					pstconn_mar=conn_mar.prepareStatement(conta);
 					rs_conn_mar=pstconn_mar.executeQuery();
 			           if(rs_conn_mar.next())
@@ -428,6 +429,39 @@ public class marcacoes {
 				Gestor_Refeicoes.dta_registo_aux.setText(null);
 			}
           }
+	}
+	public static void daily_meals()
+	{
+		MyQuery_Marc mq = new MyQuery_Marc();
+		ArrayList<Marcacao_Checada> list = mq.shecules_from_day();
+		String[] columnName = {"Num. Mec.","Nome","Dta. Refeição","Refeição","Prato","Dta. Reg.","Cod.Ref.","Cod.Pra."}; 
+		Object [][] rows = new Object[list.size()][9];
+		for(int i = 0; i < list.size(); i++)
+			{
+				rows[i][0] = list.get(i).getNum_mec();
+				rows[i][1] = list.get(i).getNome();
+				rows[i][2] = list.get(i).getDta_ref();
+				rows[i][3] = list.get(i).getDes_ref();
+				rows[i][4] = list.get(i).getDes_pr();
+				rows[i][5] = list.get(i).getDta_reg();
+				rows[i][6] = list.get(i).getCod_ref();
+				rows[i][7] = list.get(i).getCod_pr();
+			}
+		Model.Model_Schedules model = new Model.Model_Schedules(rows, columnName);
+		Gestor_Refeicoes.table.setModel(model);
+		Gestor_Refeicoes.table.setRowHeight(30);
+		Gestor_Refeicoes.table.getColumnModel().getColumn(0).setPreferredWidth(100);
+		Gestor_Refeicoes.table.getColumnModel().getColumn(1).setPreferredWidth(340);
+		Gestor_Refeicoes.table.getColumnModel().getColumn(2).setPreferredWidth(140);
+		Gestor_Refeicoes.table.getColumnModel().getColumn(3).setPreferredWidth(110);
+		Gestor_Refeicoes.table.getColumnModel().getColumn(4).setPreferredWidth(110);
+		Gestor_Refeicoes.table.getColumnModel().getColumn(5).setPreferredWidth(140);
+		Gestor_Refeicoes.table.getColumnModel().getColumn(6).setMinWidth(0);
+		Gestor_Refeicoes.table.getColumnModel().getColumn(6).setMaxWidth(0);
+		Gestor_Refeicoes.table.getColumnModel().getColumn(7).setMinWidth(0);
+		Gestor_Refeicoes.table.getColumnModel().getColumn(7).setMaxWidth(0);
+		Gestor_Refeicoes.table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		Gestor_Refeicoes.table.getTableHeader().setReorderingAllowed(false);
 	}
 
 }

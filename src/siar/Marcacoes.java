@@ -19,6 +19,7 @@ import com.toedter.calendar.JDateChooser;
 
 import Check_Validation.Check_Holiday;
 import Check_Validation.Check_Schedules_Meals_Rules;
+import Check_Validation.ativa_desativa_marcacoes;
 import Data.Data_Read_Values;
 import dados_auxiliares.GetName;
 
@@ -307,7 +308,7 @@ public class Marcacoes extends JFrame {
 		btn_back_menu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-    			ativa_desativa_marcacoes.ativa_desativa_marcacoes(Integer.parseInt(Login.txtUser.getText()));
+    			ativa_desativa_marcacoes.ativa_desativa_marcacoes_(Integer.parseInt(Login.txtUser.getText()));
 			}
 		});
 		btn_back_menu.setIcon(new ImageIcon("C:\\Users\\Rui Pereira\\Documents\\Icons_Geral\\Icons\\001_27.gif"));

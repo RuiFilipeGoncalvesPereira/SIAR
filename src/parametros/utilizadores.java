@@ -23,10 +23,10 @@ import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 
 import Entities.Product;
+import Model.TheModel;
 import siar.Administrador;
 import siar.JavaConection;
 import siar.MyQuery;
-import siar.TheModel;
 
 public class utilizadores {
 	

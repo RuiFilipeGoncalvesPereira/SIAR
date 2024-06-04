@@ -4,31 +4,21 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
 
-import Check_Validation.Check_Holiday;
 import Check_Validation.Check_Meals_Served_Not_Served;
 import Data.Data_Read_Values;
 import dados_auxiliares.GetName;
-import net.proteanit.sql.DbUtils;
 
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JButton;
-import javax.swing.DefaultCellEditor;
 import javax.swing.ImageIcon;
 import java.awt.event.ActionListener;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.ListSelectionModel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JCheckBox;
@@ -38,12 +28,6 @@ public class Gestor_Refeicoes extends JFrame {
 	private JPanel contentPane;
 	public static JLabel lblnum,lblNome;
 	public static JTable table;
-	static Connection conn_verifica= null;
-	Connection conn_mar=null;
-	static ResultSet rs_conn_verifica= null;
-	static PreparedStatement pstconn_verifica = null;
-	ResultSet rs_conn_mar= null;
-	PreparedStatement pstconn_mar = null;
 	Calendar cal = Calendar.getInstance();
     Calendar calum = Calendar.getInstance();
     public static JTextField nmec_aux;
@@ -55,9 +39,8 @@ public class Gestor_Refeicoes extends JFrame {
 	public static JCheckBox Check_corr_ref;
     java.util.Date data_hoje = new java.util.Date();
     java.sql.Date sqlDate = new java.sql.Date(data_hoje.getTime());
-	static Check_Holiday CH = new Check_Holiday();
-	static Data_Read_Values mostra_data;
 	SimpleDateFormat df2 = new SimpleDateFormat("dd-MM-yyyy");
+	static Data_Read_Values mostra_data;
 	//System.out.println(formatter.format(currentTime)); // 13:05:56;
 
   
@@ -82,13 +65,11 @@ public class Gestor_Refeicoes extends JFrame {
 	 */
 	public Gestor_Refeicoes() {
 		setAutoRequestFocus(false);
-		conn_verifica = JavaConection.ConnecrDb();
-		conn_mar = JavaConection.ConnecrDb();
 	    mostra_data = new Data_Read_Values();
         mostra_data.le_data();  
         mostra_data.le_hora();
 		initialize();
-		marcacoes_diarias();
+		parametros.marcacoes.daily_meals();
 		GetName Gn = new GetName();
 		@SuppressWarnings("static-access")
 		String nome = Gn.GETNAME(Integer.parseInt(Login.txtUser.getText()));
@@ -99,7 +80,7 @@ public class Gestor_Refeicoes extends JFrame {
 	}
 	private void initialize() 
 	{
-		setTitle("Gest�o de Refeições"); 
+		setTitle("Gestao de Refeições"); 
 		setAutoRequestFocus(false);
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 698, 471);
@@ -184,7 +165,7 @@ public class Gestor_Refeicoes extends JFrame {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				marcacoes_diarias();
+				parametros.marcacoes.daily_meals();
 				Check_corr_ref.setVisible(false);
 				Check_corr_ref.setEnabled(false);
 				Check_ref.setVisible(true);
@@ -192,7 +173,7 @@ public class Gestor_Refeicoes extends JFrame {
 			}
 		});
 		bt_check.setIcon(new ImageIcon("C:\\Users\\Rui Pereira\\Documents\\Icons_Geral\\Icons\\checkin.gif"));
-		bt_check.setToolTipText("Refei\u00E7\u00F5es N\u00E3o Verificadas");
+		bt_check.setToolTipText("Refeicoes Nao Verificadas");
 		bt_check.setBounds(10, 132, 43, 36);
 		contentPane.add(bt_check);
 		
@@ -256,7 +237,7 @@ public class Gestor_Refeicoes extends JFrame {
 		Check_corr_ref.setBounds(63, 24, 240, 23);
 		contentPane.add(Check_corr_ref);
 	}
-	public static void marcacoes_diarias()
+	/*public static void marcacoes_diarias()
 	{
 		JTextField Jcolzero = new JTextField();
 		JTextField Jcolum = new JTextField();
@@ -420,5 +401,5 @@ public class Gestor_Refeicoes extends JFrame {
 	     {
 	    	 JOptionPane.showMessageDialog(null, "Erro ao Listar as Refeições do dia!"+e);
 	     }
-	}
+	}*/
 }

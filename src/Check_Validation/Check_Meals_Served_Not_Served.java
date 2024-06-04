@@ -47,7 +47,7 @@ public class Check_Meals_Served_Not_Served {
 					}
 				    JOptionPane.showMessageDialog(null,"Refeição Servida!");
 				}
-			    Gestor_Refeicoes.marcacoes_diarias();
+			    parametros.marcacoes.daily_meals();
 				Gestor_Refeicoes.Check_ref.setSelected(false);
 	    }
 	}
