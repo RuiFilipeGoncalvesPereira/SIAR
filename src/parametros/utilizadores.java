@@ -24,9 +24,9 @@ import javax.swing.ListSelectionModel;
 
 import Entities.Product;
 import Model.TheModel;
+import Query.MyQuery;
 import siar.Administrador;
 import siar.JavaConection;
-import siar.MyQuery;
 
 public class utilizadores {
 	

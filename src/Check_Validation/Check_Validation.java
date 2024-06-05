@@ -1,5 +1,6 @@
 package Check_Validation;
 
+import java.awt.HeadlessException;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -18,21 +19,21 @@ import siar.Marcacoes;
 
 public class Check_Validation {
 	
-	static int conta=0;  
-	static Connection conn_utilizador = null;
+	static int conta=3;  
+	public static Connection conn_utilizador = null;
     public static String numero;
-    static PreparedStatement pst = null;
-    static PreparedStatement pst_des = null;
-    static ResultSet rs = null;
-    static ResultSet rs_des = null;
-    static ResultSet rs_admin = null;
-    static ResultSet rs_gecan = null;
-    static ResultSet rs_geementa = null;
-    static Connection conn_utilizador_des = null;
+    public static PreparedStatement pst = null;
+    public static PreparedStatement pst_des = null;
+    public static ResultSet rs = null;
+    public static ResultSet rs_des = null;
+    public static ResultSet rs_admin = null;
+    public static ResultSet rs_gecan = null;
+    public static ResultSet rs_geementa = null;
+    public static Connection conn_utilizador_des = null;
     static Date now = new Date(System.currentTimeMillis());
     
 	@SuppressWarnings("deprecation")
-	public static void Valida_Login()
+	public static void Valida_Login() throws HeadlessException, SQLException
 	{ 
 		    if(siar.Login.txtUser.getText().length()==0)
 		    {
@@ -48,10 +49,113 @@ public class Check_Validation {
 	        }
 			else
 			{
-			  Login.frame.setVisible(false);
-			  conn_utilizador = JavaConection.ConnecrDb();	  
-			  conn_utilizador_des = JavaConection.ConnecrDb();	  
-			  if(conta< 3)
+		        Login.frame.setVisible(false);
+			    conn_utilizador = JavaConection.ConnecrDb();	  
+			    conn_utilizador_des = JavaConection.ConnecrDb();	
+			    
+		        String sql="select * from siar.siar_utilizadores Where Num_Mecanog='"+siar.Login.txtUser.getText()+"' and Senha='"+siar.Login.passField.getText()+"'";
+		        conn_utilizador.prepareStatement(sql);
+		        pst=conn_utilizador.prepareStatement(sql,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+		        rs=pst.executeQuery();
+		        
+		        String sql_des="select * from siar.siar_utilizadores Where Num_Mecanog='"+siar.Login.txtUser.getText()+"' and Senha='"+siar.Login.passField.getText()+"'"
+		        		+ "and dta_desativo is not null";
+		        conn_utilizador_des.prepareStatement(sql_des);
+		        pst_des=conn_utilizador_des.prepareStatement(sql_des,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+		        rs_des=pst_des.executeQuery();
+		        
+		        String sql_admin="select * from siar.siar_dominios b"
+		        		+ " Where b.dominio='admin' and valor='"+siar.Login.txtUser.getText()+"'";
+		        conn_utilizador.prepareStatement(sql_admin);
+		        pst=conn_utilizador.prepareStatement(sql_admin,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+		        rs_admin=pst.executeQuery();
+		        
+		        String sql_gecan="select * from siar.siar_dominios b"
+		            		+ " Where b.dominio='gecan' and valor='"+siar.Login.txtUser.getText()+"'";
+		        conn_utilizador.prepareStatement(sql_gecan);
+		        pst=conn_utilizador.prepareStatement(sql_gecan,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+		        rs_gecan=pst.executeQuery();
+		        
+		        String sql_gementa="select * from siar.siar_dominios b"
+		            		+ " Where b.dominio='gemen' and valor='"+siar.Login.txtUser.getText()+"'";
+		        conn_utilizador.prepareStatement(sql_gementa);
+		        pst=conn_utilizador.prepareStatement(sql_gementa,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+		        rs_geementa=pst.executeQuery();
+		        
+		        numero = siar.Login.txtUser.getText();	
+		        
+	            if(rs_des.first())
+	            {
+	         	   JOptionPane.showMessageDialog(null, "Your acess is bloked, contact the administrator!"); 
+	            }
+	            else
+	            {
+		            if(!rs.first())
+		            {
+		            	if(conta==3)
+		                {     
+				    	     conta = conta - 1;
+		            		 JOptionPane.showMessageDialog(null, "Validação Incorecta!,Têm mais "+conta+" Oportunidade/s!");
+				             Login.frame.setVisible(true);
+				             siar.Login.passField.requestFocus();
+		                }
+		            	else if(conta==2)
+		                {     
+				    	     conta = conta - 1;
+		            		 JOptionPane.showMessageDialog(null, "Validação Incorecta!,Têm mais "+conta+" Oportunidade/s!");
+				             Login.frame.setVisible(true);
+				             siar.Login.passField.requestFocus();
+		                }
+		                else if(conta==1)
+		                {  
+				    	     conta = conta - 1;
+				    		 try
+				    			{
+				    	     	  sql="update siar.siar_utilizadores set dta_desativo = sysdate, activo = 'N' where siar.siar_utilizadores.num_mecanog='"+numero+"'";
+				    	     	  pst=conn_utilizador.prepareStatement(sql); 
+				    	     	  rs=pst.executeQuery();
+				    			}
+				    		    catch(Exception e)
+				    		    {
+				    		       JOptionPane.showMessageDialog(null, "Erro ao desativar utilizador!"+e);
+				    		    }
+			                 JOptionPane.showMessageDialog(null, "You miss again you account is now blokced!");
+			                 System.exit(0);
+		                }
+		            }
+          	        if(rs.first())
+		              {
+		            	   if(rs_admin.first())
+		            	   {
+		            		     JOptionPane.showMessageDialog(null, "Bem vindo senhor/a " + prodQty(Integer.parseInt(siar.Login.txtUser.getText())));
+		                         Administrador Admin = new Administrador();
+		                         Admin.setVisible(true);
+		                         Administrador.lblnum.setText(numero);
+		            	   }
+		            	   else if(rs_gecan.first()){
+				            	 JOptionPane.showMessageDialog(null, "Bem vindo senhor/a " + prodQty(Integer.parseInt(siar.Login.txtUser.getText())));
+		                         Gestor_Refeicoes Ges = new Gestor_Refeicoes();
+		                         Ges.setVisible(true);
+		                         Gestor_Refeicoes.lblnum.setText(numero);
+		            	   }
+		            	   else if(rs_geementa.first()){
+				            	 JOptionPane.showMessageDialog(null, "Bem vindo senhor/a " + prodQty(Integer.parseInt(siar.Login.txtUser.getText())));
+				                 Gestor_Cantina Ges_em = new Gestor_Cantina();
+				                 Ges_em.setVisible(true);
+				                 Gestor_Cantina.lblnum.setText(numero);
+		            	   }
+		            	   else
+		            	   {
+				                 JOptionPane.showMessageDialog(null, "Bem vindo senhor/a " + prodQty(Integer.parseInt(siar.Login.txtUser.getText())));
+		                         Marcacoes Marc = new Marcacoes();
+		                         Marc.setVisible(true);
+		                         Marcacoes.lblNum.setText(numero);
+		                         Marcacoes.btn_back_menu.setVisible(false);
+		            	   }
+		               }
+	            } 
+			  
+			  /*if(conta==3)
 				         {    
 				            try
 				            {
@@ -93,7 +197,7 @@ public class Check_Validation {
 				               	else
 				               {
 				            	      if(rs.first())
-						               {
+						              {
 						            	   if(rs_admin.first())
 						            	   {
 						            		     JOptionPane.showMessageDialog(null, "Bem vindo senhor/a " + prodQty(Integer.parseInt(siar.Login.txtUser.getText())));
@@ -124,16 +228,25 @@ public class Check_Validation {
 						               }
 						               else
 						               {
-						                   conta++; 
-						                   if(conta==2)
-						                   {    
-						                     JOptionPane.showMessageDialog(null, "Validação Incorecta!,Têm mais "+conta+" Oportunidade/s!");
+						            	   JOptionPane.showMessageDialog(null, conta); 
+						            	   conta = conta - 1;
+						            	   JOptionPane.showMessageDialog(null, conta);
+						            	   if(conta==2)
+						                   {     
+						            		 JOptionPane.showMessageDialog(null, "Validação Incorecta!,Têm mais "+conta+" Oportunidade/s!");
+						                     JOptionPane.showMessageDialog(null, conta); 
+						                     Login.frame.setVisible(true);
+						                     //siar.Login.passField.requestFocus();
 						                   }
 						                   else if(conta==1)
 						                   {  
-						                	   JOptionPane.showMessageDialog(null, "Validação Incorecta!,Têm mais "+conta+" Oportunidade/s!");
+						                	  //conta--; 
+						                	  JOptionPane.showMessageDialog(null, "Validação Incorecta!,Têm mais 2 Oportunidade/s!");
+							            	  JOptionPane.showMessageDialog(null, conta); 
+						                	  Login.frame.setVisible(true);
+						                	  //siar.Login.passField.requestFocus();
 						                   }
-						                   else
+						                   else if(conta==0)
 						                   {
 						                     JOptionPane.showMessageDialog(null, "Falhou outra Vez!");
 						                     System.exit(0);
@@ -145,7 +258,7 @@ public class Check_Validation {
 				            {
 				                JOptionPane.showMessageDialog(null,e);
 				            }
-				      }
+				      }*/
 			  }
 	     }  
 	public static String prodQty(int num_mec)

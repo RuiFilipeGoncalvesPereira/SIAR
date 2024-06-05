@@ -11,8 +11,8 @@ import javax.swing.ListSelectionModel;
 
 import Entities.Dominio;
 import Model.TheModel;
+import Query.MyQuery;
 import siar.Administrador;
-import siar.MyQuery;
 
 public class dominios {
 	

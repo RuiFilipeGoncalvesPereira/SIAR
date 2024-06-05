@@ -13,9 +13,9 @@ import javax.swing.ListSelectionModel;
 import Data.Data_Read_Values;
 import Entities.Refeicao;
 import Model.TheModel;
+import Query.MyQuery;
 import siar.Administrador;
 import siar.JavaConection;
-import siar.MyQuery;
 
 
 public class refeicoes {

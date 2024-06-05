@@ -14,8 +14,8 @@ import javax.swing.ListSelectionModel;
 import Data.Data_Read_Values;
 import Entities.Ementas;
 import Model.TheModel;
+import Query.MyQuery;
 import siar.Gestor_Cantina;
-import siar.MyQuery;
 
 public class ementas {
 	

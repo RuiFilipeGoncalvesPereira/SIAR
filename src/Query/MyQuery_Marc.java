@@ -1,4 +1,4 @@
-package siar;
+package Query;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -11,6 +11,8 @@ import Check_Validation.Check_Holiday;
 import Data.Data_Read_Values;
 import Entities.Marcacao;
 import Entities.Marcacao_Checada;
+import siar.JavaConection;
+import siar.Login;
 
 public class MyQuery_Marc {
 	
@@ -137,8 +139,9 @@ public class MyQuery_Marc {
 						   rs_conn_mar.getInt("cod_ref"),
 						   rs_conn_mar.getInt("cod_pra")
 							);
-						list.add(p);
+				list.add(p);	
 			}
+			
 		}
 		catch(Exception e)
 		{

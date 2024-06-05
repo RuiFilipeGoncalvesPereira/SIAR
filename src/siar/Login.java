@@ -1,11 +1,11 @@
 package siar;
-import java.awt.EventQueue;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.awt.event.ActionEvent;
 import java.awt.*;
 import javax.swing.*;
@@ -22,7 +22,7 @@ public class Login {
 	public static JPasswordField passField;
 	public static JTextField txtUser;
 	static ResultSet rs = null;
-	static PreparedStatement pst = null;
+	static Statement pst = null;
 	String nome_utilizador = null;
 	String Nome;
 	/**
@@ -91,7 +91,13 @@ public class Login {
 		btnNewButton.setToolTipText("Acesso ao Sistema");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Check_Validation.Check_Validation.Valida_Login();
+				try {
+					Check_Validation.Check_Validation.Valida_Login();
+				} catch (HeadlessException e) {
+					e.printStackTrace();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
 			}	    
 		});
 		btnNewButton.setBounds(151, 139, 112, 33);

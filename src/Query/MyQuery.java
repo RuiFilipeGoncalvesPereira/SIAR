@@ -1,4 +1,4 @@
-package siar;
+package Query;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.ResultSet;
@@ -15,6 +15,7 @@ import Entities.Parametro;
 import Entities.Product;
 import Entities.Refeicao;
 import Entities.prato;
+import siar.JavaConection;
 
 public class MyQuery {
 	

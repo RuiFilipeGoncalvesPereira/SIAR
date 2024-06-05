@@ -13,11 +13,11 @@ import javax.swing.ListSelectionModel;
 import Data.Data_Read_Values;
 import Entities.prato;
 import Model.TheModel;
+import Query.MyQuery;
 
 //package default;
 
 import siar.Administrador;
-import siar.MyQuery;
 
 
 public class pratos {
