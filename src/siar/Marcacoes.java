@@ -124,7 +124,8 @@ public class Marcacoes extends JFrame {
 			@SuppressWarnings("static-access")
 			public void actionPerformed(ActionEvent arg0)
 			{
-                dispose();
+				cal.add(Calendar.DATE,-1);
+				dispose();
         		Login window = new Login();
 				window.frame.setVisible(true);
 			}
@@ -336,7 +337,7 @@ public class Marcacoes extends JFrame {
 		contentPane.add(lblNewLabel_2_2);
 		
 		cal.add(Calendar.DATE,Integer.parseInt(CH.check_holiday(31)));
-		calum.add(Calendar.DATE,Integer.parseInt(CH.check_holiday(61)));
+		calum.add(Calendar.DATE,Integer.parseInt(CH.check_holiday(31)));
 		caldois.add(Calendar.DATE,Integer.parseInt(CH.check_holiday(71)));
 		calmaiortrinta.add(Calendar.DATE,Integer.parseInt(CH.check_holiday(51)));
 		

@@ -59,8 +59,7 @@ public class Check_Schedules_Meals_Rules {
 			if (Marcacoes.caldois != null) {
 				strcaldois = sdfcalendar.format(Marcacoes.caldois.getTime());
 				}
-			
-	         if(((JTextField)Marcacoes.dt_ref.getDateEditor().getUiComponent()).getText().isEmpty())
+	        if(((JTextField)Marcacoes.dt_ref.getDateEditor().getUiComponent()).getText().isEmpty())
 	         {
 	             JOptionPane.showMessageDialog(null, "Deve Inserir a Data da Refeição!");
 	             ((JTextField)Marcacoes.dt_ref.getDateEditor().getUiComponent()).requestFocus();
@@ -153,8 +152,6 @@ public class Check_Schedules_Meals_Rules {
 			}
 			if ((val == 7) && (dataobtida.compareTo(strcalum)==0))
 			{
-				 JOptionPane.showMessageDialog(null, "dataobtida " + dataobtida);
-				 JOptionPane.showMessageDialog(null, "strcalum " + strcalum);
 				 JOptionPane.showMessageDialog(null, "Sábado!,Não pode marcar refeições para Segunda!");
 				 Marcacoes.dt_ref.requestFocus();
 				 return;
@@ -165,7 +162,6 @@ public class Check_Schedules_Meals_Rules {
 				 Marcacoes.dt_ref.requestFocus();
 				 return;
 			}
-			
 			if(dataobtida.compareTo(strcalendar)==0 && (mostra_data.horamin.compareTo(horalimite)>=0))
 	        {
 			 JOptionPane.showMessageDialog(null, "Já passa das "+horalimite+" Não pode marcar refeições para Amanhâ!");
