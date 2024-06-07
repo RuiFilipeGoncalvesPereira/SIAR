@@ -43,7 +43,8 @@ public class Marcacoes extends JFrame {
 	public static JLabel lblNome;
 	public static Calendar cal = Calendar.getInstance();
 	public static Calendar calum = Calendar.getInstance();
-	public static Calendar caldois = Calendar.getInstance(); 
+	public static Calendar caldois = Calendar.getInstance();
+	public static Calendar caltres = Calendar.getInstance(); 
     Check_Holiday CH = new Check_Holiday();
     public static Calendar calmaiortrinta = Calendar.getInstance();
     Data_Read_Values mostra_data;
@@ -124,7 +125,10 @@ public class Marcacoes extends JFrame {
 			@SuppressWarnings("static-access")
 			public void actionPerformed(ActionEvent arg0)
 			{
-				cal.add(Calendar.DATE,-1);
+				cal.add(Calendar.DATE,-Integer.parseInt(CH.check_holiday(31)));
+				caldois.add(Calendar.DATE,-Integer.parseInt(CH.check_holiday(61)));
+				caltres.add(Calendar.DATE,-Integer.parseInt(CH.check_holiday(71)));
+				calmaiortrinta.add(Calendar.DATE,-Integer.parseInt(CH.check_holiday(51)));
 				dispose();
         		Login window = new Login();
 				window.frame.setVisible(true);
@@ -139,6 +143,10 @@ public class Marcacoes extends JFrame {
 		{
 			public void actionPerformed(ActionEvent arg0)
 			{
+				cal.add(Calendar.DATE,-Integer.parseInt(CH.check_holiday(31)));
+				caldois.add(Calendar.DATE,-Integer.parseInt(CH.check_holiday(61)));
+				caltres.add(Calendar.DATE,-Integer.parseInt(CH.check_holiday(71)));
+				calmaiortrinta.add(Calendar.DATE,-Integer.parseInt(CH.check_holiday(51)));
 				dispose();
 				Password.Call_Pass_Form.Alterar_Password();
 			}
@@ -308,6 +316,10 @@ public class Marcacoes extends JFrame {
 		btn_back_menu.setToolTipText("Back to Food Management");
 		btn_back_menu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				cal.add(Calendar.DATE,-Integer.parseInt(CH.check_holiday(31)));
+				caldois.add(Calendar.DATE,-Integer.parseInt(CH.check_holiday(61)));
+				caltres.add(Calendar.DATE,-Integer.parseInt(CH.check_holiday(71)));
+				calmaiortrinta.add(Calendar.DATE,-Integer.parseInt(CH.check_holiday(51)));
 				dispose();
     			ativa_desativa_marcacoes.ativa_desativa_marcacoes_(Integer.parseInt(Login.txtUser.getText()));
 			}
@@ -337,8 +349,8 @@ public class Marcacoes extends JFrame {
 		contentPane.add(lblNewLabel_2_2);
 		
 		cal.add(Calendar.DATE,Integer.parseInt(CH.check_holiday(31)));
-		calum.add(Calendar.DATE,Integer.parseInt(CH.check_holiday(31)));
-		caldois.add(Calendar.DATE,Integer.parseInt(CH.check_holiday(71)));
+		caldois.add(Calendar.DATE,Integer.parseInt(CH.check_holiday(61)));
+		caltres.add(Calendar.DATE,Integer.parseInt(CH.check_holiday(71)));
 		calmaiortrinta.add(Calendar.DATE,Integer.parseInt(CH.check_holiday(51)));
 		
         }

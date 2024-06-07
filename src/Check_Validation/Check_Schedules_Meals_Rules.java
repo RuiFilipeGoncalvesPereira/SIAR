@@ -29,8 +29,8 @@ public class Check_Schedules_Meals_Rules {
             mostra_data.le_hora();
         	Check_Holiday CH = new Check_Holiday();
 		    String strcalendar = null;
-			String strcalum = null;
 			String strcaldois = null;
+			String strcaltres = null;
 			String horalimite = CH.check_holiday(2);
 			String Imaculada = CH.check_Feriado(1);
 			String Natal = CH.check_Feriado(2);
@@ -53,11 +53,11 @@ public class Check_Schedules_Meals_Rules {
 			if (Marcacoes.cal != null) {
 				strcalendar = sdfcalendar.format(Marcacoes.cal.getTime());
 				}
-			if (Marcacoes.calum != null) {
-				strcalum = sdfcalendar.format(Marcacoes.calum.getTime());
-				}
 			if (Marcacoes.caldois != null) {
 				strcaldois = sdfcalendar.format(Marcacoes.caldois.getTime());
+				}
+			if (Marcacoes.caltres != null) {
+				strcaltres = sdfcalendar.format(Marcacoes.caltres.getTime());
 				}
 	        if(((JTextField)Marcacoes.dt_ref.getDateEditor().getUiComponent()).getText().isEmpty())
 	         {
@@ -132,13 +132,13 @@ public class Check_Schedules_Meals_Rules {
 				 Marcacoes.dt_ref.requestFocus();
 				 return;
 			}
-			if ((val == 6) && (dataobtida.compareTo(strcalum)==0) && (mostra_data.horamin.compareTo(horalimite)>=0))
+			if ((val == 6) && (dataobtida.compareTo(strcaldois)==0) && (mostra_data.horamin.compareTo(horalimite)>=0))
 			{
 				 JOptionPane.showMessageDialog(null, "Sexta,Já passa das "+horalimite+" !,Não pode marcar refeições para Domingo!");
 				 Marcacoes.dt_ref.requestFocus();
 				 return;
 			}
-			if ((val == 6) && (dataobtida.compareTo(strcaldois)==0)&& (mostra_data.horamin.compareTo(horalimite)>=0))
+			if ((val == 6) && (dataobtida.compareTo(strcaltres)==0)&& (mostra_data.horamin.compareTo(horalimite)>=0))
 			{
 				 JOptionPane.showMessageDialog(null, "Sexta,Já passa das "+horalimite+" !,Não pode marcar refeições para Segunda!");
 				 Marcacoes.dt_ref.requestFocus();
@@ -150,7 +150,7 @@ public class Check_Schedules_Meals_Rules {
 				 Marcacoes.dt_ref.requestFocus();
 				 return;
 			}
-			if ((val == 7) && (dataobtida.compareTo(strcalum)==0))
+			if ((val == 7) && (dataobtida.compareTo(strcaldois)==0))
 			{
 				 JOptionPane.showMessageDialog(null, "Sábado!,Não pode marcar refeições para Segunda!");
 				 Marcacoes.dt_ref.requestFocus();

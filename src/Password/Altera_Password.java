@@ -133,6 +133,7 @@ public class Altera_Password extends JFrame {
 		JButton button = new JButton("");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+
 				conn_utilizador = JavaConection.ConnecrDb();
 				String sql_admin="select * from siar.siar_dominios b"
 		           		+ " Where b.dominio='admin' and valor='"+Integer.parseInt(Login.txtUser.getText())+"'";
@@ -187,9 +188,7 @@ public class Altera_Password extends JFrame {
 				} catch (SQLException e1) {
 					e1.printStackTrace();
 				} 
-		         
-		         
-		         
+    
 	    	  try {
 					if(rs_admin.first())
 					   {
