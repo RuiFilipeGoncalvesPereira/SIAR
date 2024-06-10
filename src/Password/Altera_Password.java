@@ -64,7 +64,7 @@ public class Altera_Password extends JFrame {
 		initialize();
 	}
 	private void initialize() {
-		this.setTitle("Menu de Alteração de Password");
+		this.setTitle("Changing Password Screen");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 344, 243);
@@ -72,7 +72,7 @@ public class Altera_Password extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		JButton btnNewButton = new JButton("Alteração de Password");
+		JButton btnNewButton = new JButton("Changing of Password");
 		btnNewButton.addActionListener(new ActionListener()
 		{
 			@SuppressWarnings("deprecation")

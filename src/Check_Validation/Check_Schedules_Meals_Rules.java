@@ -61,128 +61,128 @@ public class Check_Schedules_Meals_Rules {
 				}
 	        if(((JTextField)Marcacoes.dt_ref.getDateEditor().getUiComponent()).getText().isEmpty())
 	         {
-	             JOptionPane.showMessageDialog(null, "Deve Inserir a Data da Refeição!");
+	             JOptionPane.showMessageDialog(null, "You must insert meal date!");
 	             ((JTextField)Marcacoes.dt_ref.getDateEditor().getUiComponent()).requestFocus();
 	             return;
 	         }
 	         
 			if ((strDate.compareTo(Imaculada)==0) && (dataobtida.compareTo(Imaculada)==0))
 			{
-				 JOptionPane.showMessageDialog(null, "Dia da Imaculada Conçeição não Pode Marcar Refeições para Amanhâ");
+				 JOptionPane.showMessageDialog(null, "Day of the Immaculate Conception, you can't schedule meals for tomarrow!");
 				 Marcacoes.dt_ref.requestFocus();
 				 return;
 			}
 			if ((strDate.compareTo(Natal)==0) && (dataobtida.compareTo(Natal)==0))
 			{
-				 JOptionPane.showMessageDialog(null, "Dia de Natal não Pode Marcar Refeições para Amanhâ");
+				 JOptionPane.showMessageDialog(null, "Cristhmas day, you can't schedule meals for tomarrow!");
 				 Marcacoes.dt_ref.requestFocus();
 				 return;
 			}
 			if ((strDate.compareTo(AssunSenhora)==0) && (dataobtida.compareTo(AssunSenhora)==0))
 			{
-				 JOptionPane.showMessageDialog(null, "Dia de nossa Senhora da Assunção não Pode Marcar Refeições para Amanhã");
+				 JOptionPane.showMessageDialog(null, "Our Lady of the Assumption day, you can't schedule meals for tomarrow!");
 				 Marcacoes.dt_ref.requestFocus();
 				 return;
 			}
-			if ((strDate.compareTo(DPortugal)==0) && (dataobtida.compareTo(DPortugal)==0))
+			if (((strcalendar.compareTo(DPortugal)==0) || (strDate.compareTo(DPortugal)==0)) && (dataobtida.compareTo(DPortugal)==0))
 			{
-				 JOptionPane.showMessageDialog(null, "Dia de Portugal não Pode Marcar Refeições para Amanhâ");
+				 JOptionPane.showMessageDialog(null, "Portugal Day, You can't schedule meals for tomarrow!");
 				 Marcacoes.dt_ref.requestFocus();
 				 return;
 			}
 			if ((strDate.compareTo(DTrabalhador)==0) && (dataobtida.compareTo(DTrabalhador)==0))
 			{
-				 JOptionPane.showMessageDialog(null, "Dia do trabalhador não Pode Marcar Refeições para Amanhâ");
+				 JOptionPane.showMessageDialog(null, "Labor Day, you can't schedule meals for tomarrow");
 				 Marcacoes.dt_ref.requestFocus();
 				 return;
 			}
 			if ((strDate.compareTo(Fmunicipal)==0) && (dataobtida.compareTo(Fmunicipal)==0))
 			{
-				 JOptionPane.showMessageDialog(null, "Feriado Municipal Não Pode Marcar refeições para Amanhâ");
+				 JOptionPane.showMessageDialog(null, "Municipal holiday, you can't schedule meals for tomarrow");
 				 Marcacoes.dt_ref.requestFocus();
 				 return;
 			}
 			if ((strDate.compareTo(Dliberdade)==0) && (dataobtida.compareTo(Dliberdade)==0))
 			{
-				 JOptionPane.showMessageDialog(null, "Dia da liberdade Não Pode Marcar refeições para Amanhâ");
+				 JOptionPane.showMessageDialog(null, "Liberty day, you can't schedule meals for tomarrow!");
 				 Marcacoes.dt_ref.requestFocus();
 				 return;
 			}
 			if ((strDate.compareTo(Pascoa)==0) && (dataobtida.compareTo(Pascoa)==0))
 			{
-				 JOptionPane.showMessageDialog(null, "Páscoa Não Pode Marcar refeições para Amanhâ");
+				 JOptionPane.showMessageDialog(null, "Easter, You can't schedule meals for tomarrow!");
 				 Marcacoes.dt_ref.requestFocus();
 				 return;
 			}
 			if ((strDate.compareTo(SextaSanta)==0) && (dataobtida.compareTo(SextaSanta)==0))
 			{
-				 JOptionPane.showMessageDialog(null, "Sexta Feira Santa Não Pode Marcar refeições para Amanhâ");
+				 JOptionPane.showMessageDialog(null, "Good friday, you can't schedule meals for tomarrow!");
 				 Marcacoes.dt_ref.requestFocus();
 				 return;
 			}
 			if ((strDate.compareTo(AnoNovo)==0) && (dataobtida.compareTo(AnoNovo)==0))
 			{
-				 JOptionPane.showMessageDialog(null, "Ano Novo Não Pode Marcar refeições para Amanhâ");
+				 JOptionPane.showMessageDialog(null, "New years day, you can't schedule meals for tomarrow!");
 				 Marcacoes.dt_ref.requestFocus();
 				 return;
 			}
 			if ((val == 6) && (dataobtida.compareTo(strcalendar)==0) && (mostra_data.horamin.compareTo(horalimite)>=0))
 			{
-				 JOptionPane.showMessageDialog(null, "Sexta,Já passa das "+horalimite+" !,Não pode marcar refeições para Sábado!");
+				 JOptionPane.showMessageDialog(null, "Friday, already past from "+horalimite+" !,You can't schedule meals for Saturday!");
 				 Marcacoes.dt_ref.requestFocus();
 				 return;
 			}
 			if ((val == 6) && (dataobtida.compareTo(strcaldois)==0) && (mostra_data.horamin.compareTo(horalimite)>=0))
 			{
-				 JOptionPane.showMessageDialog(null, "Sexta,Já passa das "+horalimite+" !,Não pode marcar refeições para Domingo!");
+				 JOptionPane.showMessageDialog(null, "Friday, already past from "+horalimite+" !,You can't schedule meals for Sunday!");
 				 Marcacoes.dt_ref.requestFocus();
 				 return;
 			}
 			if ((val == 6) && (dataobtida.compareTo(strcaltres)==0)&& (mostra_data.horamin.compareTo(horalimite)>=0))
 			{
-				 JOptionPane.showMessageDialog(null, "Sexta,Já passa das "+horalimite+" !,Não pode marcar refeições para Segunda!");
+				 JOptionPane.showMessageDialog(null, "Friday, already past from "+horalimite+"!, You can't schedule meals for Monday!");
 				 Marcacoes.dt_ref.requestFocus();
 				 return;
 			}
 			if ((val == 7) && (dataobtida.compareTo(strcalendar)==0))
 			{
-				 JOptionPane.showMessageDialog(null, "Sábado!,Não pode marcar refeições para domingo!");
+				 JOptionPane.showMessageDialog(null, "Saturday!, You can't schecule meals for Sunday!");
 				 Marcacoes.dt_ref.requestFocus();
 				 return;
 			}
 			if ((val == 7) && (dataobtida.compareTo(strcaldois)==0))
 			{
-				 JOptionPane.showMessageDialog(null, "Sábado!,Não pode marcar refeições para Segunda!");
+				 JOptionPane.showMessageDialog(null, "Saturday!, You can't schecule meals for Monday!");
 				 Marcacoes.dt_ref.requestFocus();
 				 return;
 			}
 			if ((val == 1) && (dataobtida.compareTo(strcalendar)==0))
 			{
-				 JOptionPane.showMessageDialog(null, "Domingo!,Não pode marcar refeições para segunda!");
+				 JOptionPane.showMessageDialog(null, "Sunday!, You can't schecule meals for Monday!");
 				 Marcacoes.dt_ref.requestFocus();
 				 return;
 			}
 			if(dataobtida.compareTo(strcalendar)==0 && (mostra_data.horamin.compareTo(horalimite)>=0))
 	        {
-			 JOptionPane.showMessageDialog(null, "Já passa das "+horalimite+" Não pode marcar refeições para Amanhâ!");
+			 JOptionPane.showMessageDialog(null, "It's already past "+horalimite+" you can´t schedule meals for tomarrow!");
 			 Marcacoes.dt_ref.requestFocus();
 			 return;
 	        }
 	        if(sqlStartDate.after(sqlDateTrinta))
 	        {
-			 JOptionPane.showMessageDialog(null, "Não pode marcar refeições para daqui a mais de 31 dias!");
+			 JOptionPane.showMessageDialog(null, "You cannot schedule meals for more than 31 days from now!");
 			 Marcacoes.dt_ref.requestFocus();
 			 return;
 	        }
 			if(dataobtida.equals(strDate))
 	    	{
-			 JOptionPane.showMessageDialog(null, "Erro!,Não pode marcar refeições para hoje!");
+			 JOptionPane.showMessageDialog(null, "Error!You cannot schedule meals for today!");
 			 Marcacoes.dt_ref.requestFocus();
 			 return;
 			}
 			else if(sqlStartDate.before(sqlDate)) 
 			{
-			 JOptionPane.showMessageDialog(null, "Erro!,Está a tentar marcar refeições para datas passadas!");
+			 JOptionPane.showMessageDialog(null, "Error!You are trying schedule meals for past dates!");
 			 Marcacoes.dt_ref.requestFocus();
 			 return;
 			}

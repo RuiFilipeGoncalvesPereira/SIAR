@@ -344,7 +344,7 @@ public class marcacoes {
 		{  
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(Marcacoes.dt_ref.getDate());
-			cal.add(Calendar.DAY_OF_MONTH, 2);
+			cal.add(Calendar.DAY_OF_MONTH, Integer.parseInt(CH.check_holiday(61)));
 			java.util.Date futureDate2 = cal.getTime();	
 			Marcacoes.dt_ref.setDate(futureDate2);
 		}
@@ -352,7 +352,7 @@ public class marcacoes {
 		{
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(Marcacoes.dt_ref.getDate());
-			cal.add(Calendar.DAY_OF_MONTH, 1);
+			cal.add(Calendar.DAY_OF_MONTH, Integer.parseInt(CH.check_holiday(31)));
 			java.util.Date futureDate1 = cal.getTime();	
 			Marcacoes.dt_ref.setDate(futureDate1);	
 		}
