@@ -1,5 +1,8 @@
 package parametros;
 
+import java.awt.Desktop;
+import java.io.File;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -390,6 +393,20 @@ public class marcacoes {
 		Gestor_Refeicoes.table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		Gestor_Refeicoes.table.getTableHeader().setReorderingAllowed(false);
 	}
+
+    public static void openfile(String file)
+    {
+    	try {
+    		
+    		File path = new File(file);
+    		Desktop.getDesktop().open(path);
+    	}catch(IOException ioe)
+    	{
+    		System.out.println(ioe);
+    	}
+    	
+    }
+
 	public static void seleciona_linha_Checked_Meal()
 	{
 		conn_mar = JavaConection.ConnecrDb();
@@ -434,7 +451,8 @@ public class marcacoes {
 	{
 		MyQuery_Marc mq = new MyQuery_Marc();
 		ArrayList<Marcacao_Checada> list = mq.shecules_from_day();
-		String[] columnName = {"Num. Mec.","Nome","Dta. Refeição","Refeição","Prato","Dta. Reg.","Cod.Ref.","Cod.Pra."}; 
+		//String[] columnName = {"Num. Mec.","Nome","Dta. Refeição","Refeição","Prato","Dta. Reg.","Cod.Ref.","Cod.Pra."};
+		String[] columnName = {"Num. Mec.","Nome","Dta. Refeição","Refeição","Prato","Dta. Reg."}; 
 		Object [][] rows = new Object[list.size()][9];
 		for(int i = 0; i < list.size(); i++)
 			{
@@ -444,8 +462,8 @@ public class marcacoes {
 				rows[i][3] = list.get(i).getDes_ref();
 				rows[i][4] = list.get(i).getDes_pr();
 				rows[i][5] = list.get(i).getDta_reg();
-				rows[i][6] = list.get(i).getCod_ref();
-				rows[i][7] = list.get(i).getCod_pr();
+				//rows[i][6] = list.get(i).getCod_ref();
+				//rows[i][7] = list.get(i).getCod_pr();
 			}
 		Model.Model_Schedules model = new Model.Model_Schedules(rows, columnName);
 		Gestor_Refeicoes.table.setModel(model);
@@ -456,10 +474,10 @@ public class marcacoes {
 		Gestor_Refeicoes.table.getColumnModel().getColumn(3).setPreferredWidth(110);
 		Gestor_Refeicoes.table.getColumnModel().getColumn(4).setPreferredWidth(110);
 		Gestor_Refeicoes.table.getColumnModel().getColumn(5).setPreferredWidth(140);
-		Gestor_Refeicoes.table.getColumnModel().getColumn(6).setMinWidth(0);
+		/*Gestor_Refeicoes.table.getColumnModel().getColumn(6).setMinWidth(0);
 		Gestor_Refeicoes.table.getColumnModel().getColumn(6).setMaxWidth(0);
 		Gestor_Refeicoes.table.getColumnModel().getColumn(7).setMinWidth(0);
-		Gestor_Refeicoes.table.getColumnModel().getColumn(7).setMaxWidth(0);
+		Gestor_Refeicoes.table.getColumnModel().getColumn(7).setMaxWidth(0);*/
 		Gestor_Refeicoes.table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		Gestor_Refeicoes.table.getTableHeader().setReorderingAllowed(false);
 	}

@@ -7,6 +7,7 @@ import javax.swing.border.EmptyBorder;
 
 import Check_Validation.Check_Meals_Served_Not_Served;
 import Data.Data_Read_Values;
+import EXCEL.EXCEL_EXPORT;
 import dados_auxiliares.GetName;
 
 import javax.swing.JLabel;
@@ -76,6 +77,17 @@ public class Gestor_Refeicoes extends JFrame {
 		Gestor_Refeicoes.lblNome.setText(nome);
 		lblnum.setVisible(false);
 		Check_corr_ref.setEnabled(false);
+		
+		JButton btn_export_excel = new JButton("");
+		btn_export_excel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				EXCEL_EXPORT.Print_Excel_Meals();
+			}
+		});
+		btn_export_excel.setIcon(new ImageIcon("C:\\Users\\Rui Pereira\\Documents\\Icons_Geral\\Icons\\export_large.gif"));
+		btn_export_excel.setToolTipText("Export to Excel");
+		btn_export_excel.setBounds(10, 132, 43, 36);
+		contentPane.add(btn_export_excel);
 		Check_corr_ref.setVisible(false);
 	}
 	private void initialize() 
@@ -174,7 +186,7 @@ public class Gestor_Refeicoes extends JFrame {
 		});
 		bt_check.setIcon(new ImageIcon("C:\\Users\\Rui Pereira\\Documents\\Icons_Geral\\Icons\\checkin.gif"));
 		bt_check.setToolTipText("Refeicoes Nao Verificadas");
-		bt_check.setBounds(10, 132, 43, 36);
+		bt_check.setBounds(10, 168, 43, 36);
 		contentPane.add(bt_check);
 		
 		JButton bt_n_check = new JButton("");
@@ -191,7 +203,7 @@ public class Gestor_Refeicoes extends JFrame {
 		});
 		bt_n_check.setIcon(new ImageIcon("C:\\Users\\Rui Pereira\\Documents\\Icons_Geral\\Icons\\checkout.gif"));
 		bt_n_check.setToolTipText("Refei\u00E7\u00F5es Verificadas");
-		bt_n_check.setBounds(10, 168, 43, 36);
+		bt_n_check.setBounds(10, 204, 43, 36);
 		contentPane.add(bt_n_check);
 		
 		nmec_aux = new JTextField();
