@@ -21,7 +21,7 @@ public class Check_Meals_Served_Not_Served {
 		val_marc = JavaConection.ConnecrDb(); 
 		if((Gestor_Refeicoes.nmec_aux.getText().length()==0) || (Gestor_Refeicoes.dta_ref_aux.getText().length()==0) || (Gestor_Refeicoes.cod_ref_aux.getText().length()==0))
         {
-	     JOptionPane.showMessageDialog(null,"Nenhum Registo Selecionado!");
+		 JOptionPane.showMessageDialog(null,"No regist was selected!");
 	     Gestor_Refeicoes.Check_ref.setSelected(false);
 	    }	
 	    else	
@@ -36,6 +36,7 @@ public class Check_Meals_Served_Not_Served {
 	            	catch (SQLException e1) 
 	            	{
 						e1.printStackTrace();
+						JOptionPane.showMessageDialog(null,e1);
 					}
 	            	try 
 	            	{

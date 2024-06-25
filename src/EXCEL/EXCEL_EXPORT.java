@@ -6,7 +6,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 import javax.swing.JFileChooser;
-
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -35,15 +34,17 @@ public class EXCEL_EXPORT {
 				for(int i =0;i<Gestor_Refeicoes.table.getColumnCount();i++)
 				{
 					XSSFCell cell = rowCol.createCell(i);
-					cell.setCellValue(Gestor_Refeicoes.table.getColumnName(i));
+					if (Gestor_Refeicoes.table.getColumnName(i) != "Cod.Ref." 
+					&& Gestor_Refeicoes.table.getColumnName(i) != "Cod.Pra." ) {
+						cell.setCellValue(Gestor_Refeicoes.table.getColumnName(i));	
+					}
 				}	
 				for(int j=0;j<Gestor_Refeicoes.table.getRowCount();j++)
 				{
 					XSSFRow row = sheet.createRow(j+1);
-					for(int k=0;k<Gestor_Refeicoes.table.getColumnCount();k++)
+					for(int k=0;k<Gestor_Refeicoes.table.getColumnCount()-2;k++)
 					{
 						XSSFCell cell = row.createCell(k);
-						System.out.println(Gestor_Refeicoes.table.getValueAt(j,k).toString());
 						if(Gestor_Refeicoes.table.getValueAt(j, k)!= null)
 						{
 							 cell.setCellValue(Gestor_Refeicoes.table.getValueAt(j,k).toString());
