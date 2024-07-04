@@ -7,6 +7,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
 import com.itextpdf.text.BaseColor;
@@ -34,22 +35,30 @@ public class Print_Meals_PDF {
 	public static void Print_PDF_Meals()
 	{
 	    //Imprimir valores de items em relat�rios
-	    //string value1=txt_empregado.getText();
-		//string value2=txt_empregadoid.getText();
-		//string value3=combo_age.getSelectedItem().toString();		
-		 String path ="";
-		 String numero ="Número";
-		 String nome ="Nome";
-		 String Dta_Refeicao ="Data Refeição";
-		 String Refeicao ="Refeição";
-		 String Prato ="Prato";
-		 String dta_reg ="Data Registo";
-		 String value1="";
-		 String value2="";
-		 String value3="";
-		 String value4="";
-		 String value5="";
-		 String value6="";
+	   //string value1=txt_empregado.getText();
+	  //string value2=txt_empregadoid.getText();
+	 //string value3=combo_age.getSelectedItem().toString();		
+			
+	 int count=Gestor_Refeicoes.table.getRowCount();
+	 String path ="";
+	 String numero ="Número";
+	 String nome ="Nome";
+	 String Dta_Refeicao ="Data Refeição";
+	 String Refeicao ="Refeição";
+	 String Prato ="Prato";
+	 String dta_reg ="Data Registo";
+	 String value1="";
+	 String value2="";
+	 String value3="";
+	 String value4="";
+	 String value5="";
+	 String value6="";
+ 	if(count == 0)
+ 	{
+ 		JOptionPane.showMessageDialog(null,"There is  no meals to Print");
+ 	}
+	else
+	{
 		JFileChooser j= new JFileChooser();
 		j.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 		int x = j.showSaveDialog(null);
@@ -59,7 +68,6 @@ public class Print_Meals_PDF {
 		 path = j.getSelectedFile().getPath(); 				
 	    }	
 		try{
-			int count=Gestor_Refeicoes.table.getRowCount();
 			Document document=new Document(PageSize.A4);
 			PdfWriter.getInstance(document,new FileOutputStream(path+"\\"+"Refeicoes_DIA.pdf"));
 			document.open();
@@ -176,6 +184,7 @@ public class Print_Meals_PDF {
 		catch(Exception e2){
 			return;
 		 }
+	}
 		//Juntar dois Relat�rios PDF
 		/*try
 		 {
