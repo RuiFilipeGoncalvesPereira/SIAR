@@ -25,9 +25,8 @@ public class Login {
 	static Statement pst = null;
 	String nome_utilizador = null;
 	String Nome;
-	/**
-	 * Launch the application.
-	 */
+
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			@SuppressWarnings("static-access")

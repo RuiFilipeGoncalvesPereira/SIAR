@@ -18,14 +18,12 @@ import siar.Gestor_Refeicoes;
 
 public class EXCEL_EXPORT {
 	
-	//https://www.youtube.com/watch?v=FLLeDTtFBbQ&list=PL-27958n0CeU8HLeek9p6MRWTaU3w9ejg
-	
 	public static void Print_Excel_Meals()
 	{	
     	if(Gestor_Refeicoes.table.getRowCount() == 0)
     	{
     		//throw new MealsExeption("There is  no meals to Print");	
-    		JOptionPane.showMessageDialog(null,"There is  no meals to Print");
+    		JOptionPane.showMessageDialog(null,"There is no meals to Print");
     	}
     	else
     	{	
@@ -50,10 +48,11 @@ public class EXCEL_EXPORT {
 					}	
 					for(int j=0;j<Gestor_Refeicoes.table.getRowCount();j++)
 					{
-						XSSFRow row = sheet.createRow(j+1);
+						XSSFRow row = sheet.createRow(j+1);	
 						for(int k=0;k<Gestor_Refeicoes.table.getColumnCount()-2;k++)
 						{
 							XSSFCell cell = row.createCell(k);
+							//JOptionPane.showMessageDialog(null,Gestor_Refeicoes.table.getValueAt(j,k).toString());
 							if(Gestor_Refeicoes.table.getValueAt(j, k)!= null)
 							{
 								 cell.setCellValue(Gestor_Refeicoes.table.getValueAt(j,k).toString());

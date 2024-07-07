@@ -90,9 +90,6 @@ public class Administrador extends JFrame {
 	
 	//SimpleDateFormat ddath = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) 
 	{
 		EventQueue.invokeLater(new Runnable() 

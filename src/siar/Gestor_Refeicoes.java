@@ -45,9 +45,6 @@ public class Gestor_Refeicoes extends JFrame {
 	//System.out.println(formatter.format(currentTime)); // 13:05:56;
 
   
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -61,9 +58,6 @@ public class Gestor_Refeicoes extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
 	public Gestor_Refeicoes() {
 		setAutoRequestFocus(false);
 	    mostra_data = new Data_Read_Values();

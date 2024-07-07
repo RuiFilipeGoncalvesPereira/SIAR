@@ -61,9 +61,6 @@ public class Gestor_Cantina extends JFrame {
     private JLabel lblNewLabel_2_5;
     private JLabel lblNewLabel_2_6;
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -77,9 +74,6 @@ public class Gestor_Cantina extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
 	public Gestor_Cantina() {
 		initialize();
 		GetName Gn = new GetName();
