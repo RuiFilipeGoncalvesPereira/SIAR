@@ -343,8 +343,25 @@ public class marcacoes {
         mostra_data.le_hora();
 		Marcacoes.dt_ref.setDate(now);
 		String horalimite = CH.check_holiday(2);
-		if((mostra_data.horamin.compareTo(horalimite)>=0))
-		{  
+		//JOptionPane.showMessageDialog(null,"Day of week: " + Check_Validation.Check_Schedules_Meals_Rules.val); 
+		if (Check_Validation.Check_Schedules_Meals_Rules.val == 6) 
+		{
+			Calendar cal = Calendar.getInstance();
+			cal.setTime(Marcacoes.dt_ref.getDate());
+			cal.add(Calendar.DAY_OF_MONTH, Integer.parseInt(CH.check_holiday(127)));
+			java.util.Date futureDate2 = cal.getTime();	
+			Marcacoes.dt_ref.setDate(futureDate2);
+		}
+		else if (Check_Validation.Check_Schedules_Meals_Rules.val == 7) 
+		{
+			Calendar cal = Calendar.getInstance();
+			cal.setTime(Marcacoes.dt_ref.getDate());
+			cal.add(Calendar.DAY_OF_MONTH, Integer.parseInt(CH.check_holiday(71)));
+			java.util.Date futureDate2 = cal.getTime();	
+			Marcacoes.dt_ref.setDate(futureDate2);
+		}
+		else if (Check_Validation.Check_Schedules_Meals_Rules.val == 1) 
+		{
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(Marcacoes.dt_ref.getDate());
 			cal.add(Calendar.DAY_OF_MONTH, Integer.parseInt(CH.check_holiday(61)));
@@ -353,11 +370,22 @@ public class marcacoes {
 		}
 		else
 		{
-			Calendar cal = Calendar.getInstance();
-			cal.setTime(Marcacoes.dt_ref.getDate());
-			cal.add(Calendar.DAY_OF_MONTH, Integer.parseInt(CH.check_holiday(31)));
-			java.util.Date futureDate1 = cal.getTime();	
-			Marcacoes.dt_ref.setDate(futureDate1);	
+			if((mostra_data.horamin.compareTo(horalimite)>=0))
+			{  
+				Calendar cal = Calendar.getInstance();
+				cal.setTime(Marcacoes.dt_ref.getDate());
+				cal.add(Calendar.DAY_OF_MONTH, Integer.parseInt(CH.check_holiday(61)));
+				java.util.Date futureDate2 = cal.getTime();	
+				Marcacoes.dt_ref.setDate(futureDate2);
+			}
+			else
+			{
+				Calendar cal = Calendar.getInstance();
+				cal.setTime(Marcacoes.dt_ref.getDate());
+				cal.add(Calendar.DAY_OF_MONTH, Integer.parseInt(CH.check_holiday(31)));
+				java.util.Date futureDate1 = cal.getTime();	
+				Marcacoes.dt_ref.setDate(futureDate1);	
+			}
 		}
 	}
 	public static void marcacoes_diarias_checadas()

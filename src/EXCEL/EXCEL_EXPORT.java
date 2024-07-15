@@ -38,13 +38,16 @@ public class EXCEL_EXPORT {
 					XSSFSheet sheet = wb.createSheet("Daily_Meals");
 					
 					XSSFRow rowCol = sheet.createRow(0);
+					int conta = 0;
 					for(int i =0;i<Gestor_Refeicoes.table.getColumnCount();i++)
 					{
 						XSSFCell cell = rowCol.createCell(i);
 						if (Gestor_Refeicoes.table.getColumnName(i) != "Cod.Ref." 
 						&& Gestor_Refeicoes.table.getColumnName(i) != "Cod.Pra." ) {
 							cell.setCellValue(Gestor_Refeicoes.table.getColumnName(i));	
+							conta = conta + 1;
 						}
+						JOptionPane.showMessageDialog(null,conta);
 					}	
 					for(int j=0;j<Gestor_Refeicoes.table.getRowCount();j++)
 					{

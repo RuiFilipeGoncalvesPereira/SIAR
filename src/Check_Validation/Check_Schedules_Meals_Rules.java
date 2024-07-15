@@ -16,7 +16,7 @@ public class Check_Schedules_Meals_Rules {
 	static SimpleDateFormat df2 = new SimpleDateFormat("dd-MM-yyyy");
 	public static Date now = new Date(System.currentTimeMillis());
 	static Calendar caldia = Calendar.getInstance();
-	static int val = caldia.get(Calendar.DAY_OF_WEEK);
+	public static int val = caldia.get(Calendar.DAY_OF_WEEK);
 	int hour = caldia.get(Calendar.HOUR_OF_DAY);
 	int minute = caldia.get(Calendar.MINUTE);
 	static java.util.Date data_hoje = new java.util.Date();
