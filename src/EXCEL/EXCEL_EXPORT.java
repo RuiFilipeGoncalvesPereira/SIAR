@@ -47,15 +47,13 @@ public class EXCEL_EXPORT {
 							cell.setCellValue(Gestor_Refeicoes.table.getColumnName(i));	
 							conta = conta + 1;
 						}
-						JOptionPane.showMessageDialog(null,conta);
 					}	
 					for(int j=0;j<Gestor_Refeicoes.table.getRowCount();j++)
 					{
 						XSSFRow row = sheet.createRow(j+1);	
-						for(int k=0;k<Gestor_Refeicoes.table.getColumnCount()-2;k++)
+						for(int k=0;k<conta;k++)
 						{
 							XSSFCell cell = row.createCell(k);
-							//JOptionPane.showMessageDialog(null,Gestor_Refeicoes.table.getValueAt(j,k).toString());
 							if(Gestor_Refeicoes.table.getValueAt(j, k)!= null)
 							{
 								 cell.setCellValue(Gestor_Refeicoes.table.getValueAt(j,k).toString());

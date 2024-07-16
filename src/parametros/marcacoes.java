@@ -180,7 +180,7 @@ public class marcacoes {
             rs_prato_rem.next();
             int conta_ref_rem = rs_prato_rem.getInt(1);
 
-            if(conta_ref > 0) // Entra aqui Quando Já Existe o Agendamento Especifico
+            if(conta_ref > 0) // Entra aqui quando já Existe o Agendamento Especifico
               {
                 if (conta_ref_rem == 0) 
                 {	
@@ -344,7 +344,7 @@ public class marcacoes {
 		Marcacoes.dt_ref.setDate(now);
 		String horalimite = CH.check_holiday(2);
 		//JOptionPane.showMessageDialog(null,"Day of week: " + Check_Validation.Check_Schedules_Meals_Rules.val); 
-		if (Check_Validation.Check_Schedules_Meals_Rules.val == 6) 
+		/*if (Check_Validation.Check_Schedules_Meals_Rules.val == 6) 
 		{
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(Marcacoes.dt_ref.getDate());
@@ -369,7 +369,7 @@ public class marcacoes {
 			Marcacoes.dt_ref.setDate(futureDate2);
 		}
 		else
-		{
+		{*/
 			if((mostra_data.horamin.compareTo(horalimite)>=0))
 			{  
 				Calendar cal = Calendar.getInstance();
@@ -386,7 +386,7 @@ public class marcacoes {
 				java.util.Date futureDate1 = cal.getTime();	
 				Marcacoes.dt_ref.setDate(futureDate1);	
 			}
-		}
+		//}
 	}
 	public static void marcacoes_diarias_checadas()
 	{
