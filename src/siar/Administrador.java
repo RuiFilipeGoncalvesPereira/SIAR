@@ -160,7 +160,7 @@ public class Administrador extends JFrame {
 			}
 		}
 		);
-		button.setIcon(new ImageIcon("C:\\Users\\Rui Pereira\\Documents\\Icons_Geral\\Icons\\001_20.gif"));
+		button.setIcon(new ImageIcon("C:\\Icons_Geral\\Icons\\001_20.gif"));
 		button.setBounds(10, 11, 43, 36);
 		contentPane.add(button);
 		
@@ -177,7 +177,7 @@ public class Administrador extends JFrame {
                 Marcacoes.lblNum.setText(Login.txtUser.getText());
 			}
 		});
-		button_1.setIcon(new ImageIcon("C:\\Users\\Rui Pereira\\Documents\\Icons_Geral\\Icons\\001_44.gif"));
+		button_1.setIcon(new ImageIcon("C:\\Icons_Geral\\Icons\\001_44.gif"));
 		button_1.setBounds(10, 47, 43, 36);
 		contentPane.add(button_1);
 		
@@ -222,7 +222,7 @@ public class Administrador extends JFrame {
 			}
 		});
 		button_3.setToolTipText("Pesquisar Utilizador");
-		button_3.setIcon(new ImageIcon("C:\\Users\\Rui Pereira\\Documents\\Icons_Geral\\Icons\\image275.gif"));
+		button_3.setIcon(new ImageIcon("C:\\Icons_Geral\\Icons\\image275.gif"));
 		button_3.setBounds(820, 58, 27, 28);
 		Ges_Uti.add(button_3);
 
@@ -256,7 +256,7 @@ public class Administrador extends JFrame {
 			}
 		});
 		button_5.setToolTipText("Inserir Utilizador");
-		button_5.setIcon(new ImageIcon("C:\\Users\\Rui Pereira\\Documents\\Icons_Geral\\Icons\\action_add.gif"));
+		button_5.setIcon(new ImageIcon("C:\\Icons_Geral\\Icons\\action_add.gif"));
 
 		button_5.setBounds(857, 25, 27, 28);
 		Ges_Uti.add(button_5);
@@ -299,7 +299,7 @@ public class Administrador extends JFrame {
 			    }
 			}	
 		});
-		button_6.setIcon(new ImageIcon("C:\\Users\\Rui Pereira\\Documents\\Icons_Geral\\Icons\\001_06.gif"));
+		button_6.setIcon(new ImageIcon("C:\\Icons_Geral\\Icons\\001_06.gif"));
 		button_6.setToolTipText("Ativar Utilizador");
 		button_6.setBounds(804, 197, 27, 28);
 		Ges_Uti.add(button_6);
@@ -328,7 +328,7 @@ public class Administrador extends JFrame {
 				}
 			}
 		});
-		button_7.setIcon(new ImageIcon("C:\\Users\\Rui Pereira\\Documents\\Icons_Geral\\Icons\\001_05.gif"));
+		button_7.setIcon(new ImageIcon("C:\\Icons_Geral\\Icons\\001_05.gif"));
 		button_7.setToolTipText("Desativar Utilizador");
 		button_7.setBounds(804, 225, 27, 28);
 		Ges_Uti.add(button_7);
@@ -354,7 +354,7 @@ public class Administrador extends JFrame {
 				parametros.utilizadores.atualiza_uti();
 			}
 		});
-		button_16.setIcon(new ImageIcon("C:\\Users\\Rui Pereira\\Documents\\Icons_Geral\\Icons\\affldsav.gif"));
+		button_16.setIcon(new ImageIcon("C:\\Icons_Geral\\Icons\\affldsav.gif"));
 		button_16.setToolTipText("Ativar Utilizador");
 		button_16.setBounds(804, 253, 27, 28);
 		Ges_Uti.add(button_16);
@@ -410,6 +410,7 @@ public class Administrador extends JFrame {
 		Ges_Uti.add(Jlnome);
 		
 		JButton btnNewButton = new JButton("");
+		btnNewButton.setToolTipText("Upload Image");
 		btnNewButton.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent e)
@@ -417,7 +418,7 @@ public class Administrador extends JFrame {
 				parametros.utilizadores.upload_imagem();
 			}
 		});
-		btnNewButton.setIcon(new ImageIcon("C:\\Users\\Rui Pereira\\Documents\\Icons_Geral\\Icons\\affldopn.gif"));
+		btnNewButton.setIcon(new ImageIcon("C:\\Icons_Geral\\Icons\\pt_files.png"));
 		btnNewButton.setBounds(820, 25, 27, 28);
 		Ges_Uti.add(btnNewButton);
 		
@@ -441,7 +442,7 @@ public class Administrador extends JFrame {
 				parametros.utilizadores.upload_imagem_upd();
 			}
 		});
-		button_17.setIcon(new ImageIcon("C:\\Users\\Rui Pereira\\Documents\\Icons_Geral\\Icons\\folder_files.gif"));
+		button_17.setIcon(new ImageIcon("C:\\Icons_Geral\\Icons\\folder_files.gif"));
 		button_17.setBounds(767, 365, 27, 28);
 		Ges_Uti.add(button_17);
 		
@@ -469,7 +470,7 @@ public class Administrador extends JFrame {
 				}
 			}
 		});
-		button_8.setIcon(new ImageIcon("C:\\Users\\Rui Pereira\\Documents\\Icons_Geral\\Icons\\action_add.gif"));
+		button_8.setIcon(new ImageIcon("C:\\Icons_Geral\\Icons\\action_add.gif"));
 		button_8.setToolTipText("Inserir Refeição");
 		button_8.setBounds(412, 18, 27, 28);
 		Ges_Ref.add(button_8);
@@ -505,7 +506,7 @@ public class Administrador extends JFrame {
 				parametros.refeicoes.remove_refeicao();
 			}
 		});
-		button_9.setIcon(new ImageIcon("C:\\Users\\Rui Pereira\\Documents\\Icons_Geral\\Icons\\001_05.gif"));
+		button_9.setIcon(new ImageIcon("C:\\Icons_Geral\\Icons\\001_05.gif"));
 		button_9.setToolTipText("Desativar Refeição");
 		button_9.setBounds(566, 69, 27, 28);
 		Ges_Ref.add(button_9);
@@ -560,7 +561,7 @@ public class Administrador extends JFrame {
 				}
 			}
 		});
-		button_10.setIcon(new ImageIcon("C:\\Users\\Rui Pereira\\Documents\\Icons_Geral\\Icons\\action_add.gif"));
+		button_10.setIcon(new ImageIcon("C:\\Icons_Geral\\Icons\\action_add.gif"));
 		button_10.setToolTipText("Inserir Utilizador");
 		button_10.setBounds(412, 18, 27, 28);
 		Ges_Pr.add(button_10);
@@ -571,7 +572,7 @@ public class Administrador extends JFrame {
 				parametros.pratos.remove_prato();
 			}
 		});
-		button_11.setIcon(new ImageIcon("C:\\Users\\Rui Pereira\\Documents\\Icons_Geral\\Icons\\001_05.gif"));
+		button_11.setIcon(new ImageIcon("C:\\Icons_Geral\\Icons\\001_05.gif"));
 		button_11.setToolTipText("Desativar Refeição");
 		button_11.setBounds(412, 69, 27, 28);
 		Ges_Pr.add(button_11);
@@ -648,7 +649,7 @@ public class Administrador extends JFrame {
 				parametros.parametros.prenche_parametros();
 			}
 		});
-		button_14.setIcon(new ImageIcon("C:\\Users\\Rui Pereira\\Documents\\Icons_Geral\\Icons\\action_add.gif"));
+		button_14.setIcon(new ImageIcon("C:\\Icons_Geral\\Icons\\action_add.gif"));
 		button_14.setToolTipText("Inserir Utilizador");
 		button_14.setBounds(568, 18, 27, 28);
 		Ges_Par.add(button_14);
@@ -672,7 +673,7 @@ public class Administrador extends JFrame {
 				parametros.parametros.remove_parametro();
 			}
 		});
-		button_15.setIcon(new ImageIcon("C:\\Users\\Rui Pereira\\Documents\\Icons_Geral\\Icons\\001_05.gif"));
+		button_15.setIcon(new ImageIcon("C:\\Icons_Geral\\Icons\\001_05.gif"));
 		button_15.setToolTipText("Desativar Refeição");
 		button_15.setBounds(699, 69, 27, 28);
 		Ges_Par.add(button_15);
@@ -712,7 +713,7 @@ public class Administrador extends JFrame {
 				parametros.parametros.prenche_parametros();
 			}
 		});
-		button_19_1.setIcon(new ImageIcon("C:\\Users\\Rui Pereira\\Documents\\Icons_Geral\\Icons\\affldsav.gif"));
+		button_19_1.setIcon(new ImageIcon("C:\\Icons_Geral\\Icons\\affldsav.gif"));
 		button_19_1.setToolTipText("Ativar Utilizador");
 		button_19_1.setBounds(699, 100, 27, 28);
 		Ges_Par.add(button_19_1);
@@ -775,7 +776,7 @@ public class Administrador extends JFrame {
 				}
 			}
 		});
-		button_12.setIcon(new ImageIcon("C:\\Users\\Rui Pereira\\Documents\\Icons_Geral\\Icons\\action_add.gif"));
+		button_12.setIcon(new ImageIcon("C:\\Icons_Geral\\Icons\\action_add.gif"));
 		button_12.setToolTipText("Inserir Utilizador");
 		button_12.setBounds(500, 18, 27, 28);
 		Ges_Dom.add(button_12);
@@ -804,7 +805,7 @@ public class Administrador extends JFrame {
 				parametros.dominios.prenche_dominios();
 			}
 		});
-		button_13.setIcon(new ImageIcon("C:\\Users\\Rui Pereira\\Documents\\Icons_Geral\\Icons\\001_05.gif"));
+		button_13.setIcon(new ImageIcon("C:\\Icons_Geral\\Icons\\001_05.gif"));
 		button_13.setToolTipText("Desativar Refeição");
 		button_13.setBounds(500, 69, 27, 28);
 		Ges_Dom.add(button_13);
@@ -833,7 +834,7 @@ public class Administrador extends JFrame {
 		Ges_Dom.add(lblNewLabel_16);
 		
 		JButton button_19_2 = new JButton("");
-		button_19_2.setIcon(new ImageIcon("C:\\Users\\Rui Pereira\\Documents\\Icons_Geral\\Icons\\affldsav.gif"));
+		button_19_2.setIcon(new ImageIcon("C:\\Icons_Geral\\Icons\\affldsav.gif"));
 		button_19_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				parametros.dominios.update_dom();
@@ -890,7 +891,7 @@ public class Administrador extends JFrame {
 				}
 			}
 		});
-		button_18.setIcon(new ImageIcon("C:\\Users\\Rui Pereira\\Documents\\Icons_Geral\\Icons\\action_add.gif"));
+		button_18.setIcon(new ImageIcon("C:\\Icons_Geral\\Icons\\action_add.gif"));
 		button_18.setToolTipText("Inserir Utilizador");
 		button_18.setBounds(528, 18, 27, 28);
 		Ges_Fer.add(button_18);
@@ -920,7 +921,7 @@ public class Administrador extends JFrame {
 				parametros.feriados.atualiza_feriados();
 			}
 		});
-		button_19.setIcon(new ImageIcon("C:\\Users\\Rui Pereira\\Documents\\Icons_Geral\\Icons\\affldsav.gif"));
+		button_19.setIcon(new ImageIcon("C:\\Icons_Geral\\Icons\\affldsav.gif"));
 		button_19.setToolTipText("Ativar Utilizador");
 		button_19.setBounds(528, 65, 27, 28);
 		Ges_Fer.add(button_19);

@@ -78,7 +78,7 @@ public class Gestor_Refeicoes extends JFrame {
 				EXCEL_EXPORT.Print_Excel_Meals();
 			}
 		});
-		btn_export_excel.setIcon(new ImageIcon("C:\\Users\\Rui Pereira\\Documents\\Icons_Geral\\Icons\\export_large.gif"));
+		btn_export_excel.setIcon(new ImageIcon("C:\\Icons_Geral\\Icons\\export_large.gif"));
 		btn_export_excel.setToolTipText("Export to Excel");
 		btn_export_excel.setBounds(10, 132, 43, 36);
 		contentPane.add(btn_export_excel);
@@ -118,12 +118,12 @@ public class Gestor_Refeicoes extends JFrame {
 				window.frame.setVisible(true);
 			}
 		});
-		button.setIcon(new ImageIcon("C:\\Users\\Rui Pereira\\Documents\\Icons_Geral\\Icons\\001_20.gif"));
+		button.setIcon(new ImageIcon("C:\\Icons_Geral\\Icons\\001_20.gif"));
 		button.setBounds(10, 24, 43, 36);
 		contentPane.add(button);
 		
 		JButton bt_mar = new JButton("");
-		bt_mar.setIcon(new ImageIcon("C:\\Users\\Rui Pereira\\Documents\\Icons_Geral\\Icons\\001_44.gif"));
+		bt_mar.setIcon(new ImageIcon("C:\\Icons_Geral\\Icons\\001_44.gif"));
 		bt_mar.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent e)
@@ -161,7 +161,7 @@ public class Gestor_Refeicoes extends JFrame {
 		  }		
 		}
 		);
-		button_1.setIcon(new ImageIcon("C:\\Users\\Rui Pereira\\Documents\\Icons_Geral\\Icons\\pdf.gif"));
+		button_1.setIcon(new ImageIcon("C:\\Icons_Geral\\Icons\\pdf.gif"));
 		button_1.setToolTipText("");
 		button_1.setBounds(10, 96, 43, 36);
 		contentPane.add(button_1);
@@ -178,7 +178,7 @@ public class Gestor_Refeicoes extends JFrame {
 				Check_ref.setEnabled(true);
 			}
 		});
-		bt_check.setIcon(new ImageIcon("C:\\Users\\Rui Pereira\\Documents\\Icons_Geral\\Icons\\checkin.gif"));
+		bt_check.setIcon(new ImageIcon("C:\\Icons_Geral\\Icons\\checkin.gif"));
 		bt_check.setToolTipText("Refeicoes Nao Verificadas");
 		bt_check.setBounds(10, 168, 43, 36);
 		contentPane.add(bt_check);
@@ -195,7 +195,7 @@ public class Gestor_Refeicoes extends JFrame {
 				Check_corr_ref.setEnabled(true);
 			}
 		});
-		bt_n_check.setIcon(new ImageIcon("C:\\Users\\Rui Pereira\\Documents\\Icons_Geral\\Icons\\checkout.gif"));
+		bt_n_check.setIcon(new ImageIcon("C:\\Icons_Geral\\Icons\\checkout.gif"));
 		bt_n_check.setToolTipText("Refei\u00E7\u00F5es Verificadas");
 		bt_n_check.setBounds(10, 204, 43, 36);
 		contentPane.add(bt_n_check);

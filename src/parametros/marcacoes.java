@@ -343,33 +343,35 @@ public class marcacoes {
         mostra_data.le_hora();
 		Marcacoes.dt_ref.setDate(now);
 		String horalimite = CH.check_holiday(2);
-		//JOptionPane.showMessageDialog(null,"Day of week: " + Check_Validation.Check_Schedules_Meals_Rules.val); 
-		/*if (Check_Validation.Check_Schedules_Meals_Rules.val == 6) 
+		if (Check_Validation.Check_Schedules_Meals_Rules.val == 6) 
 		{
-			Calendar cal = Calendar.getInstance();
-			cal.setTime(Marcacoes.dt_ref.getDate());
-			cal.add(Calendar.DAY_OF_MONTH, Integer.parseInt(CH.check_holiday(127)));
-			java.util.Date futureDate2 = cal.getTime();	
-			Marcacoes.dt_ref.setDate(futureDate2);
+			if((mostra_data.horamin.compareTo(horalimite)>=0))
+			{  
+				Calendar cal = Calendar.getInstance();
+				cal.setTime(Marcacoes.dt_ref.getDate());
+				cal.add(Calendar.DAY_OF_MONTH, Integer.parseInt(CH.check_holiday(127)));
+				java.util.Date futureDate3 = cal.getTime();	
+				Marcacoes.dt_ref.setDate(futureDate3);
+			}
 		}
 		else if (Check_Validation.Check_Schedules_Meals_Rules.val == 7) 
 		{
-			Calendar cal = Calendar.getInstance();
-			cal.setTime(Marcacoes.dt_ref.getDate());
-			cal.add(Calendar.DAY_OF_MONTH, Integer.parseInt(CH.check_holiday(71)));
-			java.util.Date futureDate2 = cal.getTime();	
-			Marcacoes.dt_ref.setDate(futureDate2);
+				Calendar cal = Calendar.getInstance();
+				cal.setTime(Marcacoes.dt_ref.getDate());
+				cal.add(Calendar.DAY_OF_MONTH, Integer.parseInt(CH.check_holiday(128)));
+				java.util.Date futureDate4 = cal.getTime();	
+				Marcacoes.dt_ref.setDate(futureDate4);
 		}
 		else if (Check_Validation.Check_Schedules_Meals_Rules.val == 1) 
 		{
-			Calendar cal = Calendar.getInstance();
-			cal.setTime(Marcacoes.dt_ref.getDate());
-			cal.add(Calendar.DAY_OF_MONTH, Integer.parseInt(CH.check_holiday(61)));
-			java.util.Date futureDate2 = cal.getTime();	
-			Marcacoes.dt_ref.setDate(futureDate2);
+			    Calendar cal = Calendar.getInstance();
+			    cal.setTime(Marcacoes.dt_ref.getDate());
+			    cal.add(Calendar.DAY_OF_MONTH, Integer.parseInt(CH.check_holiday(129)));
+			    java.util.Date futureDate5 = cal.getTime();	
+			    Marcacoes.dt_ref.setDate(futureDate5);
 		}
 		else
-		{*/
+		{
 			if((mostra_data.horamin.compareTo(horalimite)>=0))
 			{  
 				Calendar cal = Calendar.getInstance();
@@ -386,7 +388,7 @@ public class marcacoes {
 				java.util.Date futureDate1 = cal.getTime();	
 				Marcacoes.dt_ref.setDate(futureDate1);	
 			}
-		//}
+		}
 	}
 	public static void marcacoes_diarias_checadas()
 	{

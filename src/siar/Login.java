@@ -54,11 +54,10 @@ public class Login {
         passField = new JPasswordField();
         passField.setBounds(151, 114, 112, 20);
         frame.getContentPane().add(passField);
-        Image img = new ImageIcon(this.getClass().getResource("/Siarfundo.jpg")).getImage();
         lblData.setText(                              "Hoje é "+Data_Read_Values.mostra_data.dia_semana+" ,dia "+Data_Read_Values.mostra_data.dia+" de "+Data_Read_Values.mostra_data.mes+" de "+Data_Read_Values.mostra_data.ano);
         
         JLabel lblNewLabel = new JLabel("");
-        lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Rui Pereira\\eclipse-workspace\\AlimentacaoJava_Demo\\Img\\Siarfundo.jpg"));
+        lblNewLabel.setIcon(new ImageIcon("C:\\Icons_Geral\\Siarfundo.jpg"));
         lblNewLabel.setBounds(0, 0, 459, 261);
         frame.getContentPane().add(lblNewLabel);
 	}
@@ -77,6 +76,7 @@ public class Login {
 	 }*/
 	private void initialize() {
 		frame = new JFrame();
+		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Icons_Geral\\logo.png"));
 		frame.setSize(new Dimension(512, 300));
 		frame.setResizable(false);
 		frame.setBounds(100, 100, 475, 300);
@@ -86,7 +86,7 @@ public class Login {
 		
 		JButton btnNewButton = new JButton("Login");
 		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 11));
-		btnNewButton.setIcon(new ImageIcon("C:\\Users\\Rui Pereira\\Documents\\Icons_Geral\\Icons\\001_06.gif"));
+		btnNewButton.setIcon(new ImageIcon("C:\\Icons_Geral\\Icons\\001_06.gif"));
 		btnNewButton.setToolTipText("Acesso ao Sistema");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {

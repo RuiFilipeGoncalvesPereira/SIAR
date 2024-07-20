@@ -71,7 +71,7 @@ public class Print_Meals_PDF {
 			Document document=new Document(PageSize.A4);
 			PdfWriter.getInstance(document,new FileOutputStream(path+"\\"+"Refeicoes_DIA.pdf"));
 			document.open();
-			Image logo = Image.getInstance("C:\\Users\\Rui Pereira\\eclipse-workspace\\AlimentacaoJava_Demo\\Img\\logo.png");
+			Image logo = Image.getInstance("C:\\Icons_Geral\\logo.png");
             document.add(logo);
 			PdfPTable tab=new PdfPTable(6);
 			PdfPCell cell = new PdfPCell(new Paragraph("Refeições"));

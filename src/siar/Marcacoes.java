@@ -134,7 +134,7 @@ public class Marcacoes extends JFrame {
 				window.frame.setVisible(true);
 			}
 		});
-		btnNewButton.setIcon(new ImageIcon("C:\\Users\\Rui Pereira\\Documents\\Icons_Geral\\Icons\\001_20.gif"));
+		btnNewButton.setIcon(new ImageIcon("C:\\Icons_Geral\\Icons\\001_20.gif"));
 		btnNewButton.setBounds(10, 11, 43, 36);
 		contentPane.add(btnNewButton);
 		
@@ -151,7 +151,7 @@ public class Marcacoes extends JFrame {
 				Password.Call_Pass_Form.Alterar_Password();
 			}
 		});
-		button.setIcon(new ImageIcon("C:\\Users\\Rui Pereira\\Documents\\Icons_Geral\\Icons\\001_41.gif"));
+		button.setIcon(new ImageIcon("C:\\Icons_Geral\\Icons\\001_41.gif"));
 		button.setToolTipText("Alteração de Password");
 		button.setBounds(52, 11, 43, 36);
 		contentPane.add(button);
@@ -208,7 +208,7 @@ public class Marcacoes extends JFrame {
 				Check_Schedules_Meals_Rules.ValidaDatas();
 			}
 		});
-		btn_add_Refeicao.setIcon(new ImageIcon("C:\\Users\\Rui Pereira\\Documents\\Icons_Geral\\Icons\\action_add.gif"));
+		btn_add_Refeicao.setIcon(new ImageIcon("C:\\Icons_Geral\\Icons\\action_add.gif"));
 		btn_add_Refeicao.setBounds(645, 74, 27, 28);
 		contentPane.add(btn_add_Refeicao);
 		
@@ -245,7 +245,7 @@ public class Marcacoes extends JFrame {
 			}
 		});
 		btn_anula.setToolTipText("Desmarcar Refei\u00E7\u00E3o");
-		btn_anula.setIcon(new ImageIcon("C:\\Users\\Rui Pereira\\Documents\\Icons_Geral\\Icons\\action_delete.gif"));
+		btn_anula.setIcon(new ImageIcon("C:\\Icons_Geral\\Icons\\001_05.gif"));
 		btn_anula.setBounds(645, 151, 27, 28);
 		contentPane.add(btn_anula);
 		
@@ -282,7 +282,7 @@ public class Marcacoes extends JFrame {
 			}
 		});
 		btnNewButton_1.setToolTipText("Agendamentos");
-		btnNewButton_1.setIcon(new ImageIcon("C:\\Users\\Rui Pereira\\Documents\\Icons_Geral\\Icons\\db_ins.gif"));
+		btnNewButton_1.setIcon(new ImageIcon("C:\\Icons_Geral\\Icons\\db_ins.gif"));
 		btnNewButton_1.setBounds(10, 151, 27, 28);
 		contentPane.add(btnNewButton_1);
 		
@@ -294,7 +294,7 @@ public class Marcacoes extends JFrame {
 			}
 		});
 		button_1.setToolTipText("Histórico");
-		button_1.setIcon(new ImageIcon("C:\\Users\\Rui Pereira\\Documents\\Icons_Geral\\Icons\\database.gif"));
+		button_1.setIcon(new ImageIcon("C:\\Icons_Geral\\Icons\\database.gif"));
 		button_1.setBounds(10, 178, 27, 28);
 		contentPane.add(button_1);
 		
@@ -308,7 +308,7 @@ public class Marcacoes extends JFrame {
 			}
 		});
 		button_2.setToolTipText("Anula��es");
-		button_2.setIcon(new ImageIcon("C:\\Users\\Rui Pereira\\Documents\\Icons_Geral\\Icons\\db_del.gif"));
+		button_2.setIcon(new ImageIcon("C:\\Icons_Geral\\Icons\\db_del.gif"));
 		button_2.setBounds(10, 205, 27, 28);
 		contentPane.add(button_2);
 		
@@ -324,7 +324,7 @@ public class Marcacoes extends JFrame {
     			ativa_desativa_marcacoes.ativa_desativa_marcacoes_(Integer.parseInt(Login.txtUser.getText()));
 			}
 		});
-		btn_back_menu.setIcon(new ImageIcon("C:\\Users\\Rui Pereira\\Documents\\Icons_Geral\\Icons\\001_27.gif"));
+		btn_back_menu.setIcon(new ImageIcon("C:\\Icons_Geral\\Icons\\001_27.gif"));
 		btn_back_menu.setBounds(94, 11, 43, 36);
 		contentPane.add(btn_back_menu);
 		

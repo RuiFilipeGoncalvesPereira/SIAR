@@ -232,7 +232,7 @@ public class Altera_Password extends JFrame {
 				   }
 			}
 		});
-		button.setIcon(new ImageIcon("C:\\Users\\Rui Pereira\\Documents\\Icons_Geral\\Icons\\001_20.gif"));
+		button.setIcon(new ImageIcon("C:\\Icons_Geral\\Icons\\001_20.gif"));
 		button.setBounds(10, 11, 43, 36);
 		contentPane.add(button);
 		

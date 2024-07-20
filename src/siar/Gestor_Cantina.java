@@ -121,7 +121,7 @@ public class Gestor_Cantina extends JFrame {
 				Login.frame.setVisible(true);
 			}
 		});
-		button.setIcon(new ImageIcon("C:\\Users\\Rui Pereira\\Documents\\Icons_Geral\\Icons\\001_20.gif"));
+		button.setIcon(new ImageIcon("C:\\Icons_Geral\\Icons\\001_20.gif"));
 		button.setBounds(10, 11, 43, 36);
 		contentPane.add(button);
 		
@@ -134,7 +134,7 @@ public class Gestor_Cantina extends JFrame {
                 Marcacoes.lblNum.setText(Login.txtUser.getText());
 			}
 		});
-		button_1.setIcon(new ImageIcon("C:\\Users\\Rui Pereira\\Documents\\Icons_Geral\\Icons\\001_44.gif"));
+		button_1.setIcon(new ImageIcon("C:\\Icons_Geral\\Icons\\001_44.gif"));
 		button_1.setBounds(10, 47, 43, 36);
 		contentPane.add(button_1);
 		
@@ -197,7 +197,7 @@ public class Gestor_Cantina extends JFrame {
 				}
 			}
 		});
-		btn_add_Refeicao.setIcon(new ImageIcon("C:\\Users\\Rui Pereira\\Documents\\Icons_Geral\\Icons\\action_add.gif"));
+		btn_add_Refeicao.setIcon(new ImageIcon("C:\\Icons_Geral\\Icons\\action_add.gif"));
 		btn_add_Refeicao.setBounds(647, 47, 27, 28);
 		contentPane.add(btn_add_Refeicao);
 		
