@@ -139,7 +139,7 @@ public class Gestor_Refeicoes extends JFrame {
 		contentPane.add(bt_mar);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(63, 53, 572, 327);
+		scrollPane.setBounds(63, 53, 609, 368);
 		contentPane.add(scrollPane);
 		
 		table = new JTable();
